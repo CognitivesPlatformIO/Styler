@@ -1,0 +1,151 @@
+{{ set(this, 'title', 'Login / Signup') }}
+{% set network = _Network.getNetworkData()%}
+{{this.registerJs('AuthController.loginOrSignup()')}}
+<div class="login-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-11 col-xs-12 col-centered">
+          <div class="tabbable tabbable-custom">
+              <ul class="nav nav-tabs nav_tabs_two">
+                    <li class="loginTab {{ (login is defined and login == 'TRUE') ? 'active' : '' }}"><a href="#Login" data-toggle="tab">Login</a></li>
+                     {% if not _Network.isNetworkClosed(network)%}
+                    <li class="signupTab {{ (signup is defined and signup == 'TRUE') ? 'active' : '' }}"><a href="#SignUp" data-toggle="tab">Sign Up</a></li>
+                    {% endif %}
+            </ul>
+              <div class="tab-content">
+                  <div class="tab-pane fade in  {{ (login is defined and login == 'TRUE') ? 'active' : '' }}" id="Login">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12 col-xs-12" id="login-social">
+                              {{this.render('layouts/partials/messages.twig') | raw }}
+                              <div class="social-buttons">
+                                  <ul class="row">
+                                      <li class="facebook"><a href="{{_AppHelper.getSocialFacebookUrl(1)}}"><i class="fa fa-facebook"></i> Login with Facebook</a></li>
+                                      <li class="twitter"><a href="{{_AppHelper.getSocialTwitterUrl(1)}}"><i class="fa fa-twitter"></i> Login with Twitter</a></li>
+                                      <!--<li class="g-plus"><a href="#"><i class="fa fa-google-plus"></i> Login with Google+</a></li>
+                                      <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i> Login with LinkedIn</a></li>-->
+                                  </ul>
+                              </div>
+                              {% if not _Network.isNetworkClosed(network)%}
+                                <p class="text-center mbt50"><a href="#SignUp" class="txt-link signupBtn">Don't have an account? <span class="green">Sign up here</span></a></p>
+                              {% endif %}
+                              <p class="email-login"><span class="seperation">Login with email</span></p>
+                              <div class="WriteAnArticleForm">
+                                  <form name="loginForm" id="loginForm" class="form-horizontal" action="{{_AppHelper.getLoginUrl()}}" method="post" autocomplete="off">
+                                        <input type="hidden" name="_csrf" value="{{_AppHelper.getCsrfToken()}}" />
+                                        {% if errors | length > 0 %}
+                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <ul>
+                                                    {% for errorArr in errors %}
+                                                        {% for error in errorArr %}
+                                                            <li>{{error}}</li>
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="controls-full">
+                                            {{_AppForm.input({type:'text', name: 'username', value: form.username, class: 'form-control', placeholder: 'Username or email'}) | raw }}
+                                        </div>
+                                        <div class="controls-full">
+                                            {{_AppForm.input({type:'password', name: 'password', value: form.password, class: 'form-control', placeholder: 'Password'}) | raw }}
+                                        </div>
+
+
+                                        <div class="button-set">
+                                            <label>
+                                                {% set isRememberMeChecked = (form.rememberMe == 1) ? 'checked' : '' %}
+                                                {{_AppForm.input({type:'checkbox', name: 'rememberMe', value: form.rememberMe, 'checked': isRememberMeChecked}) | raw }}
+                                                <span><!-- fake checkbox --></span>Remember Me
+                                            </label>
+                                            <div class="right-section">
+                                                <a href="{{_AppHelper.getForgotPasswordUrl()}}" class="forget"><span class="green">Forgot Password?</span></a>
+                                                {{_AppForm.button({type:'submit', name: 'submitLoginForm', class: 'button button-large'}) | raw }}
+                                            </div>
+                                        </div>
+
+                                      </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                {% if not _Network.isNetworkClosed(network)%}
+                  <div class="tab-pane fade in {{ (signup is defined and signup == 'TRUE') ? 'active' : '' }}" id="SignUp">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12 col-xs-12" id="signup-social">
+
+                              <p class="email-login"><span class="seperation">Let’s get this party started!</span></p>
+
+                              <div class="social-buttons">
+                                  <ul class="row">
+                                    <li class="facebook"><a href="{{_AppHelper.getSocialFacebookUrl()}}"><i class="fa fa-facebook"></i> Sign up with Facebook</a></li>
+                                    <li class="twitter"><a href="{{_AppHelper.getSocialTwitterUrl()}}"><i class="fa fa-twitter"></i> Sign up with Twitter</a></li>
+                                      <!--<li class="g-plus"><a href="#"><i class="fa fa-google-plus"></i> Sign up with Google+</a></li>
+                                      <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i> Sign up with LinkedIn</a></li>-->
+                                  </ul>
+                              </div>
+                              <p class="text-center mbt50"><a href="#Login" class="txt-link loginBtn">Already have an account? <span class="green">Login here</span></a></p>
+
+                              <p class="email-login"><span class="seperation">Sign up with email</span></p>
+                              <div class="WriteAnArticleForm">
+                                  <form name="signupForm" id="signupForm" class="form-horizontal" action="{{_AppHelper.getSignupUrl()}}" method="post" autocomplete="off">
+                                            <input type="hidden" name="_csrf" value="{{_AppHelper.getCsrfToken()}}" />
+                                            {% if errors | length > 0 %}
+                                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                                                    <ul>
+                                                        {% for errorArr in errors %}
+                                                            {% for error in errorArr %}
+                                                                <li>{{error}}</li>
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            {% endif %}
+
+                                            <div class="controls-lt">
+                                                {{_AppForm.input({name: 'firstname', value: form.firstname, class: 'form-control', placeholder: 'Firstname'}) | raw }}
+                                            </div>
+                                            <div class="controls-rt">
+                                                {{_AppForm.input({name: 'lastname', value: form.lastname, class: 'form-control', placeholder: 'Lastname'}) | raw }}
+
+                                            </div>
+                                            <div class="controls-full">
+                                                {{_AppForm.input({name: 'email', value: form.email, class: 'form-control', placeholder: 'Email'}) | raw }}
+                                            </div>
+                                            <div class="controls-full">
+                                                {{_AppForm.input({type : 'password', value: form.password, name: 'password', class: 'form-control', placeholder: 'Password', id: 'password'}) | raw }}
+                                            </div>
+                                            <div class="controls-full">
+                                                {{_AppForm.input({type : 'password', value: form.verifypassword, name: 'verifypassword', class: 'form-control', placeholder: 'Verify Password'}) | raw }}
+                                            </div>
+                                            <div class="controls-full">
+                                                {{_AppForm.input({ name: 'username', value: form.username, class: 'form-control', placeholder: 'Username'}) | raw }}
+                                            </div>
+                                            <div class="controls-full captcha">
+                                                <span class='help-block'>This is how you'll be known on {{_Network.getNetworkTitle()}}</span>
+                                                {{_AppForm.captcha({class: 'form-control', placeholder: 'Please enter tha captcha text above'}) | raw }}
+                                            </div>
+                                            <div class="button-set">
+                                                <label class="hide"><input type="checkbox" id="AcceptTerms" name="acceptterms" value="1" {{(form.acceptterms == '1') ? 'CHECKED' : ''}}><span></span>
+                                                    I agree to the terms & conditions</label>
+                                                <div class="right-section">
+                                                    {{_AppForm.button({type:'submit', name: 'submitSignupForm', class: 'button button-large'}) | raw }}
+                                                </div>
+                                            </div>
+                                      </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                {% endif %}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //End Sign Up -->
+</div>

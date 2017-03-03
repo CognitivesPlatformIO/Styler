@@ -1,0 +1,19 @@
+{{ set(this, 'title', 'Signup Successful') }}
+{% set networkData = _Network.getNetworkData() %}
+<!-- Begin Container -->
+<div class="page_section">
+    <section class="container">
+        <!-- Begin Terms -->
+        <div class="content-wrap terms_page">
+            <h3 class="sub-heading">{{page.title | raw}}</h3>
+            <div class="row">
+                <div class="col-full">
+                    <div class="content_area text-center">
+                        <p class="helper-text"> Thank You for registering with us. Please check your inbox to verify your email address.</p>
+                        <a href="{{networkData.defaultBlogUrl}}" class="button has-margin-top-20">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

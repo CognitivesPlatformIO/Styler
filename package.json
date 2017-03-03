@@ -1,0 +1,27 @@
+{
+  "name": "cognitvespaltform",
+  "version": "1.0.0",
+  "description": "Cognitives Platform",
+  "dependencies": {
+    "grunt": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-cache-breaker": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-compress": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/cognitives/cognitives-platform"
+  },
+  "author": "Rohit Gupta",
+  "license": "ISC",
+  "homepage": "http://www.cognitives.io/",
+  "email": "rohit@ideoris.com.au",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cache-breaker": "^2.0.1",
+    "grunt-contrib-compress": "^1.3.0",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{% set disqusArr = _AppHelper.getDisqusToken(disqus) %}
+{% if disqusArr.token != FALSE and disqusArr.token != '' %}
+{% set disqusJsParams = {articleId: articleId, url: url, userId:userId, token: disqusArr.token, networkName: disqusArr.networkName, shortName:disqus.shortName, apiKey: disqus.apiKey  }  %}
+{{this.registerJs('$.fn.Disqus({params:'~ disqusJsParams|json_encode|raw ~'})')}}
+<div class="DisqusCommentArea">
+    <div class="container">
+        <div class="article-content-section">
+            <div class="content-area">
+                <div class="medium-insert-embeds">
+                    <div id="disqus_thread" class="DisqusPlaceholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

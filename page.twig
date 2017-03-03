@@ -1,0 +1,20 @@
+{% set page = _Page.getPageData(slug) %}
+
+{{ set(this, 'title', page.title | raw) }}
+
+<!-- Begin Container -->
+<div class="page_section">
+    <section class="container">
+        <!-- Begin Terms -->
+        <div class="content-wrap terms_page">
+            <h3 class="sub-heading">{{page.title | raw}}</h3>
+            <div class="row">
+                <div class="col-full">
+                    <div class="content_area">
+                        {{page.content | raw}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

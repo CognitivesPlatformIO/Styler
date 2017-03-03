@@ -1,0 +1,147 @@
+{% set blogInfo = _Blog.getBlog() %}
+{% set networkData = _Network.getNetworkData() %}
+
+{{ set(this, 'title', blogInfo.title) }}
+
+{% set limit = 21 %}
+{% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
+{% set articles = articlesArr.articles %}
+
+{% set hasBlogImage = FALSE %}
+{% set blogImage = "" %}
+{% if blogInfo.media['cover']['id'] is not empty %}
+    {% set blogImage = _Media.getMediaUrl(blogInfo.media['cover'], 1160, 600, {gravity: 'north'}) %}
+    {% set hasBlogImage = TRUE %}
+{% endif %}    
+{% set blogDetails = _Blog.getBlogDetails() %}
+
+{{this.registerJs("HomeController.listing();")}}
+{{this.registerJs("HomeController.blog();")}}
+{% set blogOwnerImage = network.templatePath~'/static/images/placeholder/no_image.svg' %} %}
+{% if blogInfo.owner['media'] | length > 0 and blogInfo.owner['media']['id'] is defined %}
+    {% set blogOwnerImage = _Media.getMediaUrl(blogInfo.owner['media'], 180, 180, {crop:"thumb", radius:"max", gravity:"face"}) %}
+{% endif %}
+<div class="page_section home_section blog_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="blog_top_section">
+                    <div class="blog-header image-covered" {%if blogImage is not empty%}style="background-image:url('{{blogImage}}')"{%endif%}>
+                        <div class="blog-content">
+                            <h2 class="heading-section">{{blogInfo.title}}</h2>
+                            <p>By <a href="javascript:;">{{blogInfo.owner['display_name'] | raw}}</a></p>
+                        </div>
+                        <div class="blog-userprofile image-covered" {%if blogOwnerImage is not empty%}style="background-image:url('{{blogOwnerImage}}')"{%endif%}></div>
+                    </div>
+                    <div class="social-section">
+                        <div class="social-connect">
+                            <ul>
+                                {% if blogInfo.settings['social']['twitter'] is not empty %}
+                                <li><a class="twitter" href="{{blogInfo.settings['social']['twitter']}}" target="_blank" ><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if blogInfo.settings['social']['facebook'] is not empty %}
+                                <li><a class="facebook" href="{{blogInfo.settings['social']['facebook']}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                {% if blogInfo.settings['social']['google'] is not empty %}
+                                <li><a class="google-plus" href="{{blogInfo.settings['social']['google']}}" target="_blank" ><i class="fa fa-google-plus"></i></a></li>
+                                {% endif %}
+                                {% if blogInfo.settings['social']['linkedin'] is not empty %}
+                                <li><a class="linkedin" href="{{blogInfo.settings['social']['linkedin']}}" target="_blank" ><i class="fa fa-linkedin"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="social-button">
+                            {% if not _User.isGuest %}
+                                {% set isUserFollowingBlog = _User.isUserFollowing('blog', blogInfo.id) %}
+                                {% if isUserFollowingBlog %}
+                                    <a href="javascript:void(0)" class="button upper black  followBlog" data-status="unfollow"  data-guid="{{blogInfo.guid}}">FOLLOWING <i class="fa fa-minus"></i></a>
+                                {% else %}
+                                    <a href="javascript:void(0)" class="button upper black  followBlog" data-status="follow"  data-guid="{{blogInfo.guid}}">FOLLOW <i class="fa fa-plus"></i></a>
+                                {% endif %}
+                            {% else %}
+                                <a href="javascript:void(0)" class="button upper black forceLoginModal">Follow <i class="fa fa-plus"></i></a>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                {% if articles|length > 0 %}
+                    <div class="cards_main">
+                        {% for i in 0..2 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-third">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for i in 3..4 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-half">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'halfwidth'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for i in 5..7 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-third">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for i in 8..11 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-quarter">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'small'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                         {% for i in 12..13 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-half">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'halfwidth'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                         {% for i in 14..16 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-third">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                         {% for i in 17..20 %}
+                            {% if articles[i] is defined %}
+                                <div class="col-quarter">
+                                    {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}   
+
+                    </div>
+                    <div class="cards_main ajaxArticles" data-existing-nonpinned-count="{{articlesArr.existingNonPinnedCount}}" data-offset="{{limit}}"></div>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if articles|length >= limit %}
+        <div class="row text-center has-margin-bottom-20 has-margin-top-20">            
+                <a href="javascript:void(0)" class="button grey button-large loadMoreArticles"><i class="fa fa-arrow-down"></i>Load More</a>    
+        </div>
+        {% endif %}
+        
+        {% set noDataCls = 'hide' %}
+        {% if articles|length == 0 %}
+            {% set noDataCls = '' %}
+         {% endif %}
+        <div class="row text-center has-margin-bottom-20 has-margin-top-20 {{noDataCls}} NoArticlesMsg">
+            <p class="no-data text-center">No articles found.</p>  
+        </div>
+        
+    </div>
+</div>
+

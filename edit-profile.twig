@@ -1,0 +1,90 @@
+{{ set(this, 'title', 'Edit Profile') }}
+
+{% set user = _User.getUser()%}
+<!-- Begin User Profile Page -->
+<div class="user_profile page_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><h3 class="sub-heading">Account &amp; Profile</h3></div>
+            <div class="col-sm-6 col-xs-12"><a href="/profile/{{user.username}}" class="button pull-right ">View Profile</a></div>
+        </div>
+        <div class="user_profile_section">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    {{this.render('layouts/partials/messages.twig') | raw}}
+                    <div class="profile-status text-center">
+                        <p>Your profile is <span class="grey_themer">{{_User.getProfileCompletionPercentage()}}%</span> complete</p>
+                    </div>
+                    <div class="profile-upload text-center ">
+                        {% set profileImage = _Media.getMediaUrl(user.profileMedia, 120, 120, {radius: 'max', gravity: 'face', 'crop': 'thumb'})%}
+                        <div class="user-pic"><span class="uploadedUser"{% if profileImage is not empty %} style="background-image:url({{profileImage}});"{% endif %}><i class="fa fa-user {{ (profileImage is not empty) ? 'hide' : ''}}"></i></span></div>
+                        <a href="javascript:void(0)" class="em grey_themer upload-profile uploadFileBtn" data-imgcls="uploadedUser" data-id="userProfileImage">
+                            <i class="fa fa-plus-circle green"></i>add new image
+                        </a>
+                    </div>
+
+                    <div class="profile-details">
+                        <form id="profile-form" class="form-horizontal" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <input type="hidden" name="_csrf" value="{{_AppHelper.getCsrfToken()}}" />
+                            <input type="hidden" name="profileImage" id="userProfileImage" value="" />
+                            <div class="controls-full">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" class="form-control" name="username" value="{{user.username}}" placeholder="Username" >
+                            </div>
+
+                            <div class="controls-full">
+                                <label for="firstname">First Name</label>
+                                <input type="text" id="firstname" class="form-control" name="firstname" value="{{user.firstname}}" placeholder="First name">
+                            </div>
+
+                            <div class="controls-full">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" id="lastname" class="form-control" name="lastname" value="{{user.lastname}}" placeholder="Last name">
+                             </div>
+
+                            <div class="controls-full">
+                                <label for="user-by_line">Byline</label>
+                                <div class="button-set grey">
+                                    <div class="column">
+                                        <label><input type="radio" id="User_by_line0" name="by_line" value="FirstNameLastName" {% if user.by_line == 'FirstNameLastName'%} checked='checked' {% endif %}><span><!-- fake checkbox --></span>First Name Last Name</label>
+                                    </div>
+
+                                    <div class="column">
+                                        <label><input type="radio" id="User_by_line1" name="by_line" value="Username" {% if user.by_line == 'Username'%} checked='checked' {% endif %}><span><!-- fake checkbox --></span>Username</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="controls-full">
+                                <label for="user-bio">Bio</label>
+                                <textarea id="user-bio" class="form-control" name="bio" rows="3" placeholder="Write your description...">{{Html.decode(user.bio)}}</textarea>
+                                <span class='help-block'>Tell us a bit about yourself</span>
+                            </div>
+
+                            <div class="controls-full field-user-email required">
+                                <label for="user-email">Email</label>
+                                <input type="text" id="user-email" class="form-control" disabled="true" name="email" value="{{user.email}}" placeholder="Email">
+                                <span class='help-block'>can't update your email address</span>
+                            </div>
+
+                            <div class="controls-full">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" class="form-control" name="password" placeholder="Leave empty to not update">
+                            </div>
+
+                            <div class="controls-full">
+                                <label for="user-verifypassword">Verify Password</label>
+                                <input type="password" id="user-verifypassword" class="form-control" name="verifypassword" placeholder="Leave empty to not update">
+                            </div>
+
+                            <div class="button-full">
+                                <button type="submit" class="button grey button-large">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //End User Profile Page -->

@@ -1,0 +1,218 @@
+{% set networkData = _Network.getNetworkData() %}
+{% set blogData = _Blog.getBlog() %}
+
+{{ this.beginPage() }}
+<!DOCTYPE html>
+<!--[if lte IE 8]>
+<html class="ie ie8" lang="{{_AppHelper.getLanguage()}}">
+<![endif]-->
+<!--[if gt IE 8]>
+<html class="ie" lang="{{_AppHelper.getLanguage()}}">
+<![endif]-->
+<!--[if !(IE)]><!-->
+<html lang="{{_AppHelper.getLanguage()}}">
+<!--<![endif]-->
+
+<head>
+    <meta charset="{{_AppHelper.getCharset() }}" />
+    <title>{{this.title | raw}}</title>
+    {{ Html.csrfMetaTags | raw }}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- Google Tag Manager -->
+    {% if networkData.thirdPartyIntegrations['googleTagManager'] | length > 0 %}
+        {{networkData.thirdPartyIntegrations['googleTagManager']['script'] | raw}}
+    {% endif %}
+    
+    {% set favicon = ''%}
+    {% if networkData.favMedia | length > 0 %}
+        {% set favicon = _Media.getMediaUrl(networkData.favMedia, 80, 80) %}
+    {% endif %}
+    
+    {% if favicon != '' %}
+    <link rel="shortcut icon" href="{{favicon}}" type="image/x-icon" />
+    <link rel="icon" href="{{favicon}}" sizes="any" type="image/svg+xml" />
+    {% endif %}
+        
+    {% set primaryFont = networkData['styling']['fonts']['primaryFont'] %}
+    {% set secFont = networkData['styling']['fonts']['secondaryFont'] %}
+
+    {% if primaryFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{primaryFont}}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if secFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{secFont}}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    
+    <link rel="alternate" type="application/rss+xml" title="{{_Network.getNetworkTitle()}} -  RSS Feeds" href="http://{{networkData.defaultDomain['domain']}}/feed/rss"/>
+
+    <!--[if lte IE 8]><script type="text/javascript" src="{{networkData.templatePath}}/static/js/ie/ie.js"></script><![endif]-->
+    
+    {% if _AppHelper.getApplicationEnv() == 'PROD'%}
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.gz.css?rel=1483548792893" type="text/css" media="all">
+    {% else %}
+        <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.fancybox/source/jquery.fancybox.css" />
+        <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.noty-2.3.8/demo/animate.css" />
+        <link type="text/css" rel="stylesheet" href="{{_AppHelper.getAssetsSDKPath()}}/js/media-player/mediaelementplayer.css" />
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/css/index.css" type="text/css" media="all" />
+    {% endif %}
+    
+     {% set themeColors = networkData['styling']['colours'] %}
+    <style type='text/css'>
+        {% if primaryFont != "" %}
+            body, .body, p {
+                font-family: "{{primaryFont | replace({'+': ' '})}}" !important;
+            }
+        {% endif %}
+        {% if secFont != "" %}
+            h1, h2, h3, h4, h5, a.header__navigation-link {
+                font-family: "{{secFont | replace({'+': ' '})}}" !important;
+            }
+        {% endif %}
+        {% if themeColors.linkColor != "" %}
+            a {
+                color: {{themeColors.linkColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.linkHoverColor != "" %}
+            a:hover {
+                color: {{themeColors.linkHoverColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.headingColor != "" %}
+            h1, h2, h3, h4, h5 {
+                color: {{themeColors.headingColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.navigationColor != "" %}
+            a.header__navigation-link {
+                color: {{themeColors.navigationColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.navigationHoverColor != "" %}
+            a.header__navigation-link:hover {
+                color: {{themeColors.navigationHoverColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.navigationActiveColor != "" %}
+            a.header__navigation-link.active {
+                color: {{themeColors.navigationActiveColor}} !important;
+            }
+        {% endif %}
+        {% if themeColors.navigationBgColor != "" %}
+        .header__navigation {
+            background-color: {{themeColors.navigationBgColor}} !important;
+        }
+        {% endif %}
+        {% if themeColors.headerBgColor != "" %}
+        .header {
+            background-color: {{themeColors.headerBgColor}} !important;
+        }
+        .header--category {
+            border-color: {{themeColors.headerBgColor}} !important;
+        }
+        {% endif %}
+        {% if themeColors.footerBgColor != "" %}
+        .footer {
+            background-color: {{themeColors.footerBgColor}} !important;
+        }
+        {% endif %}
+        {% if themeColors.pageBgColor != "" %}
+        .body, .body > .section {
+            background-color: {{themeColors.pageBgColor}} !important;
+        }
+        {% endif %}
+
+        {% set customCss = networkData['styling']['customStyleSheet'] %}
+        {% if customCss != "" %}
+                {{customCss | raw}}
+        {% endif %}
+    </style>
+
+   {% if blogData.settings['GoogleAnalyticsID'] is defined and blogData.settings['GoogleAnalyticsID'] is not empty %}
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', '{{blogData.settings['GoogleAnalyticsID']}}', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <!-- End Google Analytics -->
+    {% endif %}
+
+
+    {% set blogList = _Blog.getBlogList() %}
+
+    {% if blogList | length > 0 %}
+    <style>
+        {% for blog in blogList %}
+            {% if blog.featuredColor is not empty %}
+                {% set blogClass = 'card--blog_'~blog.id %}
+                
+                .card.{{blogClass | lower}} .title-section span {
+                 background-color: {{blog.featuredColor}} !important;   
+                }
+                
+                
+                .{{blogClass | lower}} {
+                    border-color: {{blog.featuredColor}} !important;
+                }
+                .{{blogClass | lower}} .card__category, .article--category .article__caption .card__author {
+                    color: {{blog.featuredColor}} !important;
+                }
+                .article__header .article__category, .article__follow {
+                    background-color: {{blog.featuredColor}} !important;
+                }
+                .{{blogClass | lower}} .card__category:after {
+                    background-color: {{blog.featuredColor}} !important;
+                }
+                .{{blogClass | lower}} .card__author {
+                    color: {{blog.featuredColor}} !important;
+                }
+                .{{blogClass | lower}}.card__banner .card__no-image, .{{blogClass | lower}}.card__banner .card__image {
+                    border-color: {{blog.featuredColor}} !important;
+                }
+                .{{blogClass | lower}}.card--light .card__category {
+                    background-color: {{blog.featuredColor}} !important;
+                    color: #ffffff !important;
+                }
+            {% endif %}
+        {% endfor%}
+    </style>
+     {% endif %}
+
+    {{ this.head() }}
+</head>
+
+<body class="body">
+    {{ this.beginBody() }}
+    <!-- Google Tag Manager(noscript) -->
+    {% if networkData.thirdPartyIntegrations['googleTagManager'] | length > 0 %}
+        {{networkData.thirdPartyIntegrations['googleTagManager']['noscript'] | raw}}
+    {% endif %}
+
+    {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
+
+    {{ content | raw}}
+
+    {{ this.render('partials/_footer.twig', {networkData : networkData, blogData: blogData}) | raw }}
+
+    {{ this.render('partials/_responsive_navigation.twig', {network: networkData, blogData: blogData}) | raw }}
+
+    {{ this.render('partials/_javascript.twig', {networkData : networkData}) | raw }}
+
+    <div class="SwappingHelper" style="display:none">
+        <div style="width: 270px; height: 105px; padding: 3px; background-color: #FFF; max-width: 270px; max-height: 105px; overflow: hidden; z-index: 999 !important;">
+            <img class="article-image" src="{{networkData.placeHolder100x100}}" style="width:97px; height: 97px; float: left;" />
+            <p class="article-text" style="width: 165px; float: left; padding-left: 3px;color: #394659;font-size: 14px; font-family: Droid Serif,serif; line-height: 20px; margin-top:0px;">Dummy text  </p>
+        </div>
+    </div>
+            
+{{ this.endBody() }}
+</body>
+{{ this.endPage() }}
+</html>

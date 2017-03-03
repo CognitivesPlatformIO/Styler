@@ -1,0 +1,102 @@
+{{ set(this, 'title', (Html.encode(article.title))) }}
+{% set network = _Network.getNetworkData() %}
+
+{% set status = 'follow' %}
+{% set text = 'Follow +' %}
+{% if not _User.isGuset() and _User.isUserFollowing('blog', article.blog['id'])%}
+    {% set status = 'unfollow' %}
+    {% set text = 'Following -' %}
+{% endif %}
+
+{% set noImageClass = ''%}
+{% if article.media | length <= 0 %}
+    {% set noImageClass = 'no-image'%}
+{% endif %}
+{% set placeholder = network.templatePath~'/static/images/placeholder/placeholder.svg' %}
+
+{% set publisher = {height: 60, width: 600, name: network.title, logo: network.templatePath~'/static/images/themeLogo.svg'} %}
+{% if network.logoMedia | length > 0 %}
+    {% set publisher = publisher|merge({logo:_Media.getMediaUrl(network.logoMedia, publisher.width, publisher.height, {'crop': 'lpad'} )})%}
+{% endif %}
+<div class="page_section article_page" itemscope itemtype="http://schema.org/NewsArticle">
+    <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{article.url}}"/>
+    <meta itemprop="url" content="{{article.url}}">
+    <meta itemprop="dateModified" content="{{article.updatedAt}}">
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+        <meta itemprop="name" content="{{publisher.name}}"/>
+        <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="{{publisher.logo}}"/>
+            <meta itemprop="width" content="{{publisher.width}}"/>
+            <meta itemprop="height" content="{{publisher.height}}"/>
+        </div>
+    </div>
+    <div class="container">
+        <div class="article article--creative {{noImageClass}}">
+            <div class="article__banner">
+                <div class="slides">
+                    {% for media in article.media %}
+                        <div class="slide lazyload-remove" itemprop="image" itemscope itemtype="https://schema.org/ImageObject" data-thumbnail="{{media.path}}" data-original="{{media.path}}" style="background-image: url('{{media.path}}')">
+                            <meta itemprop="url" content="{{media.path}}">
+                            <meta itemprop="height" content="{{media.height}}">
+                            <meta itemprop="width" content="{{media.width}}">
+                            {% if media.type == 'video' %} 
+                                {% set mediaUrl = "" %}
+                                {% if media.isSystemVideo == 'TRUE'%}
+                                    {% set mediaUrl = _Media.getMediaVideoUrl(media, 0, 0,{resource_type: 'video', format: 'mp4'})  %}
+                                {% endif %}
+                                <a href="javascript:void(0)" itemprop="video" class="video-overlay video-player" data-source="{{media.source}}"  data-url="{{mediaUrl}}" data-video-id="{{media.videoId}}" data-poster="{{media.path}}" data-caption="{{article.title | raw}}">
+                                    <div class="icons">
+                                        <div class="icon"><i class="fa fa-play"></i></div>
+                                    </div>
+                                </a>
+                            {% endif %}
+                            {% if media.caption | length %}
+                                <div class="slide__content">
+                                    <p class="slide__caption">{{media.caption | raw}}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="article__header">
+                <div class="article__category"><a href="{{article.blog['url']}}">{{article.label}}</a></div>
+                <div class="article__social">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u={{article.url}}&title={{ article.title|url_encode }}" target="_blank" class="article__social-link article__social-link--facebook"></a>
+                    <a href="http://twitter.com/intent/tweet?status={{ article.title|url_encode }}{{article.url}}" target="_blank" class="article__social-link article__social-link--twitter"></a>
+                    <a href="https://plus.google.com/share?url={{article.url}}" target="_blank" class="article__social-link article__social-link--google-plus"></a>
+                     {% set subject = article.title~' '~_Network.getNetworkTitle()%}
+                    {% set body = 'I thought you would find this article interesting'|url_encode%}
+                    {% set body = body ~'%0D%0A%0D%0A' ~ article.url%}
+                    <a href="mailto:?subject={{subject}}&body={{body}}"  class="article__social-link article__social-link--mail"></a>
+                </div>
+                <h1 class="article__heading" itemprop="headline">{{article.title}}</h1>
+                <div class="article__userName">
+                    <a href="{{_AppHelper.getUserProfileUrl(article.createdBy['username'])}}">By <span itemprop="author">{{article.createdBy['displayName']}}</span></a>
+                    <time itemprop="datePublished">{{article.publishedDate}}</time>
+                </div>
+
+                {% if _User.isGuest() %}
+                    <a href="javascript:void(0)" class="button article__follow forceLoginModal">Follow +</a>
+                {% else %}
+                    <a href="javascript:void(0)" class="button article__follow followArticleBtn" data-guid="{{article.blog['guid']}}" data-status="{{status}}">{{text}}</a>
+                {% endif%}
+            </div>
+
+            <div class="article-content-section">
+                <div class="content-area" itemprop="articleBody">
+                    {{article.content | raw}}
+                </div>
+            </div>
+
+            <!-- Disqus Comment Added -->
+            {% set network = _Network.getNetworkData() %}
+            {% if network.thirdPartyIntegrations['disqus'] | length > 0 and network.thirdPartyIntegrations['disqus']['shortName'] != '' %}
+                {{this.render("partials/article/_disqus_comments.twig", {disqus: network.thirdPartyIntegrations['disqus'], userId: article.createdBy['id'], url:article.url, articleId: article.id}) | raw}}
+            {% endif %} 
+        </div>
+    </div>
+</div>
+        
+{{this.render("partials/article/_popular_articles.twig", {articleId: article.id}) | raw }}

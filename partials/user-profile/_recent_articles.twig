@@ -1,0 +1,23 @@
+<div class="recent-articles">
+    <header class="sub-header">Recent Articles <span class='hidden-xs'>{% if myArticles is defined and myArticles | length > 0 %}(<a href='{{ _AppHelper.buildUrl('profile/user-posts',{name :  Html.encode(myArticles[0].createdBy['username'])})}}' class='view-more'>View all articles</a>){% endif %}</span></header>
+    <div id="news-profile">
+        <div class="section__content">
+            <div class="row">
+                {% if myArticles | length > 0  %}
+                    <div id="owl-thumbnails" class="owl-carousel">
+                        {% set i = 0 %}
+                        {% for article in myArticles %}  
+                            <div class='col-third'>
+                            {{this.render('//partials/_single-article.twig', {article: article, 'position': (i+1), 'titleTruncateLength': 70}) | raw}}
+                            </div>
+                            {%  set i = i + 1 %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-data ">No article(s) created yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

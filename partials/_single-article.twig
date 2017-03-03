@@ -1,0 +1,153 @@
+{% set networkData = _Network.getNetworkData() %}
+{% set placeholder = network.templatePath~'/static/images/placeholder/placeholder.svg' %}
+{% if article.articleId > 0 %}
+    {% set imgWidth = 383 %}
+    {% set imgHeight = 260 %}
+    {% set articleImg = '' %}
+    {% set cardImageClass = 'without__image' %}
+    {% if viewType=='fullwidth' %}
+        {% set imgWidth = 1156 %}
+        {% set imgHeight = 500 %}
+        {% set cardClass='' %}
+    {% endif %}
+    {% if viewType=='halfwidth' %}
+        {% set imgWidth = 576 %}
+        {% set imgHeight = 500 %}
+        {% set cardClass='' %}
+    {% endif %}
+    {% if viewType=='1col' %}
+        {% set imgWidth = 286 %}
+        {% set imgHeight = 260 %}
+    {% endif %}
+    {% if article.featuredMedia | length > 0 and article.featuredMedia['id'] is not empty %}
+        {% set cardImageClass = 'withImage__content' %}
+        {% set articleImg = _Media.getMediaUrl(article.featuredMedia,imgWidth, imgHeight, {'crop': 'fill', 'gravity': 'faces'} ) %}
+        {% if viewType=='fullwidth' or viewType=='halfwidth' %}
+            {% set cardClass='content_overlay_image' %}
+            {% set cardImageClass = '' %}
+        {% endif %}
+    {% endif %}
+    {% set blogClass = 'card--blog_'~article.blog['id'] %}
+    <a href="{{article.url}}" itemscope itemtype="http://schema.org/NewsArticle"
+       class="card card__news {{cardClass}} {{cardImageClass}} {{blogClass}} {{ (article.isPromoted) ? 'ad_icon' : '' }}" 
+       data-id="{{article.articleId}}" data-position="{{position}}" data-social="0" data-article-image="{{articleImg}}" data-article-text="{{Helper.htmlToText(article.title, 100) | raw}}" id="Article{{article.articleId}}">
+        <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{article.url}}"/>
+        {% if article.featuredMedia['media'] is defined and  article.featuredMedia['media'] | length > 0%}
+            <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="{{article.featuredMedia['media']['url']}}"/>
+                <meta itemprop="width" content="{{article.featuredMedia['media']['width']}}"/>
+                <meta itemprop="height" content="{{article.featuredMedia['media']['height']}}"/>
+            </div>
+        {% endif %}
+        {% if article.publisher['url'] is not empty %}
+            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <meta itemprop="name" content="{{article.publisher['name']}}"/>
+                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="{{article.publisher['url']}}"/>
+                    <meta itemprop="width" content="{{article.publisher['width']}}"/>
+                    <meta itemprop="height" content="{{article.publisher['height']}}"/>
+                </div>
+            </div>
+        {% endif %}
+        <meta itemprop="datePublished" content="{{article.metaPublishDate}}"/>
+        <meta itemprop="dateModified" content="{{article.metaUpdateDate}}"/>
+        
+        {% if article.userHasBlogAccess == '1' %}
+            <div class="btn_overlay articleMenu">
+                <button title="Hide" data-guid="{{article.guid}}" class="btnhide social-tooltip HideBlogArticle" type="button" data-social="0">
+                    <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
+                </button>
+                <button onclick="window.location = '{{article.editUrl}}'; return false;" title="Edit" class="btnhide social-tooltip" type="button">
+                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                </button>
+                {% set pinTitle = 'Pin Article' %}
+                {% set pinTxt = 'Pin' %}
+                {% set pinCls = '' %}
+                {% if article.isPinned == 1 %}
+                    {% set pinTitle = 'Un-Pin Article' %}
+                    {% set pinTxt = 'Un-Pin' %}
+                    {% set pinCls = 'selected' %}
+                {% endif %}    
+                <button data-position="{{position}}" data-social="0" data-id="{{article.articleId}}" title="{{pinTitle}}" class="btnhide social-tooltip PinArticleBtn {{pinCls}}" type="button" data-status="{{article.isPinned}}">
+                    <i class="fa fa-thumb-tack"></i><span class="hide">{{pinTxt}}</span>
+                </button>
+            </div>
+        {% endif %}
+        
+        <div data-original="{{articleImg}}" class="card-image lazyload" {% if articleImg is not empty %}style="background-image:url('{{placeholder}}');"{%endif%}></div>
+        <div class="content-section">
+            <div class="title-section">
+                <span>{{article.label}}</span>
+                <div class="card-icon"></div>
+            </div>
+            <h1 class="heading-section"  itemprop="headline"  style="word-wrap: break-word;">{{article.title | raw}}</h1>
+            <p class="description" itemprop="description" style="word-wrap: break-word;">{{Html.encode(article.excerpt) | raw}}</p>
+            {% set publishDate = _AppHelper.getDefaultTimezoneDateTime(article.publishDate) %}
+            <div class="caption_bottom">
+                <div class="author_name" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{{article.createdBy['displayName'] | raw}}</span></div>
+                <div class="post_date">{{_AppHelper.getDateTimeBasedOnTimezone(publishDate,'SHORT')}}</div>
+                <span class="category_share_icon socialShare">
+                    <i class="fa fa-share-alt"></i>
+                    <div class="tooltip">
+                        <div onClick="window.open('http://www.facebook.com/sharer/sharer.php?u={{article.url}}&title={{ article.title|url_encode }}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=400');" class="tooltip__link tooltip__link--facebook"></div>
+                        <div onClick="window.open('http://twitter.com/intent/tweet?status={{ article.title|url_encode }}{{article.url}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=400');" class="tooltip__link tooltip__link--twitter"></div>
+                        <div onClick="window.open('https://plus.google.com/share?url={{article.url}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=400');" class="tooltip__link tooltip__link--google-plus"></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </a>
+{% else %}
+    {% set social = article.social %}
+    {% set mediaClass = (social.hasMedia == 'TRUE') ? 'withImage__content' : 'without__image' %}
+    {% if social.hasMedia == 'TRUE' %}
+        {% if viewType=='fullwidth' or viewType=='halfwidth' %}
+            {% set mediaClass='content_overlay_image' %}
+        {% endif %}
+    {% endif %}
+    {% set videoClass = (social.media['type'] == 'video') ? 'video_card' : '' %}
+    <a class="card card__{{social.source}} {{mediaClass}} {{videoClass}}" href="{{ social.url }}" target="_blank" data-id="{{article.socialId}}" id="Social{{article.socialId}}"  
+        data-position="{{position}}" data-social="1" data-article-image="{{social.media['path']}}" data-article-text="{{Helper.htmlToText(social.content, -1) | raw | escape('html')}}">
+        {% if article.userHasBlogAccess == '1' %}
+            <div class="btn_overlay articleMenu">
+                <button title="Hide" data-guid="{{social.guid}}" class="btnhide social-tooltip HideBlogArticle" type="button" data-social="1">
+                    <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
+                </button>
+                {% set pinTitle = 'Pin Article' %}
+                {% set pinTxt = 'Pin' %}
+                {% set pinCls = '' %}
+                {% if article.isPinned == 1 %}
+                    {% set pinTitle = 'Un-Pin Article' %}
+                    {% set pinTxt = 'Un-Pin' %}
+                    {% set pinCls = 'selected' %}
+                {% endif %}    
+                <button title="Edit"class="btnhide social-tooltip" type="button" data-social="1" onClick="window.open('/admin/social-funnel/update-social?guid={{social.blog['guid']}}&socialguid={{social.guid}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=450'); return false;">
+                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                </button>
+                <button data-position="{{position}}" data-social="1" data-id="{{article.socialId}}" title="{{pinTitle}}" class="btnhide social-tooltip PinArticleBtn {{pinCls}}" type="button" data-status="{{article.isPinned}}">
+                    <i class="fa fa-thumb-tack"></i><span class="hide">{{pinTxt}}</span>
+                </button>
+            </div>
+        {% endif %}
+        {% if social.hasMedia == 'TRUE' and social.media['path'] is not empty%}
+            <div data-original="{{ social.media['path'] }}" class="card-image lazyload">
+                 {% if social.media['type'] == 'video' and social.media['videoUrl'] is not empty %}
+                    <div class="play_icon video-player" data-source="{{social.source}}" data-url="{{social.media['videoUrl']}}"  data-poster="{{social.media['path']}}"></div>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="content-section">
+            <div class="title-section">
+                <span>{{social.source}}</span>
+                <div class="card-icon"></div>
+            </div>
+            <p class="description" id="updateSocial{{article.socialId}}" data-update="0">{{ social.content | raw }}</p>
+            {% set socialPublishDate = _AppHelper.getDefaultTimezoneDateTime(social.publishDate) %}
+            <div class="caption_bottom">
+                <div class="author_name">{{ (social.source == _SocialFeed.getSocialArticleSourceIsTwitter()) ? '@' : ''}}{{ social.user['name'] | lower }}</div>
+                <div class="post_date">{{_AppHelper.getDateTimeBasedOnTimezone(socialPublishDate,'SHORT')}}</div>
+            </div>
+        </div>
+    </a>
+    
+{% endif %}

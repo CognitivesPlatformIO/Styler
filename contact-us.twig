@@ -1,0 +1,82 @@
+{{ set(this, 'title', 'Contact Us') }}  
+
+<!-- Begin Container -->
+<div class="page_section">
+    <section class="container">
+        <!-- Begin ContactUs -->
+        <div class="content-wrap contact_us_page">
+            <div class="row">
+                <div class="col-third">
+                    <div class="contact_details">
+                        <h3 class="sub-heading">Contact us</h3>
+                        <p class="has-border-bottom">You can contact us direct by:</p>
+                        {% set businessDetails = _Blog.getHomeBlogSettings() %}
+                        <ul class="address">
+                            <li><span>Email</span> <a class="green" href="mailto:{{businessDetails.contact['email']}}">{{businessDetails.contact['email']}}</a></li>
+                            <li><span>Postal</span> 
+                                {{businessDetails.contact['address']}}<br />
+                                {{businessDetails.contact['city']}}, {{businessDetails.contact['state']}}
+                                <br />
+                                {{businessDetails.contact['country']}} {{businessDetails.contact['postcode']}}</li>
+                        </ul>
+                        <ul class="social">
+                            {% if businessDetails.social['facebook'] is not empty %}
+                                <li class="facebook"><a href="{{businessDetails.social['facebook']}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            {% endif %}
+                            {% if businessDetails.social['twitter'] is not empty %}
+                                <li class="twitter"><a href="{{businessDetails.social['twitter']}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            {% endif %}
+                            {% if businessDetails.social['google'] is not empty %}
+                                <li class="g-plus"><a href="{{businessDetails.social['google']}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-two-thirds">
+                    <h3 class="sub-heading">Leave us a message</h3>
+                    <p class="has-border-bottom">Please fill out the form below to contact us.</p>
+
+                    <!--<div class="alert alert-success fade in hide" id="contactMessage">
+                        Thank you for contacting us. We will respond to you as soon as possible.
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible fade in hide form-contact" role="alert" id="contactErrorContainer">
+                        <h4>Oh snap! You got an error!</h4>
+                        <div id="contactErrorContainerContent"></div>
+                    </div>
+-->
+                    <form id="contactForm" class="form-horizontal form-contact" action="{{_AppHelper.getContactFormUrl()}}" method="post" autoComplete="off">
+                        <input type="hidden" name="_csrf" value="{{_AppHelper.getCsrfToken()}}" />
+                        <!--<div class="alert alert-danger alert-dismissible fade in" style="display:none">
+                            <button class="close" aria-label="Close" data-dismiss="alert" type="button"><span aria-hidden="true">×</span></button>
+                        </div>-->
+                        <div class="controls-full">
+                            <div class="form-group field-contactform-name required">
+                                <label class="control-label" for="contactform-name">Name</label>
+                                <input type="text" id="contactform-name" class="form-control" name="name" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="controls-full">
+                            <div class="form-group field-contactform-email required">
+                                <label class="control-label" for="contactform-email">Email</label>
+                                <input type="email" id="contactform-email" class="form-control" name="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="controls-full">
+                            <div class="form-group field-contactform-message required">
+                                <label class="control-label" for="contactform-message">Message</label>
+                                <textarea class="form-control" name="message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" id="btnContact" class="button grey lg" name="contact-button">Send</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- //End ContactUs -->
+    </section>
+</div>
+<!-- //End Container -->
+

@@ -1,0 +1,47 @@
+<div class="polpular-writers">
+    <header class="sub-header">My Blogs</header>
+        {% if userOwnerBlogs | length > 0 %}
+        <ul>
+            {% for blog in userOwnerBlogs %}
+                {% if not _User.isGuest() and blog.isBlogOwner %}
+                    {% set hasImage = (blog.media['thumb'] is defined and blog.media['thumb']['path'] != '') ? 1 : 0 %}
+                    <li><a href="{{blog.url}}" target="_blank" class="{%if not hasImage%}no-image{%endif%}">
+                            {% if hasImage %}
+                                <div class="img-thumbnail"><img class="img-responsive" src="{{_Media.getMediaUrl(blog.media['thumb'], 90, 90)}}" alt=""></div>
+                            {% endif %}
+                            <div class="description">
+                                <h4>{{blog.title | raw}}</h4>
+                                <p>{{blog.url}}</p>
+                            </div>
+                        </a>
+                    </li>
+                    {% else %}
+                        {% set btnClass = '' %}
+                        {% set btnStatus = "follow" %}
+                        {% if not _User.isGuest() and _User.isUserFollowing('blog', blog.id) %}
+                            {% set btnClass = 'selected' %}
+                            {% set btnStatus = "unfollow" %}
+                        {% endif %}  
+                    <li>
+                        <a href="{{blog.url}}" target="_blank" class="{%if not hasImage%}no-image{%endif%}">
+                            {% if not _User.isGuest() %}
+                                <button type="button" class="like FollowProfileBlog {{btnClass}}" data-id="{{blog.id}}" data-status="{{btnStatus}}" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
+                            {% else %}
+                                <button type="button" class="like forceLoginModal" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
+                            {% endif %}
+                            {% if blog.media['thumb'] is defined and blog.media['thumb']['path'] != '' %}
+                                <div class="img-thumbnail"><img class="img-responsive" src="{{blog.media['thumb']['path']}}" alt=""></div>
+                            {% endif %}
+                            <div class="description">
+                                <h4>{{blog.title | raw}}</h4>
+                                <p>{{blog.url}}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class='no-data'>No blogs is found.</p>
+    {% endif %}
+</div>

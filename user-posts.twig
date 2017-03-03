@@ -1,0 +1,74 @@
+{{ set(this, 'title', 'User Articles') }}
+{% set networkData = _Network.getNetworkData() %}
+{% set profileImage =_Media.getMediaUrl(user.media, 500, 500, {crop: 'thumb', gravity: 'face', type: 'user'} )%}
+{{this.registerJs("UserArticlesController.load()")}}
+
+<div class="userProfilePost_page page_section">
+    <section class="container">
+        <div class="row">
+            <!-- Begin User Profile Sidebar -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div id="userprofile-sidebar">
+                    <figure class="user-profile-pic"{% if profileImage is not empty %} style="background-image:url('{{profileImage}}');"{% endif %}></figure>
+                    <div class="inner-descr">
+                        <h4 class="user-name text-center">{{Html.encode(user.firstname)}} {{Html.encode(user.lastname)}}</h4>
+                        {% if _User.isGuest() %}
+                            <a href="javascript:void(0)" class="button button-block forceLoginModal"><i class="fa fa-star"></i>Follow</a>
+                        {% endif %}
+                        {% if not _User.isGuest() and _User.getId() != user.id %}
+                            {% set isUserFollowing = _User.isUserFollowing('user', user.id)  %}
+                            <div class="button-set">
+                                <a href="javascript:void(0)" class="button FollowProfileUser" data-guid="{{user.guid}}" data-status="{% if isUserFollowing == 'TRUE' %}unfollow{% else %}follow{% endif %}"><i class="fa fa-star"></i>{% if isUserFollowing == 'TRUE' %} Unfollow {% else %} Follow {% endif %}</a>
+                                <a href="/profile/{{Html.encode(user.username)}}" class="button" ><i class="fa fa-star"></i>View Profile</a>
+                            </div>
+                        {% endif %}
+
+                        {% if not _User.isGuest() and _User.getId() == user.id %}
+                          <a href="{{_AppHelper.getEditProfileUrl()}}" class="button button-block"><i class="fa fa-cog"></i>Edit Profile</a>
+                        {% endif %}
+                    
+                        <a href="{{profileUrl}}" class="button button-block"><i class="fa fa-user"></i>View Profile</a>
+                        <p>{{Html.decode(user.bio) | raw}}</p>
+                        <div class="social-stuffs text-center"><a href="mailto:{{user.email}}"><i class="fa fa-envelope"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //End User Profile Sidebar -->
+
+            <!-- Begin User Posts -->
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <header class="sub-header">Articles</header>
+                <div id="news-posts">
+                    <div class="section__content">
+                        <div class="row">
+                            <div id="userArticleContainer" data-total-count="{{totalArticles}}" data-offset="0">
+                                {% if userArticles | length > 0  %}
+                                    {% set i = 0 %}
+                                    {% for article in userArticles %}  
+                                        <div class="col-third">
+                                            {{this.render('//partials/_single-article.twig', {article: article, 'position': (i+1), titleTruncateLength: 70}) | raw}}
+                                        </div>
+                                        {%  set i = i + 1 %}
+                                    {% endfor %}
+                                {% else %}
+                                    <p class="no-data ">No article(s) created yet.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <div id="LoadMoreArticles" class="clearfix"></div>
+                {% if userArticles | length >= limit%}
+                <div class="text-center">
+                    <div class="loader hide">
+                        <span><img width="24" height="24" src="{{networkData.templatePath}}/static/images/loading.svg"></span>
+                        <span class="text">please wait<span class="one">.</span><span class="two">.</span><span class="three">.</span></span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <!-- //End User Posts -->
+        </div>
+    </section>
+</div>
+

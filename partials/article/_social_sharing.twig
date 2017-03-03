@@ -1,0 +1,5 @@
+<div class="article__social {{ (class is defined) ? class : '' }}" data-guid="{{article.guid}}"> 
+    <a href="http://www.facebook.com/sharer/sharer.php?u={{article.url}}&title={{ article.title|url_encode }}" target="_blank" class="article__social-link article__social-link--facebook"></a>
+    <a href="http://twitter.com/intent/tweet?status={{ article.title|url_encode }}{{article.url}}" target="_blank" class="article__social-link article__social-link--twitter"></a>
+    <a href="https://plus.google.com/share?url={{article.url}}" target="_blank" class="article__social-link article__social-link--gplus"></a>
+</div>

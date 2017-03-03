@@ -1,0 +1,89 @@
+{{ set(this, 'title', 'My News') }}
+
+{% set limit = 21 %}
+{% set userPosts = _User.getUserFeed({limit: limit, offset: 0}) %}
+
+{{this.registerJs("UserArticlesController.load();")}}
+
+<div class="page_section cards_main home_section">
+    <div class="container">
+        {% if userPosts | length > 0 %}
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    {% if userPosts[0] is defined %}
+                        <div class="col-full">
+                            {{this.render('partials/_single-article.twig', {article: userPosts[0], position: 1, viewType: 'fullwidth' }) | raw}}
+                        </div>
+                    {% endif %}
+
+                    {% for i in 1..3 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-third">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for i in 4..5 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-half">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'halfwidth'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for i in 5..8 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-quarter">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'small'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for i in 9..11 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-third">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for i in 12..13 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-half">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'halfwidth'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for i in 14..16 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-third">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'normal'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for i in 17..20 %}
+                        {% if userPosts[i] is defined %}
+                            <div class="col-quarter">
+                                {{this.render('partials/_single-article.twig', {article: userPosts[i], 'position': (i+1), 'viewType': 'small'}) | raw}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12 col-xs-12 LoadMyArticles" data-page="2"></div>
+            </div>
+            {% if userPosts | length >= limit %}   
+                <div class="row text-center has-margin-bottom-20 has-margin-top-20">
+                    <a href="javascript:void(0)" class="button grey button-large loadMoreMyArticles"><i class="fa fa-arrow-down"></i> Load more</a>
+                </div>
+            {% endif %} 
+        {% else %}
+            <div class="row ">
+                <div class="col-md-12 col-xs-12">
+                    <p class="no-data text-center">To get a customised feed of content follow channels, authors or blogs in the network</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

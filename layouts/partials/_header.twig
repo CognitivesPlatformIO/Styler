@@ -1,0 +1,126 @@
+{% set user = '' %}
+{% set headerClass = 'header_login' %}
+{% if not _User.isGuest()%}
+    {% set user = _User.getUser()%}
+    {% set headerClass = '' %}
+{% endif %}
+<header class="header {{headerClass}} ">
+    <div class="header__container">
+        <a id="header-responsive" href="javascript:;" class="header__navigation-responsive">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="item-1"></span>
+            <span class="item-2"></span>
+            <span class="item-3"></span>
+        </a>
+        <div class="col-left">
+            {% set logo = network.templatePath~'/static/images/themeLogo.svg'%}
+            {% set logoUrl = network.networkLogoLinkUrl %}
+            {% if network.logoMedia | length > 0 %}
+                {% set logo = _Media.getMediaUrl(network.logoMedia, 300, 40, {'crop': 'fit'} )%}
+            {% endif %}
+            <a href="{{ logoUrl }}" class="header__logo header__logo--center" id="logo">
+                {% if logo is not empty %}<img src="{{logo}}" />{% endif %}
+            </a>
+        
+        </div>
+        <div class="col-right">
+            <div class="search_block">
+                <form action="{{blog.url}}/search" method="get">
+                <input type="search" placeholder="Search" name='s' value="{{_AppHelper.getRequest('s')}}">
+                <button type="button" class="search_icon"><span class="icon-search"><i class="fa fa-search"></i></span></button>
+                <button type="button" class="search_icon visible-xs" id="custom-search-button"><span class="icon-search"><i class="fa fa-search"></i></span></button>
+                </form>
+            </div>
+            {% set profileImage = ''%}
+            {% if not _User.isGuest()%}
+                {% if user.profileMedia | length > 0 %}
+                    {% set profileImage = _Media.getMediaUrl(user.profileMedia, 150, 150, {radius: 'max', gravity: 'face', 'crop': 'thumb', type:'user'})%}
+                {% endif %}
+                <a id="profile" class="header__profile" href="javascript:void(0)"  {% if profileImage != ''%} style="background-image:url({{profileImage}})" {% endif %} ><span class="drop"></span></a>
+             {% else %}
+            
+            <div class="header_buttons">
+                <a class="header__link" href="{{_AppHelper.getLoginUrl()}}">Login</a>
+                {% if not _Network.isNetworkClosed(network)%}
+                    <a class="header__link" href="{{_AppHelper.getSignupUrl()}}">Sign up </a>
+                {% endif %}
+            </div>
+                {% endif %}
+        </div>
+    </div>
+    
+    <div id="header__menu">
+    <div class="profile__container">
+        <div class="profile__menu">
+            {% if not  _User.isGuest() %}
+                <div class="profile__menu-image" style="background-image:url('{{ _Media.getMediaUrl(user.profileMedia, 80, 80, {radius: 'max', gravity: 'face', 'crop': 'thumb', 'type' : 'user'}) }}');"></div>
+                <div class="profile__menu-content">
+                    <div class="profile__menu-name">{{(user.firstname ~" "~ user.lastname) | truncate(15) | title}}</div>
+                    <div class="profile__menu-email">{{user.email | truncate(23)}}</div>
+                    <a href="{{_AppHelper.buildUrl('user/my-news')}}" class="button">My Feed</a>
+                </div>
+                <ul class="profile__menu-navigation">
+                    {% if _User.isAdminUser() %}
+                        <li><a class="profile__menu-navigation-link" href="http://{{network.defaultDomain['domain']}}/admin">Admin</a></li>
+                    {% endif %}
+                    <li><a class="profile__menu-navigation-link" href="{{blogData.url}}/profile/{{user.username}}">Profile</a></li>
+
+                    {% if _User.isAdminUser() %}
+                    <li><a class="profile__menu-navigation-link" href="http://{{network.defaultDomain['domain']}}/admin/user/account">Settings</a></li>
+                    {% else %}
+                    <li><a class="profile__menu-navigation-link" href="http://{{network.defaultDomain['domain']}}/user/edit-profile">Settings</a></li>
+                    {% endif %}
+
+                    <li><a class="profile__menu-navigation-link" href="{{_AppHelper.getLogoffUrl()}}">Sign Out</a></li>
+                </ul>
+            {% else %}
+                <ul class="profile__menu-navigation">
+                    <li><a class="profile__menu-navigation-link" href="{{_AppHelper.getLoginUrl()}}">Login</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+    
+    <div class="header__navigation">
+        <div class="container">
+            <div class="col-left">
+                <ul class="header__navigation-list">
+                    <!--
+                    <li class="header__navigation-item"><a href="{{network.defaultBlogUrl}}" class="header__navigation-link header__navigation-selected">Home</a></li>
+                    -->
+                    {% set menuItems = blogData.blogHeaderMenu %}
+                    {% for parentItem in menuItems %}
+                    {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : ''%}
+                    {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}           
+                    <li class="header__navigation-item">
+                        <a href="{{parentItem.link |raw}}" class="header__navigation-link {{activeClass}} {{externalClass}}" {% if parentItem.target != "" %}target="{{parentItem.target}}"{% endif %}>
+                            {{ ((parentItem.label is empty) ? ((parentItem.pageTitle is empty)? parentItem.blogTitle : parentItem.pageTitle) : parentItem.label )}}
+                        </a>
+                        {% if parentItem.children is defined and parentItem.children | length > 0 %}
+                            <ul class="sub-menu">
+                                {% for childItem in parentItem.children%}
+                                    {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
+                                <li><a class="{{externalClass}}" href="{{childItem.link |raw}}" {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}>
+                                       {{ ((childItem.label is empty) ? ((childItem.pageTitle is empty)? childItem.blogTitle : childItem.pageTitle) : childItem.label)}}
+                                 </a></li>
+                                 {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Begin Custom search -->
+<div class="fullscreen" id="custom-search-form-container">
+    <div id="custom-search-form">
+        <form action="{{blog.url}}/search" method="get">
+        <input type="text" placeholder="Search here" name='s' value="{{_AppHelper.getRequest('s')}}" required>
+        <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<!-- //End Custom search -->

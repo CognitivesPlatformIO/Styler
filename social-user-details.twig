@@ -1,0 +1,62 @@
+{{ set(this, 'title', "Social User Signup") }}
+{{this.registerJs('AuthController.socialSignup()')}}
+<div>
+    <div class="login-page">
+        <div class="container">
+        <div class="tab-content forget_password">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12" id="login-social">
+                    <h3 class="sub-heading">Almost there</h3>
+                    <p class="helper-text">Please pick a username and verify the details below to complete the sign up process.</p>
+                    <p class="text-center mbt50"><a href="{{_AppHelper.getLoginUrl()}}" class="txt-link">Already have an account? <span class="green">Login here</span></a></p>
+                   
+                    <div class="WriteAnArticleForm">
+                        <form name="signupForm" id="signupForm" class="form-horizontal" action="" method="post" autocomplete="off">
+                            <input type="hidden" name="_csrf" value="{{_AppHelper.getCsrfToken()}}" />
+                            {% if errors | length > 0 %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <ul>
+                                        {% for errorArr in errors %}
+                                            {% for error in errorArr %}
+                                                <li>{{error}}</li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            <div class="controls-lt">
+                                {{_AppForm.input({name: 'firstname', value: form.firstname, class: 'c9n-ippt', placeholder: 'Firstname'}) | raw }}
+                            </div>
+                            <div class="controls-rt">
+                                {{_AppForm.input({name: 'lastname', value: form.lastname, class: 'c9n-ippt', placeholder: 'Lastname'}) | raw }}
+
+                            </div>
+                            <div class="controls-full">
+                                {{_AppForm.input({ name: 'username', class: 'c9n-ippt', placeholder: 'Username'}) | raw }}
+                            </div>
+                            <div class="controls-full">
+                                {{_AppForm.input({name: 'email', value: form.email, class: 'c9n-ippt', placeholder: 'Email'}) | raw }}
+                            </div>
+                            <div class="controls-full">
+                                {{_AppForm.input({type : 'password', name: 'password', class: 'c9n-ippt', id:"password", placeholder: 'Password'}) | raw }}
+                            </div>
+                            <div class="controls-full">
+                                {{_AppForm.input({type : 'password', name: 'verifypassword', class: 'c9n-ippt', placeholder: 'Verify Password'}) | raw }}
+                            </div>
+                            
+                            <div class="button-set">
+                                <label class="hide"><input type="checkbox" id="terms" name="terms" value="1"><span></span>
+                                    I agree to the terms & conditions</label>
+                                <div class="right-section">
+                                    {{_AppForm.button({type:'submit', name: 'submitSignupForm', class: 'btn button button grey forget_btn'}) | raw }}
+                                </div>
+                            </div>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

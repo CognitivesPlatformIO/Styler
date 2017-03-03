@@ -1,0 +1,58 @@
+{{ set(this, 'title', 'User Profile') }}
+
+{% set profileImage =_Media.getMediaUrl(userDetails.media, 500, 500, {crop: 'thumb', gravity: 'face', type: 'user'} )%}
+{{this.registerJs("$('.loginModal').loginModal({});")}}
+<!-- Begin Container -->
+<div class="page_section">
+    <section class="container min-hight">
+        <div class="row" id="userprofile-page">
+            <!-- Begin User Profile -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+
+            <!-- Begin User Profile Sidebar -->
+
+            <div id="userprofile-sidebar">
+                <figure class="user-profile-pic"{% if profileImage is not empty %}  style="background-image:url({{profileImage}});"{% endif %}></figure>
+                <div class="inner-descr">
+                    <h4 class="user-name text-center">{{Html.encode(userDetails.firstname)}} {{Html.encode(userDetails.lastname)}}</h4>
+                    {% if _User.isGuest() %}
+                        <a href="javascript:void(0)" class="button button-block grey  forceLoginModal"><i class="fa fa-star"></i>Follow</a>
+                    {% endif %}
+                    {% if not _User.isGuest() and _User.getId() != userDetails.id %}
+                        {% set isUserFollowing = _User.isUserFollowing('user', userDetails.id)  %}
+                        <a href="javascript:void(0)" class="button button-block grey FollowProfileUser" data-guid="{{userDetails.guid}}" data-status="{% if isUserFollowing == 'TRUE' %}unfollow{% else %} follow {% endif %}"><i class="fa fa-star"></i>{% if isUserFollowing == 'TRUE' %} Unfollow {% else %} Follow {% endif %}</a>
+                    {% endif %}
+
+                    {% if not _User.isGuest() and _User.getId() == userDetails.id %}
+                        <a href="{{_AppHelper.getEditProfileUrl()}}" class="button button-block grey"><i class="fa fa-cog"></i>Edit Profile</a>
+                      {% endif %}
+                    
+                    <p>{{Html.decode(userDetails.bio) | raw }}</p>
+                    <div class="social-stuffs text-center"> <a href="mailto:{{userDetails.email}}"><i class="fa fa-envelope"></i></a> </div>
+                </div>
+            </div>
+            <!-- //End User Profile Sidebar -->
+        </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+
+                <!-- Begin My Blogs -->
+                {{this.render('partials/user-profile/_user_blogs.twig', {userOwnerBlogs : userOwnerBlogs}) | raw }} 
+                <!-- //End My Blogs -->
+
+                <!-- Begin Recent Articles -->
+                {{this.render('partials/user-profile/_recent_articles.twig', {myArticles : myArticles}) | raw }}
+                <!-- //End Recent Articles -->
+
+                <!-- Begin Following -->
+                {{this.render('partials/user-profile/_user_following.twig', {myBlogs : myBlogs, myFollowings: myFollowings}) | raw }}
+                <!-- //End Following -->
+
+                <!-- Begin Followed By -->
+                {{this.render('partials/user-profile/_user_followed_by.twig', {myFollowers : myFollowers}) | raw }}
+            <!-- //End Followed By -->
+            </div>
+            <!-- //End User Profile -->
+        </div>
+    </section>
+</div>
+<!-- //End Container -->

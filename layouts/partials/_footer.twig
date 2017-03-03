@@ -1,0 +1,63 @@
+{% set blogInfo = _Blog.getHomeBlogSettings()%}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer__content">
+                {% set logo = networkData.templatePath~'/static/images/themeLogo_Footer.svg'%}
+                {% set logoUrl = networkData.networkLogoLinkUrl %}
+                {% if networkData.logoMedia | length > 0 %}
+                    {% set logo = _Media.getMediaUrl(networkData.logoMedia, 120, 50, {'crop': 'fit'} )%}
+                {% endif %}
+                <a href="{{logoUrl}}" class="footer__logo">
+                    {% if logo is not empty %}<img src="{{logo}}"  alt="Logo" />{% endif %}
+                </a>
+                <div class="social_section">
+                    <!-- <div class="footer__logo"></div> -->
+                    {% if blogInfo.social['twitter'] is not empty %}
+                        <a href="{{blogInfo.social['twitter']}}" class="footer__social-twitter" target="_blank"></a>
+                    {% endif %}
+                    {% if blogInfo.social['facebook'] is not empty %}
+                        <a href="{{blogInfo.social['facebook']}}" class="footer__social-facebook" target="_blank"></a>
+                    {% endif %}
+                    {% if blogInfo.social['google'] is not empty %}
+                        <a href="{{blogInfo.social['google']}}" class="footer__social-google-plus" target="_blank"></a>
+                    {% endif %}
+                    <div class="footer__copyright">&copy; Copyright 2016</div>
+                </div>
+            </div>
+                
+        {% set menuItems = blogData.blogFooterMenu %}
+        {% set halfCounter = (menuItems | length / 2) | round(0, 'ceil') - 1 %}  
+            <div class="footer__navigation">
+                <ul class="footer__navigation-list">
+                    {% for i in 0..halfCounter %}
+                        {% set menuItem = menuItems[i] %}
+                        <li class="footer__navigation-item">
+                            <a href="{{menuItem.link}}" class="footer__navigation-link">
+                                {{ ((menuItem.label is empty) ? ((menuItem.pageTitle is empty)? menuItem.blogTitle : menuItem.pageTitle) : menuItem.label )}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if menuItems|length > 1 %}
+                <ul class="footer__navigation-list">
+                    {% for i in (halfCounter+1)..(menuItems|length)-1 %}
+                        {% set menuItem = menuItems[i] %}
+                        <li class="footer__navigation-item">
+                            <a href="{{menuItem.link}}" class="footer__navigation-link">
+                                {{ ((menuItem.label is empty) ? ((menuItem.pageTitle is empty)? menuItem.blogTitle : menuItem.pageTitle) : menuItem.label )}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <!--<ul class="footer__navigation-list footer__navigation-list-info">
+                    <li class="footer__navigation-item"><a class="footer__navigation-link" href="contact-us.php">Contact Us</a></li>
+                    <li class="footer__navigation-item"><a class="footer__navigation-link" href="#">Advertising</a></li>
+                    <li class="footer__navigation-item"><a class="footer__navigation-link" href="#">About Us</a></li>
+                    <li class="footer__navigation-item"><a class="footer__navigation-link" href="terms.php">Terms & Conditions</a></li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+</footer>

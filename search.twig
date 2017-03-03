@@ -1,0 +1,88 @@
+{{ set(this, 'title', 'Search - ' ~ search) }}
+
+{{this.registerJs("SearchController.listing();")}}
+
+{% set limit = 10 %}
+{% set articles = _Search.searchArticles({'limit': limit, 'offset': 0, 'search': search}) %}
+<div class="page_section cards_main home_section">
+    <div class="container">
+        <div class="row">
+            {% if articles|length > 0 %}
+            <div class="col-md-12 col-xs-12">
+                {% if articles[0] is defined %}
+                <div class="col-full">
+                        {{this.render('partials/_single-article.twig', {article: articles[0], 'position': 1, 'viewType': 'fullwidth'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[1] is defined %}
+                <div class="col-third">
+                    {{this.render('partials/_single-article.twig', {article: articles[1], 'position': 2, 'viewType': 'normal'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[2] is defined %}
+                <div class="col-third">
+                    {{this.render('partials/_single-article.twig', {article: articles[2], 'position': 3, 'viewType': 'normal'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[3] is defined %}
+                <div class="col-third">
+                    {{this.render('partials/_single-article.twig', {article: articles[3], 'position': 4, 'viewType': 'normal'}) | raw}}
+                </div>
+                {% endif %}
+
+                {% if articles[4] is defined %}
+                <div class="col-half">
+                    {{this.render('partials/_single-article.twig', {article: articles[4], 'position': 5, 'viewType': 'halfwidth'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[5] is defined %}
+                <div class="col-half">
+                    {{this.render('partials/_single-article.twig', {article: articles[5], 'position': 6, 'viewType': 'halfwidth'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[6] is defined %}
+                <div class="col-quarter">
+                    {{this.render('partials/_single-article.twig', {article: articles[6], 'position': 7, 'viewType': '1col'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[7] is defined %}
+                <div class="col-quarter">
+                    {{this.render('partials/_single-article.twig', {article: articles[7], 'position': 8, 'viewType': '1col'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[8] is defined %}
+                <div class="col-quarter">
+                    {{this.render('partials/_single-article.twig', {article: articles[8], 'position': 9, 'viewType': '1col'}) | raw}}
+                </div>
+                {% endif %}
+                
+                {% if articles[9] is defined %}
+                <div class="col-quarter">
+                    {{this.render('partials/_single-article.twig', {article: articles[9], 'position': 10, 'viewType': '1col'}) | raw}}
+                </div>
+                {% endif %}
+             </div>
+              {% else %}
+                 <div id="login-social" class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    <p class="helper-text"> No search result found.</p>
+                </div>
+             {% endif %}
+        </div>
+            <div class="row ">
+                <div class="col-md-12 col-xs-12 ajaxArticles" data-offset="{{limit}}"></div>
+            </div>
+            <div class=" text-center has-margin-bottom-20 has-margin-top-20">
+                {% if articles|length >= limit %}
+                <a href="javascript:void(0)" class="button grey button-large loadMoreArticles"><i class="fa fa-arrow-down" aria-hidden="true"></i> Load More</a>
+                {% endif %}
+            </div>
+    </div>
+</div>
+
