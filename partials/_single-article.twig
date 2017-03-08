@@ -1,23 +1,23 @@
 {% set networkData = _Network.getNetworkData() %}
 {% set placeholder = network.templatePath~'/static/images/placeholder/placeholder.svg' %}
 {% if article.articleId > 0 %}
-    {% set imgWidth = 383 %}
-    {% set imgHeight = 260 %}
+    {% set imgWidth = 400 %}
+    {% set imgHeight = 280 %}
     {% set articleImg = '' %}
     {% set cardImageClass = 'without__image' %}
     {% if viewType=='fullwidth' %}
-        {% set imgWidth = 1156 %}
-        {% set imgHeight = 500 %}
+        {% set imgWidth = 1180 %}
+        {% set imgHeight = 520 %}
         {% set cardClass='' %}
     {% endif %}
     {% if viewType=='halfwidth' %}
-        {% set imgWidth = 576 %}
-        {% set imgHeight = 500 %}
+        {% set imgWidth = 600 %}
+        {% set imgHeight = 520 %}
         {% set cardClass='' %}
     {% endif %}
     {% if viewType=='1col' %}
-        {% set imgWidth = 286 %}
-        {% set imgHeight = 260 %}
+        {% set imgWidth = 300 %}
+        {% set imgHeight = 280 %}
     {% endif %}
     {% if article.featuredMedia | length > 0 and article.featuredMedia['id'] is not empty %}
         {% set cardImageClass = 'withImage__content' %}

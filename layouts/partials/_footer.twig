@@ -14,20 +14,35 @@
                 <div class="social_section">
                     <!-- <div class="footer__logo"></div> -->
                     {% if blogInfo.social['twitter'] is not empty %}
-                        <a href="{{blogInfo.social['twitter']}}" class="footer__social-twitter" target="_blank"></a>
-                    {% endif %}
-                    {% if blogInfo.social['facebook'] is not empty %}
-                        <a href="{{blogInfo.social['facebook']}}" class="footer__social-facebook" target="_blank"></a>
-                    {% endif %}
-                    {% if blogInfo.social['google'] is not empty %}
-                        <a href="{{blogInfo.social['google']}}" class="footer__social-google-plus" target="_blank"></a>
-                    {% endif %}
+                        <a href="{{blogInfo.social['twitter']}}" class="footer__social-twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['youtube'] is not empty %}
+                        <a href="{{blogInfo.social['youtube']}}" class="footer__social-youtube" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['google'] is not empty %}
+                        <a href="{{blogInfo.social['google']}}" class="footer__social-gplus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['instagram'] is not empty %}
+                        <a href="{{blogInfo.social['instagram']}}" class="footer__social-instagram" target="_blank"><i class="fa fa-instagram"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['facebook'] is not empty %}
+                        <a href="{{blogInfo.social['facebook']}}" class="footer__social-facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['vimeo'] is not empty %}
+                        <a href="{{blogInfo.social['vimeo']}}" class="footer__social-vimeo" target="_blank"><i class="fa fa-vimeo"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['linkedin'] is not empty %}
+                        <a href="{{blogInfo.social['linkedin']}}" class="footer__social-linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        {% endif %}
+                        {% if blogInfo.social['pinterest'] is not empty %}
+                        <a href="{{blogInfo.social['pinterest']}}" class="footer__social-pinterest" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        {% endif %}
                     <div class="footer__copyright">&copy; Copyright 2016</div>
                 </div>
             </div>
-                
-        {% set menuItems = blogData.blogFooterMenu %}
-        {% set halfCounter = (menuItems | length / 2) | round(0, 'ceil') - 1 %}  
+
+            {% set menuItems = blogData.blogFooterMenu %}
+            {% set halfCounter = (menuItems | length / 2) | round(0, 'ceil') - 1 %}  
             <div class="footer__navigation">
                 <ul class="footer__navigation-list">
                     {% for i in 0..halfCounter %}
@@ -40,16 +55,16 @@
                     {% endfor %}
                 </ul>
                 {% if menuItems|length > 1 %}
-                <ul class="footer__navigation-list">
-                    {% for i in (halfCounter+1)..(menuItems|length)-1 %}
-                        {% set menuItem = menuItems[i] %}
-                        <li class="footer__navigation-item">
-                            <a href="{{menuItem.link}}" class="footer__navigation-link">
-                                {{ ((menuItem.label is empty) ? ((menuItem.pageTitle is empty)? menuItem.blogTitle : menuItem.pageTitle) : menuItem.label )}}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <ul class="footer__navigation-list">
+                        {% for i in (halfCounter+1)..(menuItems|length)-1 %}
+                            {% set menuItem = menuItems[i] %}
+                            <li class="footer__navigation-item">
+                                <a href="{{menuItem.link}}" class="footer__navigation-link">
+                                    {{ ((menuItem.label is empty) ? ((menuItem.pageTitle is empty)? menuItem.blogTitle : menuItem.pageTitle) : menuItem.label )}}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
                 <!--<ul class="footer__navigation-list footer__navigation-list-info">
                     <li class="footer__navigation-item"><a class="footer__navigation-link" href="contact-us.php">Contact Us</a></li>
