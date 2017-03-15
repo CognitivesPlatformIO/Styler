@@ -103,5 +103,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'cssmin', 'compress', 'cachebreaker']);
+    grunt.registerTask('default', ['uglify', 'cssmin', 'cachebreaker']);
 };
