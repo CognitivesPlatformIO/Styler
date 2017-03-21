@@ -37,7 +37,7 @@
                         {% if blogInfo.social['pinterest'] is not empty %}
                         <a href="{{blogInfo.social['pinterest']}}" class="footer__social-pinterest" target="_blank"><i class="fa fa-pinterest"></i></a>
                         {% endif %}
-                    <div class="footer__copyright">&copy; Copyright 2016</div>
+                    <div class="footer__copyright">&copy; Copyright {{'now'|date('Y')}}. Powered By {{network.poweredBy}}</div>
                 </div>
             </div>
 
