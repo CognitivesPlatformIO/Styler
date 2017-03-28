@@ -66,6 +66,27 @@
                                 <input type="text" id="user-email" class="form-control" disabled="true" name="email" value="{{user.email}}" placeholder="Email">
                                 <span class='help-block'>can't update your email address</span>
                             </div>
+                                
+                            <div class="controls-full">
+                                <label for="user-by_line">Newsletter</label>
+                                <div class="button-set grey">
+                                    <div class="column">
+                                        <label><input type="radio" id="User_customized_edm0" name="newsletterFrequency" value="1" {% if not user.userSettings['isNewsletterEnable'] %} checked='checked' {% endif %}><span><!-- fake checkbox --></span>Never</label>
+                                    </div>
+                                    
+                                    <div class="column">
+                                        <label><input type="radio" id="User_customized_edm1" name="newsletterFrequency" value="daily" {% if user.userSettings['newsletterFrequency'] == 'daily' and user.userSettings['isNewsletterEnable'] %} checked='checked' {% endif %}><span><!-- fake checkbox --></span>Daily</label>
+                                    </div>
+
+                                    <div class="column">
+                                        <label><input type="radio" id="User_customized_edm2" name="newsletterFrequency" value="weekly" {% if user.userSettings['newsletterFrequency'] == 'weekly' and user.userSettings['isNewsletterEnable']%} checked='checked' {% endif %}><span><!-- fake checkbox --></span>Weekly</label>
+                                    </div>
+                                    
+                                    <div class="column">
+                                        <label><input type="radio" id="User_customized_edm3" name="newsletterFrequency" value="monthly" {% if user.userSettings['newsletterFrequency'] == 'monthly' and user.userSettings['isNewsletterEnable']%} checked='checked' {% endif %}><span><!-- fake checkbox --></span>Monthly</label>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="controls-full">
                                 <label for="password">Password</label>
