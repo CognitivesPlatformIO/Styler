@@ -1,0 +1,48 @@
+
+/* Begin Content box breakup css */
+.container {
+    max-width: inherit !important;
+}
+.content_box_page .content_area {
+    padding: 0px !important;
+    margin-bottom: 50px;
+	float: left;
+	width: 100%;
+}
+.content_box_page .is-section {
+    position: relative !important;
+    float: left !important;
+    width: 100% !important;
+    background-color: #ffffff;
+}
+.content_box_page .is-section .column.full h1, .content_box_page .is-section.is-section-100 .column.third h1 {
+    font-size: 23px !important;
+    margin-bottom: 0px !important;
+}
+.content_box_page .is-section .column.full h1.size-48, .content_box_page .is-section .column.full .display h1 {
+    font-size: 40px !important;
+    line-height: 1.3 !important;
+}
+.content_box_page .is-section hr {
+    border-top: rgba(0, 0, 0, 0.18) 1px solid !important;
+    margin: 0 !important;
+}
+.content_box_page .is-section .row > * {
+    min-height: inherit !important;
+}
+.content_box_page .container, .content_box_page .login-page > .container, .content_box_page .header__container, .content_box_page .profile__container, .content_box_page .article__banner--caption, .content_box_page .article__header {
+    width: 90% !important;
+}
+.content_box_page .is-section.is-section-100 {
+    padding: 85px 0;
+}
+.content_box_page .is-section.is-section-100.is-shadow-1, .content_box_page .is-section.is-section-100.is-boxed-layout {
+    padding: 0;
+}
+.content_box_page .is-section.is-section-100.is-boxed-layout .is-boxes {
+    padding: 55px 0;
+}
+.content_box_page .is-box-8 .column.full, .content_box_page .is-box-6 .column.full, .content_box_page .is-box-4 .column.full  {
+    padding: 60px 0;
+}
+/* //End Content box breakup css */
