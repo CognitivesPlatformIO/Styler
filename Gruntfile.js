@@ -69,7 +69,8 @@ module.exports = function(grunt) {
                         'static/plugins/jquery.fancybox/source/jquery.fancybox.css',
                         'static/plugins/jquery.noty-2.3.8/demo/animate.css',
                         '../../static/sdk/js/media-player/mediaelementplayer.css',
-                        'static/css/index.css'
+                        'static/css/index.css',
+                        'static/css/contentbox-breakup.css',
                     ]
                 }
             }
