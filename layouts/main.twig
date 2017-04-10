@@ -200,7 +200,7 @@
     {{ this.head() }}
 </head>
 
-<body class="body">
+<body class="body  {{_Page.getBodyClass()}}">
     {{ this.beginBody() }}
     <!-- Google Tag Manager(noscript) -->
     {% if networkData.thirdPartyIntegrations['googleTagManager'] | length > 0 %}
