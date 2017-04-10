@@ -45,4 +45,10 @@
 .content_box_page .is-box-8 .column.full, .content_box_page .is-box-6 .column.full, .content_box_page .is-box-4 .column.full  {
     padding: 60px 0;
 }
+.content_box_page .is-section p b, .content_box_page .is-section h1 b, .content_box_page .is-section h2 b, .content_box_page .is-section h3 b, .content_box_page .is-section h4 b, .content_box_page .is-section h5 b, .content_box_page .is-section h6 b {
+    font-weight: bold !important;
+}
+.content_box_page h1 span, .content_box_page h2 span, .content_box_page h3 span, .content_box_page h4 span, .content_box_page h5 span, .content_box_page h6 span, .content_box_page p span {
+    font-size: inherit !important;
+}
 /* //End Content box breakup css */
