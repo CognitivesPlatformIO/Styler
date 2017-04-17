@@ -48,16 +48,28 @@
     <link rel="alternate" type="application/rss+xml" title="{{_Network.getNetworkTitle()}} -  RSS Feeds" href="http://{{networkData.defaultDomain['domain']}}/feed/rss"/>
 
     <!--[if lte IE 8]><script type="text/javascript" src="{{networkData.templatePath}}/static/js/ie/ie.js"></script><![endif]-->
-    
+	
+	{% set isPage = 'content_box_page' in _Page.getBodyClass() %}
+
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1488436508605" type="text/css" media="all">
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1491998305789" type="text/css" media="all">
     {% else %}
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.fancybox/source/jquery.fancybox.css" />
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.noty-2.3.8/demo/animate.css" />
         <link type="text/css" rel="stylesheet" href="{{_AppHelper.getAssetsSDKPath()}}/js/media-player/mediaelementplayer.css" />
         <link rel="stylesheet" href="{{networkData.templatePath}}/static/css/index.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="{{networkData.templatePath}}/static/css/contentbox-breakup.css" type="text/css" media="all" />
     {% endif %}
     
+    {% if isPage %}
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/assets/minimalist-basic/content-bootstrap.css" rel="stylesheet" type="text/css" />
+
+        <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/box/box.css" rel="stylesheet" type="text/css" />
+        <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
+        <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbox/contentbox.css" rel="stylesheet" type="text/css" />
+    {% endif %}
+        
      {% set themeColors = networkData['styling']['colours'] %}
     <style type='text/css'>
         {% if primaryFont != "" %}
@@ -188,7 +200,7 @@
     {{ this.head() }}
 </head>
 
-<body class="body">
+<body class="body {{_Page.getBodyClass()}}">
     {{ this.beginBody() }}
     <!-- Google Tag Manager(noscript) -->
     {% if networkData.thirdPartyIntegrations['googleTagManager'] | length > 0 %}
