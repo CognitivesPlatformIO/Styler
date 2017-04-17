@@ -59,10 +59,13 @@
 .content_box_page .is-section .row > * {
     min-height: inherit !important;
 }
-.content_box_page .container, .content_box_page .login-page > .container, .content_box_page .header__container, .content_box_page .profile__container, .content_box_page .article__banner--caption, .content_box_page .article__header {
+.content_box_page .container {
     width: 90% !important;
 }
-/* .content_box_page .is-section.is-section-100 {
+/* .content_box_page .container, .content_box_page .login-page > .container, .content_box_page .header__container, .content_box_page .profile__container, .content_box_page .article__banner--caption, .content_box_page .article__header {
+    width: 90% !important;
+}
+.content_box_page .is-section.is-section-100 {
     padding: 85px 0;
 }
 .content_box_page .is-section.is-section-100.is-shadow-1, .content_box_page .is-section.is-section-100.is-boxed-layout {
