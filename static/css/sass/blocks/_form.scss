@@ -1,0 +1,440 @@
+.form {
+  &__col {
+    @include make-sm-column(6);
+    @include make-md-column(6);
+
+    padding: $grid-gutter-width / 2;
+  }
+}
+
+.input {
+    &__text {
+       border-radius: 5px;
+       border: none;
+       color: $dark-color;
+       font-family: $base-font-family;
+       font-size: 16px;
+       line-height: 40px;
+       outline: none;
+       margin-bottom: 10px;
+       padding: 0px 20px;
+       height: 40px;
+       width: 100%;
+
+       &:focus {
+       }
+     }
+}
+
+.button {
+  background-color: $highlight-color;
+  border-radius: 30px;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: 14px;
+  line-height: 40px;
+  outline: none;
+  padding: 0px 30px;
+  transition: color 0.5s, background-color 0.5s;
+
+  &:hover {
+    background-color: $hover-color;
+    color: $light-color;
+    transition: color 0s, background-color 0s;
+  }
+
+  &--white {
+    background-color: transparent;
+    border-radius: 30px;
+    border: 2px $light-color solid;
+    color: $light-color;
+    display: block;
+    font-size: 14px;
+    font-family: $base-font-family;
+    line-height: 30px;
+    height: 40px;
+    margin: auto;
+    padding: 0px 30px;
+    vertical-align: middle;
+
+    &:hover {
+      color: $base-color;
+      cursor: pointer;
+      background-color: $highlight-color;
+      border-color: $highlight-color;
+    }
+  }
+}
+
+/* Forms
+------------------------------------*/
+.horizontal-form {
+	label {
+		min-height:20px;
+	}
+
+	.form-group {
+		margin-bottom:20px;
+
+		&.no-margin-bottom {
+			margin-bottom:0px;
+		}
+	}
+}
+.form-control-static-value {
+	display:table;
+	width:100%;
+
+	> p {
+		height:46px;
+		line-height:1.2;
+		display:table-cell;
+		color:darken($white, 33%);
+		font-size:$baseFontSize;
+		padding-left:20px;
+		vertical-align:middle;
+	}
+}
+
+.form-horizontal {
+	input[type="text"], input[type="password"], input[type="tel"], input[type="email"], input[type="search"], input[type="url"], input[type="number"], select, textarea {
+		display:block;
+		width:100%;
+		@include padding(7px 15px);
+		outline:none;
+		font-size:($baseFontSize * 1) + 0;
+		line-height:28px;
+		font-weight:300;
+		color:darken($white, 73%);
+		@include transition(0.25s);
+		box-shadow:none!important;
+		font-family:$base-font-family!important;
+		-webkit-appearance:none;
+		-moz-appearance:none;
+		appearance:none;
+		@include border-radius(4px);
+		border:1px solid darken($white, 25%);
+		background:$white none repeat scroll 0 0;
+        &:disabled {
+            background:rgba($grey, 0.5);
+            opacity: 0.7;
+        }
+	}
+	input {
+		&[type="text"], &[type="password"], &[type="tel"], &[type="email"], &[type="search"], &[type="url"], &[type="number"] {
+			height:55px;
+		}
+
+		&[type="text"]:focus, &[type="password"]:focus, &[type="tel"]:focus, &[type="number"]:focus, &[type="url"]:focus, &[type="email"]:focus, &[type="search"]:focus, select:focus, textarea:focus {
+			border:1px solid $blue;
+			@include border-radius(4px);
+			background:$white none repeat scroll 0 0;
+		}
+	}
+}
+select {
+	height:55px;
+	cursor:pointer;
+	@include padding(7px 12px);
+	color:lighten($black, 73%);
+	border:1px solid lighten($border-color, 50%);
+	font-size:($baseFontSize * 1) + 0;
+	font-family:$base-font-family!important;
+}
+select:focus, textarea:focus {
+	@include border-radius(4px);
+	background:$white none repeat scroll 0 0;
+}
+textarea, textarea.form-control {
+	resize:none;
+	height:232px;
+	background:$white none repeat scroll 0 0;
+
+    textarea:focus, textarea.form-control:focus {
+        border:1px solid $blue;
+    }
+}
+.selectCont {
+	margin:0 0 15px;
+	position:relative;
+
+	select {
+		height:55px;
+		color:lighten($black, 73%);
+		border:1px solid lighten($border-color, 50%);
+		font-size:($baseFontSize * 1) + 0;
+		font-family:$base-font-family!important;
+	}
+
+	label {
+		top:0;
+		bottom:0;
+		right:10px;
+		line-height:34px;
+		position:absolute;
+		pointer-events:none;
+	}
+	option {
+		padding:5px 14px;
+		color:lighten($black, 73%);
+		font-size:($baseFontSize * 1) + 0;
+		font-family:$base-font-family!important;
+	}
+}
+.selectCont label i {
+	color:lighten($black, 50%);
+	font-size:($baseFontSize * 1) + 6;
+	font-weight:600;
+	vertical-align:-14.2857%;
+	@include transform(translate(-9px, 9px));
+}
+
+.req, .has-error label {
+  	color:$error-color!important;
+}
+label, span {
+    margin-top:3px;
+    font-weight:400;
+    font-size:($baseFontSize * 1) - 2;
+
+    &.error {
+        color:$error-color;
+    }
+    &.success {
+        color:$success-color;
+    }
+}
+
+.error {
+
+	&.form-control {
+
+		&[type="text"], &[type="password"], &[type="tel"], &[type="number"], &[type="url"], &[type="email"], &[type="search"] {
+			color:$error-color;
+			border:1px solid $error-color;
+			background:lighten($error-color, 80%) none repeat scroll 0 0;
+		}
+
+		&[type="text"]:focus, &[type="password"]:focus, &[type="tel"]:focus, &[type="number"]:focus, &[type="url"]:focus, &[type="email"]:focus, &[type="search"]:focus {
+			color:darken($error-color, 10%);
+			border:1px solid darken($error-color, 10%);
+			background:lighten($error-color, 100%) none repeat scroll 0 0;
+		}
+	}
+
+	select, textarea, .cog-input-group .input-group-addon, select:focus, textarea:focus, .cog-input-group .input-group-addon:focus {
+		color:$white;
+		border:1px solid $error-color!important;
+		background:$error-color none repeat scroll 0 0;
+	}
+}
+
+.success {
+	&.form-control {
+
+		&[type="text"], &[type="password"], &[type="tel"], &[type="number"], &[type="url"], &[type="email"], &[type="search"] {
+			color:$success-color;
+			border:1px solid $success-color;
+			background:lighten($success-color, 100%) none repeat scroll 0 0;
+		}
+
+		&[type="text"]:focus, &[type="password"]:focus, &[type="tel"]:focus, &[type="number"]:focus, &[type="url"]:focus, &[type="email"]:focus, &[type="search"]:focus {
+			color:darken($success-color, 10%);
+			border:1px solid darken($success-color, 10%);
+			background:lighten($success-color, 100%) none repeat scroll 0 0;
+		}
+	}
+
+	select, textarea, .cog-input-group .input-group-addon, select:focus, textarea:focus, .cog-input-group .input-group-addon:focus {
+		color:$white;
+		border:1px solid $success-color;
+		background:$success-color none repeat scroll 0 0;
+	}
+}
+
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
+  	color:lighten($black, 73%)!important;
+}
+
+.error {
+	&::-webkit-input-placeholder {
+		color:$error-color;
+	}
+	&:-moz-placeholder {
+		color:$error-color;
+	}
+	&::-moz-placeholder {
+		color:$error-color;
+	}
+	&:-ms-input-placeholder {
+		color:$error-color;
+	}
+}
+
+.success {
+	&::-webkit-input-placeholder {
+		color:$success-color;
+	}
+	&:-moz-placeholder {
+		color:$success-color;
+	}
+	&::-moz-placeholder {
+		color:$success-color;
+	}
+	&:-ms-input-placeholder {
+		color:$success-color;
+	}
+}
+
+/* Custom Radio and Checkboxes
+------------------------------------- */
+.form-wrap.text-center label.error {
+	display:table;
+	margin-top:5px;
+	text-align:left!important;
+}
+
+.button-set {
+	position:relative;
+	margin-bottom:10px;
+
+    [class^="column"] {
+        margin-right:50px;
+        display:inline-block;
+        @media #{$media-phone} {
+            display: block;
+            margin-right: 0px;
+        }
+    }
+
+	label {
+		cursor:pointer;
+		font-weight:300;
+		margin-right:0px;
+		color:darken($white, 33%);
+		font-size:($baseFontSize * 1) + 1;
+	}
+	input {
+
+		&[type="radio"], &[type="checkbox"] {
+			margin:0;
+			@include padding(0);
+			@include opacity(0);
+			height:10px;
+			position:absolute;
+			pointer-events:none;
+		}
+		&[type="radio"] + span, &[type="checkbox"] + span {
+			@include size(20px);
+			text-align:center;
+			display:inline-block;
+			background-color:$white;
+			border:1px solid darken($white, 25%);
+			vertical-align:text-bottom;
+			position:relative;
+			margin-right:10px;
+			@include transition(all 0.1s ease);
+			@include border-radius(1px);
+		}
+        &[type="radio"] + span {
+            top:1px;
+        }
+        &[type="checkbox"] + span {
+            top:2px;
+        }
+		&[type="radio"] + span::after, &[type="checkbox"] + span::after {
+			content:"";
+			display:inline-block;
+			@include opacity(0);
+			width:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			height:100%;
+			@include transition(all 0.1s ease);
+		}
+		&[type="radio"]:focus + span, &[type="checkbox"]:focus + span, &[type="radio"]:active + span, &[type="checkbox"]:active + span {
+			border-color:$success-color;
+		}
+		&[type="radio"]:checked + span::after, &[type="checkbox"]:checked + span::after {
+			@include opacity(1);
+		}
+		&[type="radio"].error + span, &[type="checkbox"].error + span {
+			border-color:$error-color;
+		}
+		&[type="radio"] {
+			+ span {
+				@include border-radius(100%);
+
+				&::after {
+					@include border-radius(100%);
+					background-color:$success-color;
+					border-color:$success-color;
+				}
+			}
+
+			&:checked + span {
+				border:1px solid $success-color;
+				@include transition(all 0.1s ease);
+			}
+		}
+		&[type="checkbox"]:checked + span {
+			border:1px solid $success-color;
+			@include transition(all 0.1s ease);
+		}
+		&[type="radio"]:checked + span::after {
+			border:4px solid $white;
+		}
+
+		&[type="checkbox"] {
+			+ span::after {
+				top:12px;
+				left:2.5px;
+				width:70%;
+				height:40%;
+				background-color:transparent;
+				border:0 solid $success-color;
+				-webkit-transform:rotate(-45deg) translate(50%, -75%);
+				-moz-transform:rotate(-45deg) translate(50%, -75%);
+				-ms-transform:rotate(-45deg) translate(50%, -75%);
+				-o-transform:rotate(-45deg) translate(50%, -75%);
+				transform:rotate(-45deg) translate(50%, -75%);
+			}
+			&:checked + span::after {
+				border-left-width:2px;
+				border-bottom-width:2px;
+			}
+		}
+	}
+
+	.optional {
+		font-size:85%;
+	}
+
+    &.grey {
+        input {
+            &[type="radio"]:focus + span, &[type="checkbox"]:focus + span, &[type="radio"]:active + span, &[type="checkbox"]:active + span {
+    			border-color:darken($light-color, 50%);
+    		}
+            &[type="radio"] {
+    			+ span {
+
+    				&::after {
+    					background-color:darken($light-color, 50%);
+
+    				}
+    			}
+
+    			&:checked + span {
+    				border:1px solid darken($light-color, 50%);
+    			}
+    		}
+    		&[type="checkbox"]:checked + span {
+    			border:1px solid darken($light-color, 50%);
+    		}
+            &[type="checkbox"] {
+                border:0px solid darken($light-color, 50%);
+            }
+        }
+    }
+}

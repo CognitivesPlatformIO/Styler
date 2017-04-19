@@ -1,0 +1,104 @@
+// Sections
+@each $section in $sections { 
+  $name:  nth($section, 1);
+  $color: nth($section, 2);
+
+  .card--#{$name} {
+    border-color: $color; 
+
+    .card {
+      &__category {
+        color: $color;
+
+        &:after {
+          background-color: $color;
+        }
+      }
+      &__no-image,
+      &__image {
+        border-color: $color;
+      }
+      &__author {
+        color: $color;
+      }
+    }
+    &.card--light {
+      .card {
+        &__category {
+          background-color: $color;
+
+
+          &:hover {
+            background-color: $hover-color;
+          }
+        }
+      }
+    }
+  }
+
+  .card__follow.card--#{$name} {
+    background-color: $color;
+  }
+
+  .article--#{$name} {
+    border-color: $color;
+
+    .article {
+      &__banner {
+        border-color: $color;
+      }
+      &__category {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+
+// Cards
+@each $card in $cards {
+  $name:  nth($card, 1);
+  $color: nth($card, 2);
+
+  .card__#{$name} {
+    border-color: $color;
+
+    .card {
+      &__category {
+        color: $color;
+
+        &-light {
+          background-color: $color;
+        }
+
+        &:after {
+          background-color: $color;
+        }
+      }
+
+      &__no-image,
+      &__image {
+        border-color: $color;
+      }
+      &__author {
+        color: $color;
+      }
+    }
+    &.card--light {
+      .card {
+        &__category {
+          background-color: $color;
+        }
+      }
+    }
+  }
+}
+
+
+.simplemodal {
+  &-overlay {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

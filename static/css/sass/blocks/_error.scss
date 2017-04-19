@@ -1,0 +1,61 @@
+.error-wrapper {
+    @include padding(60px 0);
+    overflow: hidden;
+    .error-icon {
+        width: 50px;
+        height: 50px;
+        @media #{$media-iPhoneMedium}, #{$media-phone} {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .error-message {
+        margin-top: 30px;
+        @include border-radius(10px);
+        border: 2px solid $border-color;
+        background-color: $white;
+        @include padding(40px 50px);
+        @media #{$media-iPhoneMedium}, #{$media-phone} {
+            @include padding(40px 20px);
+        }
+        .error-heading {
+            color: $error-color;
+            font-size: ($baseFontSize * 5) + 5;
+            line-height: 1;
+            @media #{$media-iPhoneMedium}, #{$media-phone} {
+                font-size: ($baseFontSize * 4) + 4;
+            }
+            span {
+                color: lighten($base-color, 10%);
+                display: block;
+                font-size: ($baseFontSize * 2) + 6;
+                line-height: 1;
+                margin-bottom: 30px;
+                @media #{$media-iPhoneMedium}, #{$media-phone} {
+                    font-size: ($baseFontSize * 2) + 0;
+                }
+            }
+        }
+        .content-section {
+            color: lighten($base-color, 30%);
+            font-size: ($baseFontSize * 1) + 6;
+            line-height: 1.5;
+            @media #{$media-iPhoneMedium}, #{$media-phone} {
+                @include padding-bottom(0 !important);
+            }
+            span {
+                font-size: ($baseFontSize * 1) + 6;
+                color: lighten($base-color, 10%);
+                font-weight: 600;
+            }
+        }
+        .home-button {
+            margin-top: 60px;
+            border-width: 2px;
+            border-style: solid;
+            @media #{$media-iPhoneMedium}, #{$media-phone} {
+                margin-top: 30px;
+            }
+        }
+    }
+}

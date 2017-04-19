@@ -1,0 +1,303 @@
+.card {
+  border-top-style: solid;
+  border-top-width: 6px;
+  background-color: $light-color;
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+
+  @include phone {
+    margin-top:62px;
+  }
+
+  &__no-image {
+    display: table-cell;
+    @include phone {
+      border-width: 0px;
+      border-top-width: 6px;
+      border-style: solid;
+      display: block;
+    }
+  }
+  &__image {
+    background-color: $gray;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: $highlight-color;
+    border-width: 0px;
+    border-style: solid;
+    display: table-cell;
+    position: relative;
+    width: 50%;
+
+    @include phone {
+      display: block;
+      height: 180px;
+      width: 100%;
+      border-right: none;
+      border-bottom-width: 6px;
+      border-bottom-style: solid;
+    }
+  }
+
+  &__center {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 100;
+  }
+  &__content {
+    display: table-cell;
+    padding: 20px;
+    position: relative;
+    z-index: 100;
+    vertical-align: middle;
+
+    @include phone {
+      display: block;
+    }
+  }
+
+  &__category {
+    color: $highlight-color;
+    font-size: 12px;
+    font-family: $heading-font-family;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 16px;
+    text-transform: uppercase;
+
+    &:after {
+      background-color: $highlight-color;
+      border-radius: 4px;
+      content: "";
+      display: block;
+      height: 4px;
+      margin-bottom: 30px;
+      margin-top: 5px;
+      width: 24px;
+    }
+
+    @include phone {
+      &:after {
+        margin-bottom: 18px;
+      }
+    }
+  }
+  &__heading-large {
+    @include card_heading1;
+  }
+  &__heading {
+    @include card_heading3;
+
+    @include phone {
+      @include card_heading4;
+      width: 100%;
+    }
+  }
+  &__heading-small {
+    @include card_heading4;
+  }
+  &__text {
+    @include card_text;
+
+    margin-bottom: 22px;
+
+    @include phone {
+      margin-bottom: 0px;
+    }
+  }
+  &__username {
+    @include card_text_small;
+
+    color: $highlight-color;
+    display: block;
+    line-height: 26px;
+  }
+  &__link {
+    @include card_text;
+
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &__views {
+    @include card_text_small;
+
+    color: $highlight-color;
+  }
+  &__caption {
+    @include card_text_small;
+
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    position: relative;
+
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+  }
+  &__tag {
+    @include card_text;
+
+    color: $hashtag-color;
+  }
+  &__avatar {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 40px;
+    border-radius: 50px;
+    float: left;
+    margin-right: 14px;
+    position: relative;
+    height: 40px;
+    width: 40px;
+
+    &-follow {
+      background-image: url('../images/icons/follow.svg');
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: 18px;
+      height: 18px;
+      position: absolute;
+      right: -6px;
+      text-align: center;
+      top: -6px;
+      width: 18px;
+    }
+  }
+  &__author {
+    @include card_text_small;
+
+    color: $highlight-color;
+    display: block;
+  }
+  &__date {
+    @include card_text_small;
+
+    display: inline-block;
+  }
+  &__read-time {
+    @include card_text_small;
+
+    &:before {
+      margin: 0px 6px 0px 3px;
+      content: "|";
+    }
+  }
+  &__icon {
+    &-social {
+      @include image_background_social_share;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: 24px;
+      height: 30px;
+      opacity: 0.5;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 30px;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+
+    &-youtube, &-vimeo {
+      top:50%;
+      left:50%;
+      z-index:1;
+      margin-top:-30px;
+      margin-left:-30px;
+      position:absolute;
+      @include image_background_social_youtube;
+      background-position:50%;
+      background-size:100%;
+      background-repeat:no-repeat;
+      margin-bottom:20px;
+      height:60px;
+      width:60px;
+    }
+  }
+
+  &:hover {
+    color: $dark-color;
+  }
+}
+
+
+.col-third, .col-two-thirds {
+    .card {
+        .card__content {
+            height:215px;
+            position:relative;
+
+            .card__caption {
+                bottom:20px;
+                margin-bottom:0px;
+                position:absolute;
+                width:calc(100% - 40px);
+            }
+        }
+
+        &.card--light {
+            .card__content {
+                height:400px;
+                position:relative;
+
+                .card__caption {
+                    bottom:20px;
+                    margin-bottom:0px;
+                    position:absolute;
+                    width:calc(100% - 40px);
+                }
+            }
+        }
+    }
+}
+
+.col-half, .col-two-thirds {
+	.card {
+		.card__content {
+			vertical-align:top;
+
+			.card__caption {
+				bottom:20px;
+				margin-bottom:0px;
+				position:absolute;
+				width:calc(100% - 40px);
+			}
+		}
+	}
+}
+
+.col-half, .col-two-thirds {
+	.card {
+		.card__content {
+			vertical-align:top;
+
+			.card__caption {
+				bottom:20px;
+				margin-bottom:0px;
+				position:absolute;
+				width:calc(100% - 40px);
+			}
+		}
+	}
+}
+
+.content-section {
+    .heading-section {
+        overflow:hidden!important;
+    }
+    .description {
+        overflow:hidden!important;
+    }
+}

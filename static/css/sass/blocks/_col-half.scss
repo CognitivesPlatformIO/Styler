@@ -1,0 +1,45 @@
+.col-half {
+  .card {
+    height: 400px;
+
+    &__no-image {
+      border-width: 0px;
+      border-left-width: 6px;
+    }
+
+    &__heading {
+      @include card_heading3;
+
+      @include phone {
+        @include card_heading4;
+        width: 100%;
+      }
+    }
+    &__caption {
+    }
+    &__icon {
+      &-youtube {
+        display: none;
+      }
+    }
+
+    @include phone {
+      height: auto;
+    }
+    @include tablet {
+      height: auto;
+    }
+
+    &--light {
+      .card {
+        &__heading {
+          @include card_heading4;
+        }
+        &__image {
+          border-bottom-width: 6px;
+          border-right-width: 0px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+.author {
+  background-color: $light-color;
+  height: 480px;
+  margin-bottom: 20px;
+  padding: 40px 0px 0px;
+  text-align: center;
+  position: relative;
+
+  &__image {
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: none;
+    height: 90px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 50;
+  }
+  &__avatar {
+    background-position: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 100px;
+    margin: 0px auto 30px;
+    height: 160px;
+    position: relative;
+    width: 160px;
+    z-index: 90;
+  }
+  &__name {
+    margin-bottom: 4px;
+  }
+  &__title {
+    font-family: $base-font-family;
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 18px;
+    margin-bottom: 34px;
+  }
+  &__links {
+    position: absolute;
+    bottom: 0px;
+    left: 1px;
+    width: 100%;
+    display: table;
+  }
+  &__link {
+    background-color: #fafafa;
+    border: 1px #e6e6e6 solid;
+    border-left: none;
+    color: #ccc;
+    display: table-cell;
+    font-family: $base-font-family;
+    font-size: 12px;
+    font-weight: bold;
+    height: 80px;
+    line-height: 18px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 33.3333%;
+
+    strong {
+      color: $base-color;
+      display: block;
+      font-family: $text-font-family;
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 4px;
+      transition: color 0.5s;
+    }
+
+    &:hover {
+      strong {
+        color: $hover-color;
+        transition: color 0s;
+     }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.col-third-short {
+  .card {
+    border-top-style: solid;
+    border-top-width: 6px;
+    height: 205px;
+    margin-bottom: 0px;
+
+    &__no-image,
+    &__image {
+      border-width: 0px;
+    }
+    &__category {
+      &:after {
+        margin-bottom: 20px;
+      }
+    }
+    &__heading {
+       @include card_heading4;
+
+       height: 72px;
+       margin-bottom: 0px;
+       overflow-y: hidden;
+    }
+    &__caption {
+      display: none;
+    }
+    &__icon {
+      &-youtube {
+        display: none;
+      }
+    }
+    &__text {
+      display: none;
+    }
+
+    // Cards
+    &__twitter {
+      .card__text {
+        display: block;
+      }
+    }
+    &__facebook {
+      .card__text {
+        display: block;
+        height: 110px;
+        margin-bottom: 0px;
+        overflow-y: hidden;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+
+    @include phone {
+      height: auto;
+      margin-bottom: 20px;
+    }
+    @include tablet {
+      margin-bottom: 20px;
+    }
+  }
+}

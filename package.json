@@ -2,13 +2,6 @@
   "name": "cognitvespaltform",
   "version": "1.0.0",
   "description": "Cognitives Platform",
-  "dependencies": {
-    "grunt": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-cache-breaker": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-compress": "*"
-  },
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/cognitives/cognitives-platform"
@@ -17,6 +10,28 @@
   "license": "ISC",
   "homepage": "http://www.cognitives.io/",
   "email": "rohit@ideoris.com.au",
+  "dependencies": {
+    "browser-sync": "^2.17.6",
+    "chalk": "^0.4.0",
+    "gulp": "^3.6.0",
+    "gulp-autoprefixer": "0.0.7",
+    "gulp-clean": "^0.2.4",
+    "gulp-concat": "^2.2.0",
+    "gulp-exec": "^2.1.2",
+    "gulp-imagemin": "^0.2.0",
+    "gulp-jshint": "^1.5.3",
+    "gulp-livereload": "^1.2.0",
+    "gulp-minify-css": "^0.3.1",
+    "gulp-notify": "^1.2.5",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-scsslint": "0.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp-util": "^2.2.14",
+    "map-stream": "^0.1.0",
+    "tiny-lr": "0.0.5"
+  },
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-cache-breaker": "^2.0.1",

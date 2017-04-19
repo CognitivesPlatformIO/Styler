@@ -1,0 +1,23 @@
+.col-two-thirds {
+  .card {
+    height: 400px;
+
+    @include phone {
+      height: auto;
+    }
+  }
+
+  .card--light {
+    .card {
+      &__heading {
+        @include card_heading2;
+        margin-bottom: 20px;
+
+        @include phone {
+          @include card_heading4;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

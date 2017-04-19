@@ -1,0 +1,15 @@
+.card__follow {
+  height: 360px;
+  padding: 60px 20px 20px;
+  text-align: center;
+
+  &-heading {
+    color: $light-color;
+    margin-bottom: 20px;
+  }
+  &-text {
+    @include card_text;
+    color: $light-color;
+    margin-bottom: 50px;
+  }
+}

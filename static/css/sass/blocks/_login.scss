@@ -1,0 +1,71 @@
+.login {
+  background-image: url('../images/background-login.jpg');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-bottom: 6px $highlight-color solid;
+  display: table;
+  height: 600px;
+  margin-bottom: 40px;
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+
+  &__content {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &__heading {
+    color: $light-color;
+    display: block;
+    font-family: $heading-font-family;
+    font-size: 54px;
+    font-weight: bold;
+    line-height: 60px;
+    margin: 0px auto 10px;
+    width: 100%;
+  }
+  &__text {
+    color: $light-color;
+    display: block;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 0px auto 20px;
+  }
+
+  &__form {
+    margin: 0px auto;
+    position: relative;
+
+    @include large-desktop {
+      width: $screen-lg * 0.3 ;
+    }
+    @include desktop {
+      width: $screen-md * 0.5 ;
+    }
+    @include tablet {
+      width: $screen-sm * 0.7 ;
+    }
+    @include phone {
+      width: $screen-xs * 0.75;
+    }
+  }
+
+  &--arrow {
+    width: 90px;
+    height: 150px;
+    z-index: 999;
+    position: absolute;
+    background-image: url('../images/login-form-arrow.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    left: -100px;
+    top: -100px;
+
+    // TODO: the width ranges of the 'phone' and 'tablet'
+    // dont match the bootstrap mixin ranges. need to make them the same
+    @include phone-to-tablet {
+      display: none;
+    }
+  }
+}

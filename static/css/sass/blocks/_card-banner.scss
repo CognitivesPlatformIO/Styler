@@ -1,0 +1,71 @@
+.card__banner {
+  @extend .card--light;
+
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  display: table;
+  height: 600px;
+  margin-bottom: 40px;
+  padding: 0px;
+  width: 100%;
+
+  .card {
+    &__content {
+      display: table-cell;
+      padding-bottom: 40px;
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      z-index: 100;
+    }
+    &__icon {
+      &-social {
+        display: none;
+      }
+      &-youtube {
+        margin: 40px auto;
+      }
+    }
+    &__heading {
+      @include card_heading1;
+
+      margin-bottom: 30px;
+      width: 100%;
+
+      @include phone {
+        @include card_heading3;
+      }
+    }
+    &__text {
+      @include card_text_large;
+
+      color: $light-color;
+      font-weight: 100;
+      margin-bottom: 20px;
+    }
+    &__caption {
+      margin-bottom: 40px;
+    }
+    &__avatar {
+      margin: 0px auto 14px;
+      float: none;
+      text-align: center;
+    }
+    &__read-time {
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  &:after {
+    @include card_darken;
+  }
+
+  @include phone {
+    height: auto;
+  }
+}

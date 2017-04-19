@@ -1,0 +1,121 @@
+.col-quarter {
+  .card {
+    height: 400px;
+
+    &__category {
+      &:after {
+        margin-bottom: 18px;
+      }
+    }
+    &__heading {
+      @include card_heading4;
+
+      height: 72px;
+      margin-bottom: 0px;
+      overflow-y: hidden;
+      width: 100%;
+    }
+    &__no-image {
+      border-width: 0px;
+      border-top-width: 6px;
+      border-style: solid;
+      display: block;
+    }
+    &__image {
+      display: block;
+      height: 140px;
+      width:100%;
+      border-right: none;
+      border-bottom-width: 6px;
+      border-bottom-style: solid;
+    }
+    &__content {
+      display: block;
+    }
+    &__icon {
+      &-youtube {
+        display: none;
+      }
+    }
+    &__text {
+      height: 44px;
+      overflow-y: hidden;
+    }
+
+    &__featured {
+      &-left {
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+        border-right: none;
+        display: block;
+        height: 120px;
+        padding: 16px;
+        width: 100%;
+      }
+      &-right {
+        display: block;
+        width: 100%;
+      }
+      &-heading {
+        @include card_heading3;
+        margin-bottom: 0px;
+      }
+      &-title {
+        margin-bottom: 0px;
+      }
+      &-text {
+        @include card_text_small;
+        display: block;
+        margin-bottom: 0px;
+      }
+      &-sub-heading {
+        @include card_text;
+        margin-bottom: 4px;
+      }
+      &-link {
+        @include card_text_small;
+        display: block;
+        padding: 10px 0px;
+      }
+      .button {
+        line-height: 30px;
+      }
+    }
+
+    @include phone {
+      height: auto;
+    }
+  }
+  .card--light {
+    .card {
+      &__image {
+        height: 100%;
+      }
+    }
+  }
+
+  .author {
+    height: 360px;
+    padding-top: 20px;
+
+    &__image {
+      display: block;
+    }
+    &__avatar {
+      border: 3px $light-color solid;
+      height: 100px;
+      width: 100px;
+    }
+    &__links {
+      left: 0px;
+    }
+    &__link {
+      height: 70px;
+      width: 50%;
+
+      &--following {
+        display: none;
+      }
+    }
+  }
+}

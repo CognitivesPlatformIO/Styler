@@ -1,0 +1,250 @@
+.article_main {
+    margin-top: 190px;
+    .container {
+        background: $transparent;
+    }
+    .article_wrapper {
+        background: $white none repeat scroll 0 0;
+        margin-bottom: 100px;
+        border:1px solid $border-color;
+        overflow: hidden;
+        &.news__no_image {
+            .news__slides, .social_top_connect {
+                display: none;
+            }
+            .social_connect_top_section {
+                border-bottom: 1px solid $border-color;
+            }
+        }
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .section-header {
+            @include padding(0 30px 20px 30px);
+
+            h1 {
+                font-size: ($baseFontSize * 3) - 6;
+                line-height: 1.5;
+                @include phone {
+                    font-size: ($baseFontSize * 2) - 4;
+                }
+                @include tablet {
+                    font-size: ($baseFontSize * 2) + 0;
+                }
+            }
+            .head-caption {
+                .divider {
+                    position: relative;
+                    &:before {
+                        content:"|";
+                        margin-left: 5px;
+                        margin-right: 10px;
+                    }
+
+                }
+            }
+        }
+        .article-content-section {
+            background: $white none repeat scroll 0 0;
+            border-right:1px $border-color solid;
+            overflow: hidden;
+            @media #{$media-ipadPortrait} {
+                border-right:none;
+            }
+            .content-area {
+                @include padding(30px 100px 0);
+                @media #{$media-ipadPortrait} {
+                    @include padding(30px 30px 0);
+                }
+                @include phone {
+                    @include padding(30px 10px 0);
+                }
+                h1, h2, h3, h4, h5, h6, p, ul, ol, figure, section, article, aside, div, span {
+                    text-transform: none !important;
+                    line-height: 1.4 !important;
+                    margin-bottom: 20px !important;
+                    margin-top: 0px !important;
+                    /*color: $black !important;*/
+                    font-weight: 600 !important;
+                    font-family: $heading-font-family;
+                    font-size: ($baseFontSize * 1) + 2 !important;
+                    word-wrap: break-word;
+                }
+                p {
+                    span, div {
+                        margin-bottom: 0px;
+                        + span, + div {
+                            margin-top: 20px;
+                        }
+                    }
+                }
+                img {
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+                figure {
+                    width: 100%;
+                    position: relative;
+                    img {
+                        width: 100%;
+                    }
+                    figcaption {
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        background: rgba($black,0.7);
+                        color: $white;
+                        @include padding(15px 25px);
+                        font-weight: 400 !important;
+                    }
+                }
+                h1 {
+                    font-size: ($baseFontSize * 2) + 6 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 2) - 4 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 2) + 0 !important;
+                    }
+                }
+                h2 {
+                    font-size: ($baseFontSize * 2) + 2 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 2) - 6 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 2) - 4 !important;
+                    }
+                }
+                h3 {
+                    font-size: ($baseFontSize * 2) - 2 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 2) - 8 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 2) - 6 !important;
+                    }
+                }
+                h4 {
+                    font-size: ($baseFontSize * 2) - 6 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 1) + 6 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 2) - 8 !important;
+                    }
+                }
+                h5 {
+                    font-size: ($baseFontSize * 1) + 6 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 1) + 4 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 1) + 4 !important;
+                    }
+                }
+                h6 {
+                    font-size: ($baseFontSize * 1) + 4 !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 1) + 2 !important;
+                    }
+                    @include tablet {
+                        font-size: ($baseFontSize * 1) + 2 !important;
+                    }
+                }
+                p, {
+                    font-size: ($baseFontSize * 1) + 2 !important;
+                    font-weight: 400 !important;
+
+                }
+                blockquote {
+                    border-left: 6px $gray-color solid !important;
+                    display: block;
+                    font-family: $text-font-family !important;
+                    font-size: ($baseFontSize * 1) + 6 !important;
+                    font-weight: bold;
+                    line-height: 38px !important;
+                    margin: 0px auto 40px !important;
+                    padding: 0px 0px 0px 30px !important;
+                    @include phone {
+                        font-size: ($baseFontSize * 1) + 4 !important;
+                        line-height: 26px !important;
+                        padding: 0px 0px 0px 10px !important;
+                    }
+                }
+                ul, ol {
+                    li {
+                        margin-bottom: 15px;
+                        font-size: ($baseFontSize * 1) + 2 !important;
+                        font-weight: 400 !important;
+                    }
+                }
+
+                .medium-insert-embeds, .medium-insert-images, .medium-insert-vimeo, .medium-insert-instagram {
+                    margin-bottom: 20px;
+                    figure {
+                        margin:  0 auto;
+                        position: relative;
+                        @include phone {
+                            max-width: calc(100% - 0px);
+                        }
+                        .medium-insert-embed, .medium-insert-vim, .medium-insert-insta {
+                            div {
+                                max-width: 100% !important;
+                            }
+                        }
+                        figcaption {
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                            background: rgba($black,0.7);
+                            color: $white;
+                            @include padding(15px 25px);
+                        }
+                    }
+                }
+                .medium-insert-twitter {
+                    margin: 0 auto !important;
+                    figure {
+                        width: auto !important;
+                        .twitter-tweet {
+                            margin-left: auto !important;
+                            margin-right: auto !important;
+                        }
+                        .medium-insert-tweet {
+                            iframe {
+                                width: 100% !important;
+                            }
+                        }
+                    }
+                }
+                .medium-insert-images {
+                    margin: 0 -100px 30px;
+                    @media #{$media-ipadPortrait} {
+                        margin: 0 -30px 30px;
+                    }
+                    figure {
+                        width: 100%;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+                .medium-insert-embeds {
+                    figure {
+                        figcaption {
+                            position: relative !important;
+                            margin-top: -30px !important;
+                            margin-bottom: 20px !important;
+                            background: rgba($black,0.7) !important;
+                        }
+                    }
+                }
+                .social_top_connect {
+
+                }
+            }
+        }
+    }
+}
