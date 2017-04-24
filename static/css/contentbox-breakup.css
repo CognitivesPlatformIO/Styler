@@ -9,6 +9,9 @@
     float: left;
     width: 100%;
 }
+.content_box_page .content-wrap.terms_page {
+	padding: 0px !important;
+}
 .content_box_page .is-section {
     position: relative !important;
     float: left !important;
@@ -58,7 +61,7 @@
 .content_box_page .is-section .row > * {
     min-height: inherit !important;
 }
-.content_box_page .container {
+.content_box_page .is-wrapper .container {
     width: 90% !important;
 }
 /* .content_box_page .container, .content_box_page .login-page > .container, .content_box_page .header__container, .content_box_page .profile__container, .content_box_page .article__banner--caption, .content_box_page .article__header {
