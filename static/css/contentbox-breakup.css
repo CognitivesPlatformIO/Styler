@@ -6,8 +6,8 @@
 .content_box_page .content_area {
     padding: 0px !important;
     margin-bottom: 50px;
-	float: left;
-	width: 100%;
+    float: left;
+    width: 100%;
 }
 .content_box_page .is-section {
     position: relative !important;
@@ -46,7 +46,6 @@
 }
 .content_box_page .is-section .column.full h1, .content_box_page .is-section.is-section-100 .column.third h1 {
     font-size: 23px !important;
-    margin-bottom: 0px !important;
 }
 .content_box_page .is-section .column.full h1.size-48, .content_box_page .is-section .column.full .display h1 {
     font-size: 40px !important;
