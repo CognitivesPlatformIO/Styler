@@ -47,7 +47,7 @@ module.exports = function(grunt) {
         cachebreaker: {
             theme: {
                 options: {
-                    match: ['theme.min.js', 'theme.gz.js', 'output.min.css', 'output.gz.css', 'contentbox-breakup.css']
+                    match: ['theme.min.js', 'theme.gz.js', 'output.min.css', 'output.gz.css']
                 },
                 files: {
                     src: [
@@ -70,6 +70,7 @@ module.exports = function(grunt) {
                         'static/plugins/jquery.noty-2.3.8/demo/animate.css',
                         '../../static/sdk/js/media-player/mediaelementplayer.css',
                         'static/css/index.min.css',
+                        'static/css/contentbox-breakup.css',
                     ]
                 }
             }
