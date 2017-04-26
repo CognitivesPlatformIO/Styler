@@ -52,7 +52,7 @@
 	{% set isPage = 'content_box_page' in _Page.getBodyClass() %}
 
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1493046118733" type="text/css" media="all">
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1493201169005" type="text/css" media="all">
     {% else %}
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.fancybox/source/jquery.fancybox.css" />
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.noty-2.3.8/demo/animate.css" />
@@ -62,7 +62,7 @@
     {% endif %}
     
     {% if isPage %}
-
+        <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/assets/minimalist-basic/content-bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/box/box.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbox/contentbox.css" rel="stylesheet" type="text/css" />
@@ -71,7 +71,7 @@
      {% set themeColors = networkData['styling']['colours'] %}
     <style type='text/css'>
         {% if primaryFont != "" %}
-            body, .body, p, .article-content-section .content-area [class*="medium-insert-"], .article-content-section .content-area article, .article-content-section .content-area aside, .article-content-section .content-area blockquote, .article-content-section .content-area div, .article-content-section .content-area figure, .article-content-section .content-area ol, .article-content-section .content-area p, .article-content-section .content-area section, .article-content-section .content-area span, .article-content-section .content-area ul, .terms_page .content_area li, .terms_page .content_area ol, .terms_page .content_area p, .terms_page .content_area ul {
+            body, .body, p, .button, .article-content-section .content-area [class*="medium-insert-"], .article-content-section .content-area article, .article-content-section .content-area aside, .article-content-section .content-area blockquote, .article-content-section .content-area div, .article-content-section .content-area figure, .article-content-section .content-area ol, .article-content-section .content-area p, .article-content-section .content-area section, .article-content-section .content-area span, .article-content-section .content-area ul, .terms_page .content_area li, .terms_page .content_area ol, .terms_page .content_area p, .terms_page .content_area ul {
                 font-family: "{{primaryFont | replace({'+': ' '})}}" !important;
             }
         {% endif %}
