@@ -37,15 +37,12 @@
                     {% set profileImage = _Media.getMediaUrl(user.profileMedia, 150, 150, {radius: 'max', gravity: 'face', 'crop': 'thumb', type:'user'})%}
                 {% endif %}
                 <a id="profile" class="header__profile" href="javascript:void(0)"  {% if profileImage != ''%} style="background-image:url({{profileImage}})" {% endif %} ><span class="drop"></span></a>
-             {% else %}
-            
-            <div class="header_buttons">
-                <a class="header__link" href="{{_AppHelper.getLoginUrl()}}">Login</a>
-                {% if not _Network.isNetworkClosed(network)%}
-                    <a class="header__link" href="{{_AppHelper.getSignupUrl()}}">Sign up </a>
-                {% endif %}
-            </div>
-                {% endif %}
+             {% elseif not _Network.isNetworkClosed(network) %}
+                 <div class="header_buttons">
+                     <a class="header__link" href="{{_AppHelper.getLoginUrl()}}">Login</a>
+                     <a class="header__link" href="{{_AppHelper.getSignupUrl()}}">Sign up </a>
+                 </div>
+             {% endif %}
         </div>
     </div>
     
@@ -73,7 +70,7 @@
 
                     <li><a class="profile__menu-navigation-link" href="{{_AppHelper.getLogoffUrl()}}">Sign Out</a></li>
                 </ul>
-            {% else %}
+            {% elseif not _Network.isNetworkClosed(network) %}
                 <ul class="profile__menu-navigation">
                     <li><a class="profile__menu-navigation-link" href="{{_AppHelper.getLoginUrl()}}">Login</a></li>
                 </ul>

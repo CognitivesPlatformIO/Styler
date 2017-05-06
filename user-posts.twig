@@ -12,10 +12,10 @@
                     <figure class="user-profile-pic"{% if profileImage is not empty %} style="background-image:url('{{profileImage}}');"{% endif %}></figure>
                     <div class="inner-descr">
                         <h4 class="user-name text-center">{{Html.encode(user.firstname)}} {{Html.encode(user.lastname)}}</h4>
-                        {% if _User.isGuest() %}
+                        {% if _User.isGuest() and not _Network.isNetworkClosed(networkData) %}
                             <a href="javascript:void(0)" class="button button-block forceLoginModal"><i class="fa fa-star"></i>Follow</a>
                         {% endif %}
-                        {% if not _User.isGuest() and _User.getId() != user.id %}
+                        {% if not _User.isGuest() and _User.getId() != user.id and not _Network.isNetworkClosed(networkData) %}
                             {% set isUserFollowing = _User.isUserFollowing('user', user.id)  %}
                             <div class="button-set">
                                 <a href="javascript:void(0)" class="button FollowProfileUser" data-guid="{{user.guid}}" data-status="{% if isUserFollowing == 'TRUE' %}unfollow{% else %}follow{% endif %}"><i class="fa fa-star"></i>{% if isUserFollowing == 'TRUE' %} Unfollow {% else %} Follow {% endif %}</a>

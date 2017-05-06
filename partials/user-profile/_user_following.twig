@@ -13,28 +13,32 @@
                     {% if myBlogs | length > 0 %}
                         <ul class="tabular-data-list">
                             {% for following in myBlogs %}
-                                {% set btnClass = '' %}
-                                {% set btnStatus = "follow" %}
-                                {% if not _User.isGuest() and _User.isUserFollowing('blog', following.blog['id']) %}
-                                    {% set btnClass = 'selected' %}
-                                    {% set btnStatus = "unfollow" %}
-                                {% endif %}
+                               
                                 <li><a href="javascript:;">
                                         <span>
                                             <span class="fs16">{{following.blog['title'] | raw}}</span>
                                             <span class="email-spacer">{{following.blog['url']}}</span>
                                         </span>
-                                        <span>
-                                            {% if not _User.isGuest() %}
-                                                <button type="button" class="like FollowBlog {{btnClass}} hasStar" data-guid="{{following.blog['guid']}}" data-status="{{btnStatus}}">
-                                                    <span aria-hidden="true"><i class="fa fa-star"></i></span>
-                                                </button>
-                                            {% else %}
-                                                <button type="button" class="like forceLoginModal" aria-label="Like">
-                                                    <span aria-hidden="true"><i class="fa fa-star"></i></span>
-                                                </button>
+                                        {%if not _Network.isNetworkClosed(network)%}
+                                            {% set btnClass = '' %}
+                                            {% set btnStatus = "follow" %}
+                                            {% if not _User.isGuest() and _User.isUserFollowing('blog', following.blog['id']) %}
+                                                {% set btnClass = 'selected' %}
+                                                {% set btnStatus = "unfollow" %}
                                             {% endif %}
-                                        </span>
+                                            <span>
+
+                                                {% if not _User.isGuest() %}
+                                                    <button type="button" class="like FollowBlog {{btnClass}} hasStar" data-guid="{{following.blog['guid']}}" data-status="{{btnStatus}}">
+                                                        <span aria-hidden="true"><i class="fa fa-star"></i></span>
+                                                    </button>
+                                                {% else %}
+                                                    <button type="button" class="like forceLoginModal" aria-label="Like">
+                                                        <span aria-hidden="true"><i class="fa fa-star"></i></span>
+                                                    </button>
+                                                {% endif %}
+                                            </span>
+                                        {% endif %}
                                     </a></li>
                                 {% endfor %}
                             <li></li>
@@ -50,24 +54,25 @@
                     {% if myFollowings | length > 0 %}
                         <ul class="tabular-data-list">
                             {% for writer in myFollowings %}
-                                {% set btnClass = '' %}
-                                {% set btnStatus = "follow" %}
-                                {% if not _User.isGuest() and _User.isUserFollowing('writer', writer.following['id']) %}
-                                    {% set btnClass = 'selected' %}
-                                    {% set btnStatus = "unfollow" %}
-                                {% endif %}
-
                                 <li><a href="{{_AppHelper.buildUrl('profile/user-profile',{name: Html.encode(writer.following['username'])})}}">
-                                        {% if not _User.isGuest() %}
-                                            {% if( User.getId() != writer.following['id'])%}<!-- User cannot follow himself -->
-                                                <button type="button" class="like FollowWriter {{btnClass}} hasStar" data-guid="{{writer.following['guid']}}" data-status="{{btnStatus}}">
+                                        {%if not _Network.isNetworkClosed(network)%}
+                                            {% set btnClass = '' %}
+                                            {% set btnStatus = "follow" %}
+                                            {% if not _User.isGuest() and _User.isUserFollowing('writer', writer.following['id']) %}
+                                                {% set btnClass = 'selected' %}
+                                                {% set btnStatus = "unfollow" %}
+                                            {% endif %}
+                                            {% if not _User.isGuest() %}
+                                                {% if( User.getId() != writer.following['id'])%}<!-- User cannot follow himself -->
+                                                    <button type="button" class="like FollowWriter {{btnClass}} hasStar" data-guid="{{writer.following['guid']}}" data-status="{{btnStatus}}">
+                                                        <span aria-hidden="true"><i class="fa fa-star"></i></span>
+                                                    </button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button type="button" class="like forceLoginModal" aria-label="Like">
                                                     <span aria-hidden="true"><i class="fa fa-star"></i></span>
                                                 </button>
                                             {% endif %}
-                                        {% else %}
-                                            <button type="button" class="like forceLoginModal" aria-label="Like">
-                                                <span aria-hidden="true"><i class="fa fa-star"></i></span>
-                                            </button>
                                         {% endif %}
                                         {% if writer.following['media']['path'] is defined %}
                                             <div class="img-thumbnail"><img class="img-responsive" src="{{_Media.getMediaUrl(writer.following['media'], 100, 100, {crop:'thumb', gravity:'face', type:'user'})}}" alt="" ></div>

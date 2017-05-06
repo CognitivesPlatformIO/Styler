@@ -50,19 +50,20 @@
                                 {% endif %}
                             </ul>
                         </div>
-                        <div class="social-button">
-                            {% if not _User.isGuest %}
-                                {% set isUserFollowingBlog = _User.isUserFollowing('blog', blogInfo.id) %}
-                                {% if isUserFollowingBlog %}
-                                    <a href="javascript:void(0)" class="button upper black  followBlog" data-status="unfollow"  data-guid="{{blogInfo.guid}}">FOLLOWING <i class="fa fa-minus"></i></a>
+                        {% if not _Network.isNetworkClosed(networkData)%}
+                            <div class="social-button">
+                                {% if not _User.isGuest %}
+                                    {% set isUserFollowingBlog = _User.isUserFollowing('blog', blogInfo.id) %}
+                                    {% if isUserFollowingBlog %}
+                                        <a href="javascript:void(0)" class="button upper black  followBlog" data-status="unfollow"  data-guid="{{blogInfo.guid}}">FOLLOWING <i class="fa fa-minus"></i></a>
+                                    {% else %}
+                                        <a href="javascript:void(0)" class="button upper black  followBlog" data-status="follow"  data-guid="{{blogInfo.guid}}">FOLLOW <i class="fa fa-plus"></i></a>
+                                    {% endif %}
                                 {% else %}
-                                    <a href="javascript:void(0)" class="button upper black  followBlog" data-status="follow"  data-guid="{{blogInfo.guid}}">FOLLOW <i class="fa fa-plus"></i></a>
+                                    <a href="javascript:void(0)" class="button upper black forceLoginModal">Follow <i class="fa fa-plus"></i></a>
                                 {% endif %}
-                            {% else %}
-                                <a href="javascript:void(0)" class="button upper black forceLoginModal">Follow <i class="fa fa-plus"></i></a>
-                            {% endif %}
-                        </div>
-
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% if articles|length > 0 %}
