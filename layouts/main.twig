@@ -49,7 +49,7 @@
 
     <!--[if lte IE 8]><script type="text/javascript" src="{{networkData.templatePath}}/static/js/ie/ie.js"></script><![endif]-->
 	
-	{% set isPage = 'content_box_page' in _Page.getBodyClass() %}
+    {% set isPage = 'content_box_page' in _Page.getBodyClass() and 'page-contact-us' not in _Page.getBodyClass() %}
 
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
         <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1493201169005" type="text/css" media="all">
