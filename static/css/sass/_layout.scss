@@ -1,0 +1,203 @@
+// Responsive sizes mixins
+@mixin phone {
+    @media (max-width: $screen-phone) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: $screen-phone) and (max-width: $screen-desktop) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $screen-desktop) {
+        @content;
+    }
+}
+
+@mixin large-desktop {
+    @media (min-width: $screen-lg-desktop) {
+        @content;
+    }
+}
+
+@mixin portrait {
+    @media screen and (min-aspect-ratio: 9/16) {
+        @content;
+    }
+}
+
+@mixin phone-to-tablet {
+    @include tablet {
+        @content;
+    }
+    @include phone {
+        @content;
+    }
+}
+
+
+// Base layout classes
+.container {
+    @include container-fixed($grid-gutter-width);
+
+    @include phone {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    @include tablet {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    @include desktop {
+        width: $screen-desktop;
+    }
+    @include large-desktop {
+        width: $screen-lg-desktop;
+    }
+}
+
+.row {
+    @include make-row;
+
+    &-centered {
+        text-align: center;
+    }
+
+    @include phone {
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+}
+
+.col {
+    &-left {
+        float: left;
+        vertical-align: middle;
+        padding-left: $grid-gutter-width / 2;
+
+        @include tablet {
+            display: block;
+        }
+        @include phone {
+            display: block;
+            padding-left: 0px;
+        }
+    }
+    &-right {
+        float: right;
+        padding-right: $grid-gutter-width / 2;
+        text-align: right;
+        vertical-align: middle;
+
+        @include tablet {
+            display: block;
+            text-align: left;
+        }
+        @include phone {
+            display: block;
+            padding-right: 0px;
+        }
+    }
+
+    &-quarter,
+    &-quarter-short {
+        @include make-sm-column(6);
+        @include make-md-column(3);
+    }
+    &-third,
+    &-third-short {
+        @include make-sm-column(12);
+        @include make-md-column(4);
+    }
+    &-half {
+        @include make-sm-column(12);
+        @include make-md-column(6);
+    }
+    &-two-thirds,
+    &-two-thirds-short {
+        @include make-sm-column(12);
+        @include make-md-column(8);
+    }
+    &-three-quarters {
+        @include make-sm-column(12);
+        @include make-md-column(9);
+    }
+    &-full {
+        @include make-sm-column(12);
+    }
+}
+.page_section {
+    @include padding(105px 0 0 0);
+
+    @media screen and (max-width:767px) {
+        @include padding(0px);
+    }
+    &.home_section {
+        @include padding-top(105px);
+        @media screen and (max-width:1180px) {
+            @include padding-top(60px);
+        }
+    }
+}
+@media screen and (max-width: 1200px) {
+    .container {
+        width:95% !important;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+.col-centered {
+    float:none;
+    margin-left:auto;
+    margin-right:auto;
+}
+.grey_themer {
+    color: darken($light-color, 50%) !important;
+    border-bottom: 1px solid darken($light-color, 50%) !important;
+    i {
+        color: darken($light-color, 50%) !important;
+    }
+}
+.image-covered {
+    @include background-size(cover);
+    background-position: center;
+}
+
+/* Begin fancybox style breakup */
+.fancybox-overlay {
+    background: rgba(0, 0, 0, 0.8) url("fancybox_overlay.png") repeat scroll 0 0 !important;
+}
+.fancybox-wrap {
+    .fancybox-skin {
+        background: none repeat scroll 0 0 !important;
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
+    }
+    .fancybox-outer {
+        z-index: 50;
+    }
+    .fancybox-title {
+        display: none !important;
+    }
+    .fancybox-close {
+        background-image: none;
+        background-color: $black;
+        @include border-radius(50%);
+        right: -8px;
+        top: -14px;
+        z-index: 1;
+        &:before {
+            content:"\f00d";
+            font-family: $icon-font;
+            color: $white;
+            position:absolute; 
+            top: 50%;
+            left: 50%;
+            @include translate(-50%,-50%);
+        }
+    }
+}
+
+/* Begin fancybox style breakup */

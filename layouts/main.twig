@@ -52,19 +52,17 @@
 	{% set isPage = 'content_box_page' in _Page.getBodyClass() %}
 
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1491998305789" type="text/css" media="all">
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1493201169005" type="text/css" media="all">
     {% else %}
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.fancybox/source/jquery.fancybox.css" />
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.noty-2.3.8/demo/animate.css" />
         <link type="text/css" rel="stylesheet" href="{{_AppHelper.getAssetsSDKPath()}}/js/media-player/mediaelementplayer.css" />
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/css/index.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="{{networkData.templatePath}}/static/css/contentbox-breakup.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/css/index.min.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="{{networkData.templatePath}}/static/css/contentbox-breakup.css?rel=1493045123891" type="text/css" media="all" />
     {% endif %}
     
     {% if isPage %}
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/assets/minimalist-basic/content-bootstrap.css" rel="stylesheet" type="text/css" />
-
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/box/box.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
         <link href="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/ContentBox/contentbox/contentbox.css" rel="stylesheet" type="text/css" />
@@ -73,7 +71,7 @@
      {% set themeColors = networkData['styling']['colours'] %}
     <style type='text/css'>
         {% if primaryFont != "" %}
-            body, .body, p {
+            body, .body, p, .button, .article-content-section .content-area [class*="medium-insert-"], .article-content-section .content-area article, .article-content-section .content-area aside, .article-content-section .content-area blockquote, .article-content-section .content-area div, .article-content-section .content-area figure, .article-content-section .content-area ol, .article-content-section .content-area p, .article-content-section .content-area section, .article-content-section .content-area span, .article-content-section .content-area ul, .terms_page .content_area li, .terms_page .content_area ol, .terms_page .content_area p, .terms_page .content_area ul {
                 font-family: "{{primaryFont | replace({'+': ' '})}}" !important;
             }
         {% endif %}
@@ -223,7 +221,7 @@
             <p class="article-text" style="width: 165px; float: left; padding-left: 3px;color: #394659;font-size: 14px; font-family: Droid Serif,serif; line-height: 20px; margin-top:0px;">Dummy text  </p>
         </div>
     </div>
-            
+    <script src='https://www.google.com/recaptcha/api.js'></script>       
 {{ this.endBody() }}
 </body>
 {{ this.endPage() }}

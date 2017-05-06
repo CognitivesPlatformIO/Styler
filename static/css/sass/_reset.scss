@@ -1,0 +1,93 @@
+
+:focus {
+	outline:none;
+}
+::selection {
+	background:$hover-color;
+	color:$light-color;
+}
+::-moz-selection {
+	background:$hover-color;
+	color:$light-color;
+}
+* {
+	box-sizing:border-box;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin:0px;
+	padding:0px;
+}
+html {
+}
+body {
+ background-color:$gray-color;
+ color:$base-color;
+ font-family:$base-font-family;
+	font-size:14px;
+	line-height:24px;
+}
+h1 {
+ font-family:$heading-font-family;
+	font-size:24px;
+}
+h2 {
+	font-size:22px;
+}
+h3 {
+	font-size:18px;
+}
+h4 {
+	font-size:16px;
+}
+h5 {
+	font-size:14px;
+}
+h6 {
+	font-size:12px;
+}
+p {
+ font-family:$text-font-family;
+	font-size:14px;
+	line-height:24px;
+}
+a {
+ color:$dark-color;
+	text-decoration:none;
+	outline:0 none;
+	transition:color 0.5s, background-color 0.5s;
+}
+a:hover, a:focus, a:active {
+ color:$hover-color;
+	text-decoration:none!important;
+	transition:color 0s, background-color 0s, border-color 0s;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset, img {
+	border:0;
+}
+ol, ul {
+	list-style:none;
+}
+caption, th {
+	text-align:left;
+}
+.clear {
+	clear:both;
+	font-size:1px;
+	line-height:1px;
+	display:block;
+	height:0;
+}
+.img__full {
+	display:block;
+	height:auto;
+	margin:0px auto 40px;
+	width:$screen-md;
+	
+	@include phone-to-tablet {
+		width:100%;
+	}
+}

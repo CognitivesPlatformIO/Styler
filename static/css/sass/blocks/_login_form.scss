@@ -1,0 +1,376 @@
+/*! Layout Login Page
+-------------------------*/
+
+.page_section {
+
+    .login-page {
+        @include padding(120px 0 0 0);
+
+        @media screen and (max-width:767px) {
+            @include padding(0px);
+        }
+    }
+}
+
+.login-page {
+	margin:160px 0 50px;
+
+	> .container {
+		padding:0px;
+		@extend .container;
+		/* background-color:#fff;
+        border:1px solid rgba(0,0,0, 0.1); */
+	}
+    .tabbable-custom {
+        border: 1px solid $gray-color;
+    }
+    .nav-tabs {
+        border-bottom:0px none;
+
+        > li {
+            border:0 none;
+            margin:0!important;
+            border-left:1px solid rgba($dark-color, 0.2);
+
+            &:first-child {
+                border-left:0px none;
+            }
+
+            > a {
+                font-weight:400;
+                border-radius:0;
+                text-align:center;
+                margin:0 !important;
+                border:0 none !important;
+                 @include padding(16px 10px 22px);
+                font-size:($baseFontSize * 1) + 2;
+                background:#dfe0e1 none repeat scroll 0 0;
+            }
+
+            &.active {
+                border-bottom:0px none!important;
+
+                > a {
+                    border-bottom:0px none!important;
+                    background:$light-color none repeat scroll 0 0;
+                }
+            }
+        }
+	}
+
+	.tab-content {
+        width:100%;
+        margin:0px auto;
+        padding:50px 15%;
+        background:none repeat scroll 0 0 $light-color;
+
+				@media #{$media-ipadPortrait} {
+					@include padding(50px 0);
+				}
+				&.forget_password {
+					@media #{$media-ipadPortrait} {
+						@include padding(50px 40px);
+					}
+                    .helper-text {
+                        padding-bottom: 15px;
+                    }
+					.forget_btn {
+						font-size: ($baseFontSize * 1) + 2;
+						@include padding(7px 20px);
+						float: right;
+						@media #{$media-iPhoneMedium}, #{$media-phone} {
+							width: 100%;
+						}
+					}
+				}
+	}
+		.txt-link {
+			&:hover {
+				color: $black;
+			}
+			span {
+				margin-left: 5px;
+				&:hover {
+					color: $highlight-color;
+				}
+			}
+		}
+    .email-login {
+        color:#383b40;
+        font-weight:400;
+        position:relative;
+        text-align:center;
+        margin:30px 0 40px;
+        font-size:($baseFontSize * 1) + 2;
+
+        &:not(:last-child) {
+            margin-top:0px;
+        }
+
+        .seperation {
+            z-index:90;
+            position:relative;
+            display:inline-block;
+            @include padding(0px 20px);
+            background:none repeat scroll 0 0 $light-color;
+        }
+
+        &:before, &:after {
+            top:55%;
+            height:1px;
+            width:100%;
+            content:" ";
+            display:block;
+            position:absolute;
+            border-top:1px solid darken($light-color, 20%);
+        }
+        .seperation {
+            &:before {
+                left:0;
+            }
+            &:after {
+                right:0;
+            }
+        }
+    }
+
+    /* Forms */
+    .WriteAnArticleForm {
+        width:100%;
+        margin:0 auto;
+        @include padding(0px 10%);
+				.alert-danger {
+					overflow: hidden;
+					ul {
+						font-size: ($baseFontSize * 1) - 1;
+					}
+				}
+        &.fullWidth {
+             @include padding(0px);
+        }
+		.form-horizontal {
+		  input[type="text"], input[type="password"], input[type="tel"], input[type="email"], input[type="search"], input[type="url"], input[type="number"], select, textarea {
+			  display:block;
+			  width:100%;
+			  @include padding(7px 15px);
+			  outline:none;
+			  font-size:($baseFontSize * 1) + 0;
+			  line-height:28px;
+			  font-weight:300;
+			  color:darken($light-color, 73%);
+			  @include transition(0.25s);
+			  box-shadow:none!important;
+			  font-family:$base-font-family!important;
+			  -webkit-appearance:none;
+			  -moz-appearance:none;
+			  appearance:none;
+			  @include border-radius(4px);
+			  border:1px solid darken($light-color, 25%);
+			  background:$light-color none repeat scroll 0 0;
+		  }
+		  input {
+			  &[type="text"], &[type="password"], &[type="tel"], &[type="email"], &[type="search"], &[type="url"], &[type="number"] {
+				  height:55px;
+			  }
+
+			  &[type="text"]:focus, &[type="password"]:focus, &[type="tel"]:focus, &[type="number"]:focus, &[type="url"]:focus, &[type="email"]:focus, &[type="search"]:focus, select:focus, textarea:focus {
+				  border:1px solid $blue;
+				  @include border-radius(4px);
+				  background:$light-color none repeat scroll 0 0;
+			  }
+		  }
+		}
+        .controls-full {
+            width:100%;
+            margin-bottom:20px;
+            display:inline-block;
+        }
+
+        .button-set {
+            margin-bottom:20px;
+						label {
+							font-size: ($baseFontSize * 1) - 1;
+							margin-top: 6px;
+						}
+						.right-section {
+							float: right;
+							display: inline-block;
+							@media #{$media-iPhoneMedium}, #{$media-phone} {
+								float: left;
+								width: 100%;
+							}
+							.button {
+								float: right;
+								font-size: ($baseFontSize * 1);
+								@media #{$media-iPhoneMedium}, #{$media-phone} {
+									width: 100%;
+									float: none;
+									margin-top: 15px;
+									@include padding(10px 24px);
+								}
+							}
+	            .forget {
+	              color:$success-color;
+								margin-top: 8px;
+								margin-right: 15px;
+								display: inline-block;
+								@media #{$media-iPhoneMedium} {
+									position: absolute;
+									right: 0;
+									top: 0;
+								}
+                                @media #{media-phone} {
+                                    position: relative;
+                                    width: 100%;
+                                }
+	            }
+						}
+        }
+
+        .btn {
+            @include padding(10px 30px 12px);
+            font-size:($baseFontSize * 2) - 4;
+        }
+        .signup-button {
+			text-align: right;
+			@media #{$media-iPhoneLarge}, #{$media-iPhoneMedium}, #{$media-phone} {
+				   text-align: left;
+				}
+		}
+        .form-control {
+            width:100%;
+            height:50px;
+            @include border-radius(2px);
+        }
+    }
+
+    .controls-lt, .controls-rt {
+        width:48.387%;
+        margin-bottom:20px;
+				@media #{$media-iPhoneMedium}, #{$media-phone} {
+					width: 100%;
+				}
+    }
+    .controls-lt {
+        float:left
+    }
+    .controls-rt {
+        float:right
+    }
+}
+
+/* Social Icons */
+.social-buttons {
+    width:100%;
+    margin:0 auto 25px;
+
+    > ul {
+        padding:0px;
+        list-style:none;
+				margin: 0 auto;
+				width: 100%;
+				text-align: center;
+
+        > li {
+            width:45%;
+            /* float:left; */
+						display: inline-block;
+            list-style:none;
+            padding:0 10px;
+            margin:0 0 15px;
+                @media #{$media-iPhoneMedium}, #{$media-phone} {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    display: block;
+                }
+
+            > a {
+                width:100%;
+                color:#fff;
+                font-size:($baseFontSize * 1);
+                font-weight:400;
+                text-align:center;
+                position:relative;
+                @include padding(15px 20px);
+                @include border-radius(2px);
+                @include transition(all 0.5s ease 0s);
+                background:none repeat scroll 0 0 darken($light-color, 10%);
+                @include flexbox; /* or inline-flex then width will be 100% */
+                @include align-self;
+                align-items:center;
+                -webkit-align-items:$center;
+                -moz-align-items:$center;
+                align-items:$center;
+                -webkit-justify-content:$center;
+                -moz-justify-content:$center;
+                justify-content:$center;
+
+                > .fa {
+                    @include padding-right(10px);
+                    font-size:($baseFontSize * 2) - 4;
+                }
+            }
+
+            &.facebook {
+                > a {
+                    background:none repeat scroll 0 0 color(facebook);
+
+                    &:hover, &:focus, &:active {
+                        background:none repeat scroll 0 0 darken(color(facebook), 10%);
+                    }
+                }
+            }
+            &.twitter {
+                > a {
+                    background:none repeat scroll 0 0 color(twitter);
+
+                    &:hover, &:focus, &:active {
+                        background:none repeat scroll 0 0 darken(color(twitter), 10%);
+                    }
+                }
+            }
+            &.g-plus {
+                > a {
+                    background:none repeat scroll 0 0 color(google-plus);
+
+                    &:hover, &:focus, &:active {
+                        background:none repeat scroll 0 0 darken(color(google-plus), 10%);
+                    }
+                }
+            }
+            &.linkedin {
+                > a {
+                    background:none repeat scroll 0 0 color(linkedin);
+
+                    &:hover, &:focus, &:active {
+                        background:none repeat scroll 0 0 darken(color(linkedin), 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    button.disconnect {
+		right:-9px;
+		top:-9px;
+		padding:0;
+		border:0 none;
+		cursor:pointer;
+		color:$light-color;
+		font-weight:normal;
+		text-align:center;
+		line-height:1;
+		position:absolute;
+		@include opacity(1);
+		width:26px;
+		height:26px;
+		@include border-radius(50%);
+		font-size:($baseFontSize * 1) + 2;
+		background:none repeat scroll 0 0 rgba($light-color, 1);
+		@include box-shadow(0 0 3px 1px rgba($dark-color ,0.1));
+
+		.fa {
+			color:$error-color;
+		}
+    }
+}

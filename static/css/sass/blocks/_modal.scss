@@ -1,0 +1,399 @@
+/* Layout ▸ Modal
+----------------------------- */
+.modal {
+	z-index:9999;
+	background:rgba(darken($white, 100%), 0.75) none repeat scroll 0 0;
+}
+.modal {
+	text-align:center;
+}
+.modal-backdrop.in {
+	@include opacity(0.95);
+}
+.modal-intro {
+	color:$white;
+	text-align:left;
+}
+.modal.fade .modal-dialog {
+  -webkit-transition:-webkit-transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.475);
+	   -o-transition:     -o-transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.475);
+		  transition:        transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.475);
+	@include transform(translate(0, -25%));
+}
+.modal.in .modal-dialog {
+	@include transform(translate(0, 0));
+}
+.modal:before {
+	content:" ";
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+}
+.modal-dialog {
+	text-align:left;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+
+/*  */
+/* Modal Sizes */
+/*  */
+.modal-dialog.modal-sm {
+	width:560px;
+}
+.modal-dialog.modal-md {
+	width:680px;
+}
+.modal-dialog.modal-lg {
+	max-width:760px;
+	width: 90%;
+}
+.modal-dialog.modal-extlg {
+	width:1100px;
+}
+
+
+
+/*  */
+/* Modal Content */
+/*  */
+.modal-content {
+	border:0px none;
+	@include border-radius(0px);
+	@include box-shadow(0 8px 35px 8px rgba(darken($white, 100%), 0.9));
+}
+
+
+/*  */
+/* Modal Close */
+/*  */
+.modal-close {
+	top:60px;
+	right:60px;
+	z-index:50;
+	position:absolute;
+	@include opacity(0);
+	@include transform(translateY(-40px) rotate(90deg));
+}
+.modal.in .modal-close {
+	@include opacity(1);
+	@include transform(translateY(0px) rotate(0deg));
+}
+
+.x-close {
+	top:-35px;
+	right:0px;
+	z-index:50;
+	@include size(22px);
+	border:none;
+	cursor:pointer;
+	position:absolute;
+	background:transparent;
+	@include transition(all 0.4s ease-in-out);
+
+	&:hover {
+		@include transform(translateY(0px) rotate(90deg)!important);
+	}
+
+	&:before,
+	&:after {
+		top:50%;
+		left:-15%;
+		right:-15%;
+		height:1px;
+		content:' ';
+		position:absolute;
+		background-color:$white;
+		@include transition(all 0.2s ease-in-out);
+	}
+
+	&:before {
+		@include transform(rotate(45deg));
+	}
+	&:after {
+		@include transform(rotate(-45deg));
+	}
+}
+
+
+/*  */
+/* Modal Header */
+/*  */
+.modal-header {
+    color:$white;
+    @include padding(20px 40px);
+    background:#1e1e26 none repeat scroll 0 0;
+
+    h3 {
+        margin:0px;
+        color:$white;
+        font-weight:400;
+        @include padding(0px);
+        font-size:($baseFontSize * 1) + 6;
+    }
+}
+
+
+/*  */
+/* Modal Body */
+/*  */
+.modal-body {
+	@include padding(30px);
+
+	&.nopadd {
+		@include padding(0px);
+	}
+
+    .login-page {
+        width:100%;
+
+        .container {
+            width:100%;
+        }
+
+        .tab-content {
+           @include padding(35px);
+        }
+    }
+}
+
+#AjaxModal {
+	.modal-body {
+		@include padding(0px);
+	}
+}
+
+.ajax_body {
+	color:darken($white, 100%);
+
+	.ajax_body_container {
+		position:relative;
+		@include padding(0px 50px 40px);
+
+		.avatar_section {
+			left:0px;
+			top:-35px;
+			width:100%;
+			text-align:center;
+			position:absolute;
+		}
+
+		.username {
+			color:darken($white, 100%);
+			font-weight:600;
+	  		letter-spacing:0.4px;
+			font-size:($baseFontSize * 1) - 1;
+		}
+
+		.content_area {
+			color:$border-color;
+	  		@include padding(75px 35px 10px);
+
+			&.no {
+				@include padding(45px 35px 10px);
+			}
+
+			p {
+				font-weight:700;
+				line-height:1.27;
+		  		letter-spacing:0.5px;
+				margin-bottom:25px;
+				font-size:($baseFontSize * 1) + 8;
+
+				a {
+					color:$hover-color;
+				}
+			}
+		}
+	}
+
+	.button {
+		@include padding-left(40px);
+		@include padding-right(40px);
+		font-size:($baseFontSize * 1) + 2;
+
+		> i.mr {
+			margin-right:15px;
+		}
+		> i.ml {
+			margin-left:15px;
+		}
+	}
+
+	&.facebook {
+
+		.button {
+			color:color(facebook);
+			border-color:color(facebook);
+
+			&:hover {
+				color:$white;
+				border-color:color(facebook);
+				background:color(facebook) none repeat scroll 0 0;
+			}
+		}
+	}
+
+	&.twitter {
+
+		.button {
+			color:color(twitter);
+			border-color:color(twitter);
+
+			&:hover {
+				color:$white;
+				border-color:color(twitter);
+				background:color(twitter) none repeat scroll 0 0;
+			}
+		}
+	}
+
+	&.instagram {
+
+		.button {
+			color:color(instagram);
+			border-color:color(instagram);
+
+			&:hover {
+				color:$white;
+				border-color:color(instagram);
+				background:color(instagram) none repeat scroll 0 0;
+			}
+		}
+	}
+
+	&.youtube {
+
+		.button {
+			color:color(youtube);
+			border-color:color(youtube);
+
+			&:hover {
+				color:$white;
+				border-color:color(youtube);
+				background:color(youtube) none repeat scroll 0 0;
+			}
+		}
+	}
+}
+
+
+
+/*  */
+/* Modal Profile Popup */
+/*  */
+.profile_popup_body {
+	width:100%;
+	color:darken($white, 100%);
+	display:table;
+
+	[class^="column_"] {
+	    width:50%;
+	    display:table-cell;
+	    vertical-align:middle;
+	}
+	.column_left {
+	    width:53%;
+	}
+	.column_right {
+	    width:47%;
+	    @include padding(20px);
+	    @include padding-right(65px);
+
+	    p {
+	    	margin-bottom:5px;
+	    }
+	    h2 {
+	    	font-weight:700;
+	    	margin-bottom:15px;
+	    }
+	}
+}
+.profile_popup_footer {
+	@include padding(0px 65px 40px);
+
+	.profile_popup_footer_inner {
+		width:100%;
+		color:darken($white, 100%);
+		text-align:center;
+		border:1px solid #cecece;
+		@include border-radius(5px);
+		@include padding(25px 75px);
+
+		h4 {
+			font-weight:700;
+	    	margin-bottom:15px;
+	    	font-size:($baseFontSize * 1) + 6;
+		}
+	}
+}
+
+
+/*  */
+/* Modal My Platform Popup */
+/*  */
+.myplatform_popup_body {
+	text-align:center;
+	@include padding(40px 20px 30px);
+
+	p {
+    	margin-bottom:20px;
+		font-size:($baseFontSize * 1) + 8;
+    }
+    h1 {
+    	font-weight:700;
+    	margin-bottom:30px;
+    }
+
+    .myplatform_popup_footer {
+    	max-width:330px;
+    	margin:20px auto;
+    	text-align:center;
+
+    	p {
+	    	margin-bottom:20px;
+			font-size:($baseFontSize * 1) + 2;
+	    }
+    }
+}
+
+
+/*  */
+/* Modal Footer */
+/*  */
+.modal-footer {
+	width:100%;
+	color:$white;
+	margin-top:-5px;
+	border:0px none;
+	text-align:left;
+	display:table;
+	@include border-radius(0px);
+	@include padding(25px 75px);
+	background:darken($white, 100%) none repeat scroll 0 0;
+
+	> div {
+		width:100%;
+		height:44px;
+		display:table-cell;
+		vertical-align:middle;
+	}
+
+	p {
+		font-weight:600;
+		margin-bottom:0px;
+		font-size:($baseFontSize * 1) + 6;
+
+		> span {
+			float:left;
+			margin-top:10px;
+		}
+
+		.button {
+			float:right;
+			max-height:44px;
+			@include padding(5px 25px 8px);
+		}
+	}
+}

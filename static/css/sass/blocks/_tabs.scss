@@ -1,0 +1,36 @@
+/* Layout Tabb Design
+-------------------------*/
+
+.tabbable {
+    .nav-tabs {
+        
+        > li {
+            
+        }
+        &.nav_tabs_one {
+             > li {
+                 width:100%;
+            }
+        }
+        &.nav_tabs_two {
+             > li {
+                 width:50%;
+            }
+        }
+        &.nav_tabs_three {
+             > li {
+                 width:33.3333%;
+            }
+        }
+        &.nav_tabs_four {
+             > li {
+                 width:25%;
+            }
+        }
+        &.nav_tabs_five {
+             > li {
+                 width:20%;
+            }
+        }
+	}
+}

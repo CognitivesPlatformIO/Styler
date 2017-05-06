@@ -1,0 +1,538 @@
+/* Customized Bootstrap Buttons
+-----------------------------------*/
+
+.btn {
+  	box-shadow:none !important;
+}
+
+.button {
+	z-index:2;
+	position:relative;
+	display:inline-block;
+	margin-bottom:0;
+	font-weight:normal;
+	text-align:center;
+	vertical-align:middle;
+	touch-action:manipulation;
+	cursor:pointer;
+	background-image:none;
+	white-space:nowrap;
+	font-size:($baseFontSize * 1) + 2;
+	@include padding(8px 25px 6px);
+	font-weight:300;
+	line-height:1.42857;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	font-family:$base-font-family;
+	border:1px solid rgba(0,0,0,0.3);
+	position:relative;
+	@include border-radius(30px);
+	@include box-shadow(none);
+	-webkit-transition:all 0.4s;
+	-moz-transition:all 0.4s;
+	transition:all 0.4s;
+	overflow:hidden;
+	font-weight:600;
+
+
+	&.small {
+		font-size:($baseFontSize * 1) - 2px;
+		padding:6px 25px;
+	}
+
+	&.medium {
+		font-size:($baseFontSize * 1) - 2px;
+		padding:9px 20px;
+	}
+
+	&.large {
+		font-size:($baseFontSize * 1) + 4px;
+		padding:12px 35px;
+	}
+
+	&.button-circle {
+		padding:0px;
+		width:32px;
+		height:32px;
+		position:relative;
+		border-radius:50%;
+		border:1px solid rgba(172,179,190,1);
+		background:$light-color repeat scroll 0 0 transparent;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			border:1px solid $blue;
+			background:$light-color repeat scroll 0 0 transparent;
+		}
+		.override {
+			overflow:visible;
+		}
+	}
+
+	&.button-centered {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	&.button-square {
+		padding:0;
+		width:24px;
+		height:24px;
+		border-radius:0;
+		border:0px solid rgba(0,0,0,0);
+		background:none repeat scroll 0 0 transparent;
+	}
+
+	&.button-rectangular {
+		@include border-radius(0);
+	}
+
+	&.button-rounded {
+		@include border-radius(33px);
+	}
+
+	&.button-border-less {
+		padding:0;
+		border:0px solid rgba(0,0,0,0);
+		background:none repeat scroll 0 0 transparent;
+	}
+    &.upper {
+        text-transform: uppercase;
+    }
+}
+
+.btn-group > .button:first-child {
+  	margin-left:0;
+}
+
+.btn-group-vertical > .button {
+	  float:left;
+	  position:relative;
+}
+
+.btn-group {
+	> .button {
+		float:left;
+		position:relative;
+	}
+	.button + {
+		.button, .btn-group {
+			margin-left:-2px;
+		}
+	}
+	.btn-group + {
+		.button, .btn-group {
+			margin-left:-2px;
+		}
+	}
+	> .button {
+
+		&:not(:first-child):not(:last-child) {
+			border-radius:0;
+			&:not(.dropdown-toggle) {
+				border-radius:0;
+			}
+		}
+
+		&:first-child {
+			margin-left:0;
+			&:not(:last-child):not(.dropdown-toggle) {
+				border-bottom-right-radius:0;
+				border-top-right-radius:0;
+			}
+		}
+
+		&:last-child:not(:first-child) {
+			border-bottom-left-radius:0;
+			border-top-left-radius:0;
+		}
+	}
+}
+
+.equal-button .button {
+	min-width:175px;
+}
+
+
+a:focus, button:focus, .button.focus {
+	outline:none!important;
+	outline:5px auto -webkit-focus-ring-color;
+	outline-offset:-2px;
+}
+
+button:active:focus, .button:active.focus, button.active:focus {
+	outline:none!important;
+	outline:5px auto -webkit-focus-ring-color;
+	outline-offset:-2px;
+}
+.button:after {
+	content:" ";
+	display:block;
+	position:absolute;
+	border-radius:50%;
+	padding-top:240%;
+	padding-left:240%;
+	margin-top:-120%;
+	margin-left:-120%;
+	@include opacity(0);
+	@include transition(all 1s);
+	background:rgba($light-color ,0.3);
+}
+.button:active:after {
+    padding-top:0;
+    padding-left:0;
+    margin-top:0;
+    margin-left:0;
+	@include opacity(1);
+	@include transition(0s);
+}
+
+.button {
+	&.active.focus {
+		outline:thin dotted!important;
+		outline:5px auto -webkit-focus-ring-color;
+		outline-offset:-2px;
+	}
+	&:hover, &:focus, &.focus {
+		color:$white;
+		text-decoration:none;
+	}
+	&:active, &.active {
+		background-image:none;
+		@include box-shadow(none);
+	}
+	&:focus {
+		@include box-shadow(none);
+	}
+	&.disabled, &[disabled] {
+		cursor:not-allowed;
+		pointer-events:none;
+		opacity:0.65;
+		filter:alpha(opacity = 65);
+		-webkit-box-shadow:none;
+		box-shadow:none;
+	}
+}
+
+fieldset[disabled] .button {
+	cursor:not-allowed;
+	pointer-events:none;
+	opacity:0.65;
+	filter:alpha(opacity = 65);
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.button {
+	/*! Button ▸ Default */
+	&.default {
+		color:$dark-color;
+		border-color:$light-color;
+		background:none repeat scroll 0 0 $light-color;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$dark-color;
+			border-color:$light-color;
+			background:none repeat scroll 0 0 $light-color;
+		}
+		&.bordered {
+			color:$dark-color;
+			border-color:$dark-color;
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$dark-color;
+				border-color:$dark-color;
+				background:none repeat scroll 0 0 transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$dark-color;
+				background:none repeat scroll 0 0 $dark-color;
+			}
+		}
+	}
+
+	/*! Button ▸ Grey */
+	&.grey {
+		color:$light-color;
+		border-color:darken($light-color, 50%);
+		background:none repeat scroll 0 0 darken($light-color, 50%);
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:darken($light-color, 50%);
+			border-color:darken($light-color, 50%);
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:darken($light-color, 50%);
+			border-color:darken($light-color, 50%);
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:darken($light-color, 50%);
+				border-color:darken($light-color, 50%);
+				background:none repeat scroll 0 0 transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:darken($light-color, 50%);
+				background:none repeat scroll 0 0 darken($light-color, 50%);
+			}
+		}
+	}
+
+	/*! Button ▸ Blue */
+	&.blue {
+		color:$light-color;
+		border-color:$blue;
+		background:none repeat scroll 0 0 $blue;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$blue;
+			border-color:$blue;
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:$blue;
+			border-color:$blue;
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$blue;
+				border-color:$blue;
+				background:none repeat scroll 0 0 $transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$blue;
+				background:none repeat scroll 0 0 $blue;
+			}
+		}
+	}
+
+	/*! Button ▸ Green */
+	&.green {
+		color:$light-color;
+		border-color:$success-color;
+		background:none repeat scroll 0 0 $success-color;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$light-color;
+			border-color:darken($success-color, 5%);
+			background:none repeat scroll 0 0 darken($success-color, 5%);
+		}
+
+		&.bordered {
+			color:$success-color;
+			border-color:$success-color;
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$success-color;
+				border-color:$success-color;
+				background:none repeat scroll 0 0 transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$success-color;
+				background:none repeat scroll 0 0 $success-color;
+			}
+		}
+	}
+
+	/*! Button ▸ Light Blue */
+	&.lightBlue {
+		color:$light-color;
+		border-color:lighten($blue, 50%);
+		background:none repeat scroll 0 0 lighten($blue, 50%);
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:lighten($blue, 50%);
+			border-color:lighten($blue, 50%);
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:lighten($blue, 50%);
+			border-color:lighten($blue, 50%);
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:lighten($blue, 50%);
+				border-color:lighten($blue, 50%);
+				background:none repeat scroll 0 0 transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:lighten($blue, 50%);
+				background:none repeat scroll 0 0 lighten($blue, 50%);
+			}
+		}
+	}
+
+	/*! Button ▸ Black */
+	&.black {
+		color:$light-color;
+		border-color:$dark-color;
+		background:none repeat scroll 0 0 $dark-color;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$dark-color;
+			border-color:$dark-color;
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:$dark-color;
+			border-color:$dark-color;
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$dark-color;
+				border-color:$dark-color;
+				background:none repeat scroll 0 0 $transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$dark-color;
+				background:none repeat scroll 0 0 $dark-color;
+			}
+		}
+	}
+
+	/*! Button ▸ Yellow */
+	&.yellow {
+		color:$light-color;
+		border-color:$warning;
+		background:none repeat scroll 0 0 $warning;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$warning;
+			border-color:$warning;
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:$warning;
+			border-color:$warning;
+			background:none repeat scroll 0 0 $transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$warning;
+				border-color:$warning;
+				background:none repeat scroll 0 0 $transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$warning;
+				background:none repeat scroll 0 0 $warning;
+			}
+		}
+	}
+
+	/*! Button ▸ Red */
+	&.red {
+		color:$light-color;
+		border-color:$error-color;
+		background:none repeat scroll 0 0 $error-color;
+
+		&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+			color:$error-color;
+			border-color:$error-color;
+			background:none repeat scroll 0 0 $transparent;
+		}
+
+		&.bordered {
+			color:$error-color;
+			border-color:$error-color;
+			background:none repeat scroll 0 0 transparent;
+
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$error-color;
+				border-color:$error-color;
+				background:none repeat scroll 0 0 $transparent;
+			}
+			&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+				color:$light-color;
+				border-color:$error-color;
+				background:none repeat scroll 0 0 $error-color;
+			}
+		}
+	}
+
+	i {
+		margin-right:10px;
+	}
+}
+
+/* Button ▸ Sizes */
+.button-huge {
+	@include padding(10px 30px 12px);
+	font-size:($baseFontSize * 1) + 8;
+}
+.button-large {
+	@include padding(10px 30px 12px);
+	font-size:($baseFontSize * 1) + 4;
+}
+.button-small {
+	@include padding(6px 16px 8px);
+	font-size:($baseFontSize * 1) - 1;
+}
+
+/* Button ▸ Full Width */
+.button-block {
+	width:100%;
+	display:block;
+	padding-left:0px!important;
+	padding-right:0px!important;
+}
+
+
+/* Text Button ▸ Blue */
+a.link-blue {
+    color:$blue;
+	&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+		color:$blue;
+	}
+	.fa {
+		padding-right:6px;
+	}
+}
+a.link-red {
+    color:$error-color;
+	&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+		color:$error-color;
+	}
+	.fa {
+		padding-right:6px;
+	}
+}
+a.link-green {
+    color:$success-color;
+	&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+		color:$success-color;
+	}
+	.fa {
+		padding-right:6px;
+	}
+}
+a.link-black {
+    color:$dark-color;
+	&:hover, &:focus, &.focus, &.disabled, &[disabled] {
+		color:$dark-color;
+	}
+	.fa {
+		padding-right:6px;
+	}
+}
+
+.not-connected {
+    @include opacity(0.5);
+    cursor:not-allowed;
+    pointer-events:none;
+}

@@ -1,0 +1,54 @@
+// Headings
+@mixin card_heading1 {
+  color: $light-color;
+  font-family: $heading-font-family;
+  font-size: 54px;
+  font-weight: bold;
+  line-height: 60px;
+  margin: 0px 0px 50px 0px;
+}
+@mixin card_heading2 {
+  font-size: 46px;
+  line-height: 48px;
+}
+@mixin card_heading3 {
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 22px;
+}
+@mixin card_heading4 {
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 22px;
+}
+
+
+// Text
+@mixin card_text_large {
+  font-size: 20px;
+  line-height: 28px;
+}
+@mixin card_text {
+  font-size: 16px;
+  line-height: 22px;
+}
+@mixin card_text_small {
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+
+@mixin card_darken {
+  content: "";
+  background-color: $dark-color;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.4;
+  z-index: 90;
+}

@@ -1,0 +1,88 @@
+$light-color:     #ffffff;
+$gray-color:      #ebebeb;
+$dark-color:      #000000;
+$base-color:      #212427;
+$blue:            #0076a3;
+$highlight-color: #eec02e;
+$quote-color:     #662d91;
+$hover-color:     #f1663c;
+$follow-color:    #00a651;
+$hashtag-color:   #55acee;
+$slide-color:     #0076a3;
+$transparent:     rgba(0,0,0,0);
+$border-color:    #e0e0e0;
+$grey:			  #808080;
+
+$error-color:     #e73d4a;
+$success-color:   $follow-color;
+$warning:         #fecd50;
+$black:           #000000;
+$white:           #ffffff;
+$yellow:          #f8c82d;
+
+/* Social Media section */
+
+$facebook:    #3162a2;
+$category:    #7470a2;
+$google-plus: #e04a32;
+$instagram:   #9f6fc0;
+$youtube:     #c33433;
+$twitter:     #55acee;
+$vimeo:       #3fa9f5;
+$linkedin:    #123e65;
+
+$sections: (
+  creative:   #f1663c,
+  digital:    #0076a3,
+  follow:     #00a651,
+  innovation: #394d5f,
+  marketing:  #15b999,
+  media:      #662d91,
+  technology: #cf42b6,
+
+);
+
+$cards: (
+  facebook:    #3b5998,
+  featured:    #15b999,
+  google-plus: #e04a32,
+  instagram:   #9f6fc0,
+  linkedin:    #123e65,
+  twitter:     #55acee,
+  youtube:     #cc181e,
+  vimeo:       #00b3ec,
+  pinterest:   #bd081c,
+);
+
+
+@function color($card_type) {
+  @return map-get($cards, $card_type);
+}
+
+// Grids
+$grid-gutter-width: 20px;
+
+// Dimensions
+$screen-xs: 480px;  // Mobile
+$screen-sm: 768px;  // Tablet
+$screen-md: 1180px; // Desktop
+$screen-lg: 1600px; // Large desktop
+
+// Font
+$heading-font-family: "Playfair Display", Arial, sans-serif !default;
+$base-font-family:  "Muli", Arial, sans-serif !default;
+$text-font-family: "Muli", Arial, sans-serif !default;
+$icon-font: "FontAwesome";
+
+// Font Size
+$baseFontSize:			14px; /* ($baseFontSize * 1) + 0px; */
+$center:				center;
+
+$media-desktop: "screen and (max-width: 1194px)";
+$media-ipadLandscape: "screen and (min-width : 992px) and (max-width : 1024px)";
+$media-smallDevices: "screen and (min-width : 1025px) and (max-width : 1150px)";
+$media-ipadPortrait: "screen and (max-width :992px)";
+$media-phone: "screen and (min-width : 200px) and (max-width : 480px)";
+$media-iPhoneMedium: "screen and (min-width : 481px) and (max-width : 667px)";
+$media-iPhoneLarge: "screen and (min-width : 668px) and (max-width : 767px)";
+$media-iPad: "screen and (min-width : 768px) and (max-width : 992px)";

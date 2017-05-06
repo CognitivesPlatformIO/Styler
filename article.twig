@@ -1,13 +1,6 @@
 {{ set(this, 'title', (Html.encode(article.title))) }} 
 {% set network = _Network.getNetworkData() %}
 
-{% set status = 'follow' %}
-{% set text = 'Follow +' %}
-{% if not _User.isGuset() and _User.isUserFollowing('blog', article.blog['id'])%}
-    {% set status = 'unfollow' %}
-    {% set text = 'Following -' %}
-{% endif %}
-
 {% set noImageClass = ''%}
 {% if article.media | length <= 0 %}
     {% set noImageClass = 'no-image'%}
@@ -77,10 +70,18 @@
                     <time itemprop="datePublished">{{article.publishedDate}}</time>
                 </div>
 
-                {% if _User.isGuest() %}
-                    <a href="javascript:void(0)" class="button article__follow forceLoginModal">Follow +</a>
-                {% else %}
-                    <a href="javascript:void(0)" class="button article__follow followArticleBtn" data-guid="{{article.blog['guid']}}" data-status="{{status}}">{{text}}</a>
+                {% if not _Network.isNetworkClosed(network)%}
+                    {% set status = 'follow' %}
+                    {% set text = 'Follow +' %}
+                    {% if not _User.isGuset() and _User.isUserFollowing('blog', article.blog['id'])%}
+                        {% set status = 'unfollow' %}
+                        {% set text = 'Following -' %}
+                    {% endif %}
+                    {% if _User.isGuest() %}
+                        <a href="javascript:void(0)" class="button article__follow forceLoginModal">Follow +</a>
+                    {% else %}
+                        <a href="javascript:void(0)" class="button article__follow followArticleBtn" data-guid="{{article.blog['guid']}}" data-status="{{status}}">{{text}}</a>
+                    {% endif%}
                 {% endif%}
             </div>
 

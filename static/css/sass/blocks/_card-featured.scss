@@ -1,0 +1,129 @@
+.card__featured {
+  display: table;
+
+  &-left {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: color(featured);
+    border-width: 0px;
+    border-right-width: 6px;
+    border-style: solid;
+    display: table-cell;
+    padding: 20px;
+    vertical-align: middle;
+    text-align: center;
+    transition: border-color 0.5s;
+    width: 50%;
+
+    @include phone {
+      border-bottom-style: solid;
+      border-bottom-width: 6px;
+      border-right: none;
+      display: block;
+      height: 120px;
+      padding: 16px;
+      width: 100%;
+    }
+  }
+  &-right {
+    background-color: $light-color;
+    display: table-cell;
+    width: 50%;
+    padding: 20px;
+
+    @include phone {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &-heading {
+    @include card_heading2;
+
+    color: $light-color;
+    margin-bottom: 10px;
+    text-shadow: 0px 0px 10px $dark-color;
+
+    @include phone {
+      @include card_heading3;
+      margin-bottom: 0px;
+    }
+  }
+  &-sub-heading {
+    @include card_heading4;
+
+    font-weight: bold;
+
+    @include phone {
+      margin-bottom: 4px;
+    }
+  }
+  &-title {
+    @include card_text_small;
+
+    color: color(featured);
+    display: block;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 10px $dark-color;
+
+    @include phone {
+      margin-bottom: 0px;
+    }
+  }
+  &-text {
+    @include card_text;
+    color: $light-color;
+    display: block;
+    font-weight: 100;
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 10px $dark-color;
+
+    @include phone {
+      @include card_text_small;
+      display: block;
+      margin-bottom: 0px;
+    }
+  }
+  &-subscribers {
+    @include card_text_small;
+
+    background-image: url("../images/icons/follow.svg");
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    color: $light-color;
+    padding-right: 24px;
+  }
+  &-link {
+    display: block;
+    border-bottom: 1px $gray-color solid;
+    padding: 22px 0px;
+
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    @include phone {
+      padding: 10px 0px;
+    }
+  }
+  &-views {
+    color: color(featured);
+  }
+  &-author {
+    @include card_text_small;
+
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .button {
+    line-height: 30px;
+  }
+}

@@ -1,0 +1,118 @@
+/*! Overlay Button */
+.btn_overlay {
+    top:0px;
+    left:0px;
+    width:auto;
+    z-index:999;
+    width:28px;
+    position:absolute;
+    visibility:hidden;
+    @include opacity(0);
+    @include transition((opacity(0), 2s ease-out));
+    background:transparent none repeat scroll 0 0;
+
+    .btnhide {
+        float:left;
+        width:28px;
+        color:#ededed;
+        border:0 none;
+        margin:0px 0px;
+        min-height:28px;
+        max-height:28px;
+        line-height:28px;
+        position:relative;
+        @include border-radius(0px);
+        font-size:($baseFontSize * 1);
+        border:1px solid rgba($black, 0.9);
+        @include transition(all 0.5s ease 0s);
+        background:none repeat scroll 0 0 rgba($black, 0.9);
+
+        &:not(:first-child) {
+            border-top:0px none!important;
+        }
+
+        &:hover, &:active {
+            border:1px solid rgba($black, 0.1);
+            background:none repeat scroll 0 0 rgba($yellow, 0.9);
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .fa {
+            font-size:($baseFontSize * 1) + 2;
+        }
+
+        .fa-thumb-tack {
+            @include transform(rotate(-33deg));
+
+            &::after {
+                left:5%;
+                right:5%;
+                z-index:0;
+                height:6%;
+                bottom:-5%;
+                content:"";
+                position:absolute;
+                @include border-radius(70%);
+                @include transform(scaleY(0.1));
+                @include box-shadow((0 0 6px 6px rgba(0,0,0,0.1), 0 0 15px 10px rgba(0,0,0,0.1), inset 0 0 10px 20px rgba(0,0,0,0.25)));
+            }
+        }
+    }
+}
+
+/*! Overlay Button Tooltips */
+.social-tooltip {
+	z-index:98;
+	color:$white;
+	display:inline;
+	position:relative;
+	font-size:($baseFontSize * 1) - 2;
+	&.selected {
+        background:none repeat scroll 0 0 rgba($yellow ,0.95);
+        border-color:rgba($yellow ,0.95);
+    }
+	&:hover {
+		color:$white;
+		text-decoration:none;
+
+		&:after {
+			top:3px;
+			left:40px;
+			color:$white;
+			display:block;
+			line-height:1.3;
+			font-weight:400;
+			padding:5px 8px;
+			position:absolute;
+			white-space:nowrap;
+			content:attr(title);
+			@include border-radius(3px);
+			font-size:($baseFontSize * 1) - 2;
+			-webkit-box-shadow:0 0 2px rgba($black ,0.2);
+			@include box-shadow(0 0 2px rgba($black ,0.2));
+			background:none repeat scroll 0 0 rgba($yellow ,0.95);
+		}
+
+		&:before {
+            top:11px;
+            left:35px;
+            z-index:1;
+            border:solid;
+            border-color:transparent rgba($yellow ,0.95);
+            border-width:5px 5px 5px 0;
+            content:" ";
+            display:block;
+            position:absolute;
+		}
+	}
+}
+.card {
+    &:hover, &:focus, &:active {
+        .btn_overlay {
+            visibility:visible;
+            @include opacity(1);
+            @include transition(all 0.5s ease 0s);
+        }
+    }
+}
