@@ -25,7 +25,7 @@
         </div>
         <div class="col-right">
             <div class="search_block">
-                <form action="{{blog.url}}/search" method="get">
+                <form action="{{blog.url}}/search" method="get" autocomplete="off">
                 <input type="search" placeholder="Search" name='s' value="{{_AppHelper.getRequest('s')}}">
                 <button type="button" class="search_icon"><span class="icon-search"><i class="fa fa-search"></i></span></button>
                 <button type="button" class="search_icon visible-xs" id="custom-search-button"><span class="icon-search"><i class="fa fa-search"></i></span></button>
