@@ -16,18 +16,20 @@
                         </a>
                     </li>
                     {% else %}
-                        {% set btnClass = '' %}
-                        {% set btnStatus = "follow" %}
-                        {% if not _User.isGuest() and _User.isUserFollowing('blog', blog.id) %}
-                            {% set btnClass = 'selected' %}
-                            {% set btnStatus = "unfollow" %}
-                        {% endif %}  
                     <li>
                         <a href="{{blog.url}}" target="_blank" class="{%if not hasImage%}no-image{%endif%}">
-                            {% if not _User.isGuest() %}
-                                <button type="button" class="like FollowProfileBlog {{btnClass}}" data-id="{{blog.id}}" data-status="{{btnStatus}}" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
-                            {% else %}
-                                <button type="button" class="like forceLoginModal" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
+                            {%if not _Network.isNetworkClosed(network)%}
+                                {% set btnClass = '' %}
+                                {% set btnStatus = "follow" %}
+                                {% if not _User.isGuest() and _User.isUserFollowing('blog', blog.id) %}
+                                    {% set btnClass = 'selected' %}
+                                    {% set btnStatus = "unfollow" %}
+                                {% endif %}  
+                                {% if not _User.isGuest() %}
+                                    <button type="button" class="like FollowProfileBlog {{btnClass}}" data-id="{{blog.id}}" data-status="{{btnStatus}}" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
+                                        {% else %}
+                                    <button type="button" class="like forceLoginModal" aria-label="Like"><span aria-hidden="true"><i class="fa fa-star"></i></span></button>
+                                {% endif %}
                             {% endif %}
                             {% if blog.media['thumb'] is defined and blog.media['thumb']['path'] != '' %}
                                 <div class="img-thumbnail"><img class="img-responsive" src="{{blog.media['thumb']['path']}}" alt=""></div>
