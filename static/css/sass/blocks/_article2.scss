@@ -158,6 +158,14 @@
                     font-weight: 400 !important;
 
                 }
+                a {
+                    border-bottom: 1px solid $base-color !important;
+                    color: $base-color;
+                    &:hover, &:focus {
+                        color: $hover-color;
+                        border-color: $hover-color; 
+                    }
+                } 
                 blockquote {
                     border-left: 6px $gray-color solid !important;
                     display: block;
