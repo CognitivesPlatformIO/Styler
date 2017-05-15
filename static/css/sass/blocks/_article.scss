@@ -375,6 +375,14 @@
                 }
             }
         }
+        a {
+            border-bottom: 1px solid $base-color !important;
+            color: $base-color;
+            &:hover, &:focus {
+                color: $hover-color;
+                border-color: $hover-color; 
+            }
+        }
         img {
             max-width:100%!important;
             height:auto!important;
@@ -660,6 +668,6 @@ video.cloudVideo {
         &.medium-insert-embeds-wide, &.medium-insert-facebook-wide, &.medium-insert-twitter-wide, &.medium-insert-instagram-wide, &.medium-insert-vimeo-wide, &.medium-insert-pinterest-wide {
             width:100%;
         }
-    }
+    } 
 }
 /* End added embeded style */
