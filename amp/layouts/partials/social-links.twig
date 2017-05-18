@@ -1,0 +1,23 @@
+<div class="social-links">
+    {% if blogInfo.social['twitter'] is not empty %}
+    <a href="{{blogInfo.social['twitter']}}" target="_blank"><i class="fa fa-twitter"></i></a>
+    {% endif %}
+    {% if blogInfo.social['youtube'] is not empty %}
+    <a href="{{blogInfo.social['youtube']}}" target="_blank"><i class="fa fa-youtube-play"></i></a>
+    {% endif %}
+    {% if blogInfo.social['google'] is not empty %}
+    <a href="{{blogInfo.social['google']}}" target="_blank"><i class="fa fa-google-plus"></i></a>
+    {% endif %}
+    {% if blogInfo.social['facebook'] is not empty %}
+    <a href="{{blogInfo.social['facebook']}}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+    {% endif %}
+    {% if blogInfo.social['vimeo'] is not empty %}
+    <a href="{{blogInfo.social['vimeo']}}" target="_blank"><i class="fa fa-vimeo"></i></a>
+    {% endif %}
+    {% if blogInfo.social['linkedin'] is not empty %}
+    <a href="{{blogInfo.social['linkedin']}}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    {% endif %}
+    {% if blogInfo.social['pinterest'] is not empty %}
+    <a href="{{blogInfo.social['pinterest']}}" target="_blank"><i class="fa fa-pinterest-p"></i></a>
+    {% endif %}
+</div>

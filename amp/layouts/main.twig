@@ -1,0 +1,134 @@
+{% set networkData = _Network.getNetworkData() %}
+{% set blogData = _Blog.getBlog() %}
+{{ this.beginPage() }}
+<!doctype html>
+<html amp lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+        
+        <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+        <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+        <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+        <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+        <script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <title>{{this.title | raw}}</title>
+
+        <!-- Favicon Icon -->
+        {% set favicon = ''%}
+        {% if networkData.favMedia | length > 0 %}
+            {% set favicon = _Media.getMediaUrl(networkData.favMedia, 80, 80)%}
+        {% endif %}
+
+        {% if favicon != '' %}
+            <link rel="shortcut icon" href="{{favicon}}" type="image/x-icon" />
+            <link rel="icon" href="{{favicon}}" sizes="any" type="image/svg+xml" />
+        {% endif %}
+        
+        <link rel="canonical" href="{{_AppHelper.getServerUrl(false)}}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+        {% set logo = networkData.templatePath~'/static/images/themeLogo.svg'%}
+        {% if networkData.logoMedia | length > 0 %}
+            {% set logo = _Media.getMediaUrl(networkData.logoMedia, 177, 65, {'crop': 'limit'} )%}
+        {% endif %}
+        
+        {% set themeColors = networkData['styling']['colours'] %}
+        <style amp-custom>
+            {{this.render('/../static/css/amp.css')}}
+            .header-logo{
+                background-image: url('{{logo}}');
+            }
+            
+            {% if primaryFont != "" %}
+                body, .body, p, .article-content-section .content-area [class*="medium-insert-"], .article-content-section .content-area article, .article-content-section .content-area aside, .article-content-section .content-area blockquote, .article-content-section .content-area div, .article-content-section .content-area figure, .article-content-section .content-area h1, .article-content-section .content-area h2, .article-content-section .content-area h3, .article-content-section .content-area h4, .article-content-section .content-area h5, .article-content-section .content-area h6, .article-content-section .content-area ol, .article-content-section .content-area p, .article-content-section .content-area section, .article-content-section .content-area span, .article-content-section .content-area ul {
+                    font-family: {{primaryFont | replace({'+': ' '})}};
+                }
+            {% endif %}
+            {% if secFont != "" %}
+                h1, h2, h3, h4, h5, a.header__navigation-link, a.footer__navigation-link {
+                    font-family: {{secFont | replace({'+': ' '})}};
+                }
+            {% endif %}
+            {% if themeColors.linkColor != "" %}
+                a {
+                    color: {{themeColors.linkColor}};
+                }
+            {% endif %}
+            {% if themeColors.linkHoverColor != "" %}
+                a:hover {
+                    color: {{themeColors.linkHoverColor}};
+                }
+            {% endif %}
+            {% if themeColors.headingColor != "" %}
+                h1, h2, h3, h4, h5 {
+                    color: {{themeColors.headingColor}};
+                }
+            {% endif %}
+            {% if themeColors.navigationColor != "" %}
+                a.header__navigation-link {
+                    color: {{themeColors.navigationColor}};
+                }
+            {% endif %}
+            {% if themeColors.navigationHoverColor != "" %}
+                a.header__navigation-link:hover {
+                    color: {{themeColors.navigationHoverColor}};
+                }
+                .header__navigation-link--selected, .header__navigation-link.active, .header__navigation-link:hover {
+                    border-top: 3px {{themeColors.navigationHoverColor}} solid;
+                }
+            {% endif %}
+            {% if themeColors.navigationActiveColor != "" %}
+                a.header__navigation-link.active {
+                    color: {{themeColors.navigationActiveColor}};
+                }
+            {% endif %}
+            {% if themeColors.navigationBgColor != "" %}
+            .header__navigation {
+                background-color: {{themeColors.navigationBgColor}};
+            }
+            {% endif %}
+            {% if themeColors.headerBgColor != "" %}
+            .header {
+                background-color: {{themeColors.headerBgColor}};
+            }
+            .header--category {
+                border-color: {{themeColors.headerBgColor}};
+            }
+            {% endif %}
+            {% if themeColors.footerBgColor != "" %}
+            .footer {
+                background-color: {{themeColors.footerBgColor}};
+            }
+            {% endif %}
+            {% if themeColors.pageBgColor != "" %}
+            .body, .body > .section {
+                background-color: {{themeColors.pageBgColor}};
+            }
+            {% endif %}
+
+            {% set customCss = networkData['styling']['customStyleSheet'] %}
+            {% if customCss != "" %}
+                    {{customCss | raw }}
+            {% endif %}
+        </style>
+        <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+        
+        {{ this.head() }}
+    </head>
+
+    <body>
+        {{ this.beginBody() }}
+        {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
+        <main id="content" role="main">
+            {{ content | raw}}
+        </main>
+        {{ this.render('partials/_footer.twig', {network : networkData, blogData: blogData}) | raw }}
+        {{ this.endBody() }}
+    </body>
+</html>
+{{ this.endPage() }}

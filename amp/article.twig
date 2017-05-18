@@ -1,0 +1,118 @@
+{# Article Twig template #} 
+{{ set(this, 'title', article.title) }}
+
+{% set network = _Network.getNetworkData() %}
+{% set publisher = {height: 60, width: 600, name: network.title, logo: ''} %}
+{% if network.logoMedia | length > 0 %}
+    {% set publisher = publisher|merge({logo:_Media.getMediaUrl(network.logoMedia, publisher.width, publisher.height, {'crop': 'lpad'} )})%}
+{% endif %}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": "{{article.url}}", 
+        "headline": "{{article.title}}",
+        "datePublished": "{{article.publishedDate}}",
+        "dateModified": "{{article.updatedAt}}",
+        "description": "{{article.content}}",
+        "author": {
+            "@type": "Person",
+            "name": "{{article.createdBy['displayName']}}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{publisher.name}}",
+            "logo": {
+            "@type": "ImageObject",
+                "url": "{{publisher.logo}}",
+                "width": {{publisher.width}},
+                "height": {{publisher.height}}
+            }
+        }
+        {% if article.media | length > 0 %}
+        ,
+        {% set i = 1 %}
+        {% for media in article.media %}
+        {% if media.type != 'video' %} 
+        "image": {
+            "@type": "ImageObject",
+            "url": "{{media.path}}",
+            "width": {{media.width}},
+            "height": {{media.height}}
+        }
+        {% if article.media | length > i %}
+        ,
+        {% endif %}
+        {% endif %}
+        {% set i = i+1 %}
+        {% endfor %}
+        {% endif %}
+    }
+</script>
+<div class="article">
+    <div class="article__headerSection">
+        {% if article.media|length %}
+            <amp-carousel width="1280" height="600" layout="responsive" type="slides" autoplay="" loop="">
+                {% for media in article.media %}
+                    {% if media.type == 'video' %} 
+                        {% set mediaUrl = "" %}
+                        {% if media.isSystemVideo == 'TRUE'%}
+                            {% set mediaUrl = media.video_path  %}
+                            <div class="video-player">
+                                <amp-video id="myVideo" controls width="1280" height="550" layout="responsive" src="{{mediaUrl}}"></amp-video>
+
+                                <div id="myOverlay" class="click-to-play-overlay">
+                                    <div class="play-icon" role="button" tabindex="0" on="tap:myOverlay.hide, myVideo.play"></div>
+                                    <amp-img class="poster-image" layout="fill" src="{{media.path}}"></amp-img>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if media.source == 'youtube' %}
+                                <amp-youtube data-videoid="{{media.videoId}}" layout="responsive" width="480" height="270"></amp-youtube>
+                            {% else %}
+                                <amp-vimeo data-videoid="{{media.videoId}}" layout="responsive" width="500" height="281"></amp-vimeo>
+                            {% endif %}
+                        {% endif %}                   
+                    {% else %}
+                        <figure>
+                            <amp-img src="{{media.path}}" class="" layout="fill"></amp-img>
+                        </figure>
+                    {% endif %}
+                {% endfor %}
+            </amp-carousel>
+        {% endif %}
+
+        <div class="article__header">
+            <div class="article__header-text">
+                <a href="{{ channel.url }}" class="article__channel">{{ article.label | capitalize }}</a>
+                <div class="article__headline">{{article.title}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="article__info_container">
+        <div class="article__info">
+            <a href="{{_AppHelper.buildUrl('profile/user-profile',{name: Html.encode(article.createdBy['username'])})}}" class="article__info_author" itemprop="name">By {{article.createdBy['displayName'] | capitalize}}</a>
+
+            <div class="article__info_tabs">
+                {% set readingTime = Helper.getEstimatedReadingTime(article.content)%}
+                <div class="article__info_tab">{{Helper.renderReadingTime(readingTime) | raw}}</div>
+                <div class="article__info_tab">{{article.publishedDate}}</div>
+            </div>
+            <p class="heading">
+            <amp-social-share type="twitter" width="45" height="33"></amp-social-share>
+            <amp-social-share type="facebook" width="45" height="33" data-attribution="531506617052166"></amp-social-share>
+            <amp-social-share type="gplus" width="45" height="33"></amp-social-share>
+            </p>
+        </div>
+    </div>
+
+    <div class="article__container">
+        <div class="article__content">
+            <div class="article__intro">
+                {{article.title | raw}}
+            </div>
+            {{article.content | raw}}
+        </div>
+    </div>
+</div>
+
