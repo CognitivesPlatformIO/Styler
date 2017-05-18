@@ -1,0 +1,42 @@
+{% set user = '' %}
+{% if not _User.isGuest()%}
+    {% set user = _User.getUser()%}
+{% endif %}
+<header>
+    <button class="header-icon-1" on='tap:sidebar.open'><i class="fa fa-navicon"></i></button>
+        {% set logoUrl = network.networkLogoLinkUrl %}
+    <a href="{{logoUrl}}" class="header-logo"></a>
+</header>
+<div class="header-clear"></div>
+<amp-sidebar id="sidebar" layout="nodisplay" side="left">
+    <div class="close__button" on='tap:sidebar.close' role="1" tabindex="1">
+        <i class="fa fa-close"></i>
+    </div>
+    {% set menuItems = blogData.blogHeaderMenu %}
+    {% for i in 0..4 %}
+        {% if menuItems[i] is defined %}
+            {% set activeClass = (menuItems[i].link == _AppHelper.getServerUrl()) ? 'active' : ''%}
+            {% set externalClass = (menuItems[i].isExternal) ? 'external-link' : '' %}
+            {% set hasChildren = menuItems[i].children is defined and menuItems[i].children | length > 0 ? true : false %} 
+
+            {% if hasChildren %}
+                <amp-accordion class="sidebar-menu">
+                    <section>
+                        <h4 class='menu-heading'>{{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}} <i class="fa fa-angle-down"></i></h4>
+                        <ul>
+                            {% for childItem in menuItems[i].children%}
+                                {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
+                                {% set name = ((childItem.label is empty) ? ((childItem.pageTitle is empty)? childItem.blogTitle : childItem.pageTitle) : childItem.label) %}
+                                <li><a href="{{childItem.link |raw}}" {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}><i class="fa fa-angle-right"></i>{{ name }}</a></li>
+                                    {% endfor %}
+                        </ul>
+                    </section>
+                </amp-accordion>
+            {% else %}
+                <div class="sidebar-menu">
+                    <a href="{{menuItems[i].link |raw}}" class="sidebar-item channel-{{menuItems[i].id}} {{activeClass}} {{externalClass}}" {% if menuItems[i].target != "" %}target="{{menuItems[i].target}}"{% endif %}>{{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}} </a>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</amp-sidebar>
