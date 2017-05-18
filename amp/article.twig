@@ -95,8 +95,8 @@
 
             <div class="article__info_tabs">
                 {% set readingTime = Helper.getEstimatedReadingTime(article.content)%}
-                <div class="article__info_tab">{{Helper.renderReadingTime(readingTime) | raw}}</div>
                 <div class="article__info_tab">{{article.publishedDate}}</div>
+                <div class="article__info_tab">{{Helper.renderReadingTime(readingTime) | raw}}</div>
             </div>
             <p class="heading">
             <amp-social-share type="twitter" width="45" height="33"></amp-social-share>

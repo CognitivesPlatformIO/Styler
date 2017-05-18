@@ -1121,7 +1121,7 @@ i.fa.fa-vimeo:hover {
   color: #3b3c3f;
   margin-bottom: 20px;
 }
-.article__intro, .text-center {
+.text-center {
     text-align: center;
 }
 .article__image {
@@ -1273,10 +1273,11 @@ i.fa.fa-vimeo:hover {
   -ms-flex-direction: column;
   flex-direction: column;
   -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   background: #ffffff;
+  width: 85%;
 }
 
 .article__info_container {
@@ -1299,7 +1300,7 @@ i.fa.fa-vimeo:hover {
 }
 
 .article__info_author {
-  font-size: 16.002px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.2px;
@@ -1307,7 +1308,7 @@ i.fa.fa-vimeo:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  margin-bottom: 19px;
+  margin-bottom: 0px;
   display: block;
 }
 
@@ -1321,21 +1322,18 @@ i.fa.fa-vimeo:hover {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 7px 0px;
-  -webkit-box-shadow: 0 0 15px 0 rgba(32, 32, 32, 0.03);
-  box-shadow: 0 0 15px 0 rgba(32, 32, 32, 0.03);
-  border: solid 1px #f3f3f3;
+  padding: 0px;
 }
 
 .article__info_tab {
-  font-size: 12.006px;
+  font-size: 12px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.2px;
   color: #535659;
   display: inline-block;
   text-align: center;
-  padding: 6px 20px;
+  padding: 0px 8px;
   border-right: 1px solid #eceaea;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1349,8 +1347,11 @@ i.fa.fa-vimeo:hover {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  margin: 8px 0;
 }
-
+.article__info_tab:first-child {
+    padding-left: 0px;
+}
 .article__info_tab:last-child {
   border: none;
 }
@@ -1465,6 +1466,7 @@ i.fa.fa-vimeo:hover {
   max-width: 770px;
   padding: 7px 0px 0px;
   margin: 0px auto 100px;
+  width: 90%;
 }
 
 .article__comments {
@@ -1804,12 +1806,18 @@ i.fa.fa-vimeo:hover {
       width: 100% ;
       left: 0;
       z-index: 20 ;
-      margin-top: 30px;
+      margin-top: -40px;
+      width: 95%;
+      background: #ffffff;
+      padding-top: 30px;
   }
 
   .article__channel {
       color: #3b3c3f;
       display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
   }
   .article__headline {
        height: 100%;
@@ -1832,8 +1840,9 @@ i.fa.fa-vimeo:hover {
 }
 @media screen and (max-width: 767px) {
     .article__header-text {
-        margin: 0 0 30px ;
-        max-width: 80% ;
+        margin: 0 0 50px ;
+        width: 90% ;
+        text-align: left;
     }
     .article__headline {
         font-size: 25px ;
