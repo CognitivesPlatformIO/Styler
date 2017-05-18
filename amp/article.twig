@@ -49,7 +49,7 @@
         {% endif %}
     }
 </script>
-<div class="article">
+<div class="article {{ article.media|length <= 0 ? 'no_image' : '' }}">
     <div class="article__headerSection">
         {% if article.media|length %}
             <amp-carousel width="1280" height="600" layout="responsive" type="slides" autoplay="" loop="">

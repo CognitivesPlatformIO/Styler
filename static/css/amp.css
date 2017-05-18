@@ -1811,7 +1811,9 @@ i.fa.fa-vimeo:hover {
       background: #ffffff;
       padding-top: 30px;
   }
-
+  .article.no_image .article__header {
+      margin-top: 0px;
+  }
   .article__channel {
       color: #3b3c3f;
       display: block;
