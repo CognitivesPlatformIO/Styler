@@ -1,0 +1,8 @@
+<footer class="footer">
+    <div class="footer__container">
+        <div class="text-center">
+            {{ this.render('social-links.twig', {network: network, blogInfo: _Blog.getHomeBlogSettings()}) | raw }}
+        </div>
+        <div class="footer__copyright text-center">{{network.title}} All Rights Reserved. Powered By {{network.poweredBy}}</div>
+    </div>
+</footer>
