@@ -71,6 +71,10 @@ module.exports = function(grunt) {
                         '../../static/sdk/js/media-player/mediaelementplayer.css',
                         'static/css/index.min.css',
                         'static/css/contentbox-breakup.css',
+                    ],
+                    'static/deploy/print.min.css': [
+                        'static/css/bootstrap-print.css',
+                        'static/css/bootstrap-print-md.css'
                     ]
                 }
             }
