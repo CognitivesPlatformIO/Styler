@@ -38,10 +38,14 @@
     {% set primaryFont = networkData['styling']['fonts']['primaryFont'] %}
     {% set secFont = networkData['styling']['fonts']['secondaryFont'] %}
 
-    {% if primaryFont != "" %}
+    {% if primaryFont != "" and secFont != "" and primaryFont == secFont %}
         <link href='https://fonts.googleapis.com/css?family={{primaryFont}}' rel='stylesheet' type='text/css'>
-    {% endif %}
+    {% elseif primaryFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{primaryFont}}' rel='stylesheet' type='text/css'>
     {% if secFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{secFont}}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% elseif secFont != "" %}
         <link href='https://fonts.googleapis.com/css?family={{secFont}}' rel='stylesheet' type='text/css'>
     {% endif %}
     
