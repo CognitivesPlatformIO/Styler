@@ -38,21 +38,25 @@
     {% set primaryFont = networkData['styling']['fonts']['primaryFont'] %}
     {% set secFont = networkData['styling']['fonts']['secondaryFont'] %}
 
-    {% if primaryFont != "" %}
+    {% if primaryFont != "" and secFont != "" and primaryFont == secFont %}
         <link href='https://fonts.googleapis.com/css?family={{primaryFont}}' rel='stylesheet' type='text/css'>
-    {% endif %}
+    {% elseif primaryFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{primaryFont}}' rel='stylesheet' type='text/css'>
     {% if secFont != "" %}
         <link href='https://fonts.googleapis.com/css?family={{secFont}}' rel='stylesheet' type='text/css'>
     {% endif %}
+    {% elseif secFont != "" %}
+        <link href='https://fonts.googleapis.com/css?family={{secFont}}' rel='stylesheet' type='text/css'>
+    {% endif %}
     
-    <link rel="alternate" type="application/rss+xml" title="{{_Network.getNetworkTitle()}} -  RSS Feeds" href="http://{{networkData.defaultDomain['domain']}}/feed/rss"/>
+    <link rel="alternate" type="application/rss+xml" title="{{_Network.getNetworkTitle()}} -  RSS Feeds" href="{{_AppHelper.getBaseUrl()}}/feed/rss"/>
 
     <!--[if lte IE 8]><script type="text/javascript" src="{{networkData.templatePath}}/static/js/ie/ie.js"></script><![endif]-->
 	
     {% set isPage = 'content_box_page' in _Page.getBodyClass() and 'page-contact-us' not in _Page.getBodyClass() %}
 
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1498201140237" type="text/css" media="all">
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1500122592744" type="text/css" media="all">
         <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/print.min.css" type="text/css" media="print">
     {% else %}
         <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/plugins/jquery.fancybox/source/jquery.fancybox.css" />
@@ -70,7 +74,7 @@
     {% endif %}
     <style>
         @media print {
-            header, footer, .header, .side-navigation, .article__image {
+            header, footer, .header, .article__category, .article__social, .article__userName, .article__follow {
                 display: none !important;
             }
         }
@@ -147,19 +151,28 @@
         {% endif %}
     </style>
 
-   {% if blogData.settings['GoogleAnalyticsID'] is defined and blogData.settings['GoogleAnalyticsID'] is not empty %}
-        <!-- Google Analytics -->
-        <script>
+   {% set googleAnalyitcsId = ''%}
+        {% if blogData.settings['GoogleAnalyticsID'] is defined and  blogData.settings['GoogleAnalyticsID'] is not empty  %}
+            {% set googleAnalyitcsId = blogData.settings['GoogleAnalyticsID']%}
+        {% endif %}
+
+        {% if networkData.thirdPartyIntegrations['googleAnalytics']['id'] is defined and  networkData.thirdPartyIntegrations['googleAnalytics']['id'] is not empty  %}
+            {% set googleAnalyitcsId = networkData.thirdPartyIntegrations['googleAnalytics']['id'] %}
+        {% endif %}
+
+        {% if googleAnalyitcsId is defined and googleAnalyitcsId is not empty%}
+            <!-- Google Analytics -->
+            <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-            ga('create', '{{blogData.settings['GoogleAnalyticsID']}}', 'auto');
+            ga('create', '{{googleAnalyitcsId}}', 'auto');
             ga('send', 'pageview');
-        </script>
-        <!-- End Google Analytics -->
-    {% endif %}
+            </script>
+            <!-- End Google Analytics -->
+        {% endif %}
 
 
     {% set blogList = _Blog.getBlogList() %}
@@ -228,7 +241,7 @@
             <p class="article-text" style="width: 165px; float: left; padding-left: 3px;color: #394659;font-size: 14px; font-family: Droid Serif,serif; line-height: 20px; margin-top:0px;">Dummy text  </p>
         </div>
     </div>
-    <script src='https://www.google.com/recaptcha/api.js'></script>       
+    <script src='https://www.google.com/recaptcha/api.js' async></script>       
 {{ this.endBody() }}
 </body>
 {{ this.endPage() }}

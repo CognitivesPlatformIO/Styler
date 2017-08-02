@@ -81,7 +81,7 @@
                 <div class="card-icon"></div>
             </div>
             <h1 class="heading-section"  itemprop="headline"  style="word-wrap: break-word;">{{article.title | raw}}</h1>
-            <p class="description" itemprop="description" style="word-wrap: break-word;">{{Html.encode(article.excerpt) | raw}}</p>
+            <p class="description" itemprop="description" style="word-wrap: break-word;">{{article.excerpt | raw}}</p>
             {% set publishDate = _AppHelper.getDefaultTimezoneDateTime(article.publishDate) %}
             <div class="caption_bottom">
                 <div class="author_name" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{{article.createdBy['displayName'] | raw}}</span></div>
