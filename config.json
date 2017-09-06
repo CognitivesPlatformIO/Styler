@@ -1,8 +1,5 @@
 {
     "module" : {
-        "event" : {
-           "enabled" : true
-        },
         "styling" : {
             "enabled" : true
         },
