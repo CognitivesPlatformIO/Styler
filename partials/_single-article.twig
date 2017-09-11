@@ -57,9 +57,11 @@
                 <button title="Hide" data-guid="{{article.guid}}" class="btnhide social-tooltip HideBlogArticle" type="button" data-social="0">
                     <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
                 </button>
-                <button onclick="window.location = '{{article.editUrl}}'; return false;" title="Edit" class="btnhide social-tooltip" type="button">
-                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
-                </button>
+                {% if article.userHasEditArticleAccess == '1' %}
+                    <button onclick="window.location = '{{article.editUrl}}'; return false;" title="Edit" class="btnhide social-tooltip" type="button">
+                        <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                    </button>
+                {% endif %}
                 {% set pinTitle = 'Pin Article' %}
                 {% set pinTxt = 'Pin' %}
                 {% set pinCls = '' %}
