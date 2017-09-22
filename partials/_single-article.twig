@@ -31,7 +31,8 @@
     <a href="{{article.url}}" itemscope itemtype="http://schema.org/NewsArticle"
        class="card card__news {{cardClass}} {{cardImageClass}} {{blogClass}} {{ (article.isPromoted) ? 'ad_icon' : '' }}" 
        data-id="{{article.articleId}}" data-position="{{position}}" data-social="0" data-article-image="{{articleImg}}" data-article-text="{{Helper.htmlToText(article.title, 100) | raw}}" id="Article{{article.articleId}}">
-        <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{article.url}}"/>
+        <meta itemprop="url" content="{{article.absoluteUrl}}" />
+        <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{article.absoluteUrl}}"/>
         {% if article.featuredMedia['media'] is defined and  article.featuredMedia['media'] | length > 0%}
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="{{article.featuredMedia['media']['url']}}"/>
@@ -57,9 +58,11 @@
                 <button title="Hide" data-guid="{{article.guid}}" class="btnhide social-tooltip HideBlogArticle" type="button" data-social="0">
                     <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
                 </button>
-                <button onclick="window.location = '{{article.editUrl}}'; return false;" title="Edit" class="btnhide social-tooltip" type="button">
-                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
-                </button>
+                {% if article.userHasEditArticleAccess == '1' %}
+                    <button onclick="window.location = '{{article.editUrl}}'; return false;" title="Edit" class="btnhide social-tooltip" type="button">
+                        <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                    </button>
+                {% endif %}
                 {% set pinTitle = 'Pin Article' %}
                 {% set pinTxt = 'Pin' %}
                 {% set pinCls = '' %}
@@ -120,10 +123,12 @@
                     {% set pinTitle = 'Un-Pin Article' %}
                     {% set pinTxt = 'Un-Pin' %}
                     {% set pinCls = 'selected' %}
-                {% endif %}    
-                <button title="Edit"class="btnhide social-tooltip" type="button" data-social="1" onClick="window.open('/admin/social-funnel/update-social?guid={{social.blog['guid']}}&socialguid={{social.guid}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=450'); return false;">
-                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
-                </button>
+                {% endif %}  
+                {% if article.userHasEditArticleAccess == '1' %}
+                    <button title="Edit"class="btnhide social-tooltip" type="button" data-social="1" onClick="window.open('/admin/social-funnel/update-social?guid={{social.blog['guid']}}&socialguid={{social.guid}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=360,height=450'); return false;">
+                        <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                    </button>
+                {% endif %}  
                 <button data-position="{{position}}" data-social="1" data-id="{{article.socialId}}" title="{{pinTitle}}" class="btnhide social-tooltip PinArticleBtn {{pinCls}}" type="button" data-status="{{article.isPinned}}">
                     <i class="fa fa-thumb-tack"></i><span class="hide">{{pinTxt}}</span>
                 </button>
