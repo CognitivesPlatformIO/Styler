@@ -52,30 +52,30 @@
 <div class="article {{ article.media|length <= 0 ? 'no_image' : '' }}">
     <div class="article__headerSection">
         {% if article.media|length %}
-            <amp-carousel width="1280" height="600" layout="responsive" type="slides" autoplay="" loop="">
+            <amp-carousel width="400" height="300" layout="responsive" type="slides" autoplay="" loop="">
                 {% for media in article.media %}
                     {% if media.type == 'video' %} 
                         {% set mediaUrl = "" %}
                         {% if media.isSystemVideo == 'TRUE'%}
                             {% set mediaUrl = media.video_path  %}
                             <div class="video-player">
-                                <amp-video id="myVideo" controls width="1280" height="550" layout="responsive" src="{{mediaUrl}}"></amp-video>
+                                <amp-video id="myVideo" controls width="400" height="300" layout="responsive" src="{{mediaUrl}}"></amp-video>
 
                                 <div id="myOverlay" class="click-to-play-overlay">
                                     <div class="play-icon" role="button" tabindex="0" on="tap:myOverlay.hide, myVideo.play"></div>
-                                    <amp-img class="poster-image" layout="fill" src="{{media.path}}"></amp-img>
+                                    <amp-img class="poster-image" width="400" height="300" layout="responsive" src="{{media.path}}"></amp-img>
                                 </div>
                             </div>
                         {% else %}
                             {% if media.source == 'youtube' %}
-                                <amp-youtube data-videoid="{{media.videoId}}" layout="responsive" width="480" height="270"></amp-youtube>
+                                <amp-youtube data-videoid="{{media.videoId}}" width="400" height="300" layout="responsive"></amp-youtube>
                             {% else %}
-                                <amp-vimeo data-videoid="{{media.videoId}}" layout="responsive" width="500" height="281"></amp-vimeo>
+                                <amp-vimeo data-videoid="{{media.videoId}}" width="400" height="300" layout="responsive"></amp-vimeo>
                             {% endif %}
                         {% endif %}                   
                     {% else %}
                         <figure>
-                            <amp-img src="{{media.path}}" class="" layout="fill"></amp-img>
+                            <amp-img src="{{media.path}}" class="" width="400" height="300" layout="responsive"></amp-img>
                         </figure>
                     {% endif %}
                 {% endfor %}
